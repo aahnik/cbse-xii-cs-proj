@@ -3,10 +3,6 @@ Write a program using Dictionary and Text file to store roman numbers and find t
 equivalent.
 '''
 
-from rom import rom_parse
-
-from collections import deque
-
 ROMAN = {
     'I': 1,
     'V': 5,
