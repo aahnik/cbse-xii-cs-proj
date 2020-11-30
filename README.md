@@ -8,17 +8,31 @@ CBSE XII Boards Computer Science Project Solutions. Python and SQL.
 
 ## Usage
 
-1. View online
-
-2. Clone via git
-
-3. Download zip
-
-4. Run in an Online IDE
-
 ## Python
 
+To run the python programs,
+first move into the directory named `python`
+
+```shell
+cd python
+```
+
+and then type
+
+```shell
+python <question no> and hit [TAB] to autocomplete.
+```
+
+>For example, if you write `python 01[TAB]`,
+>then your shell will autocomplete it to `python 01_fibo.py`.
+
 ## SQL
+
+Use SQL Workbench to open a script and then click the execute button.
+
+## Doubts
+
+If you have any query regarding this project, create an issue in this repository.
 
 ## License
 
@@ -28,4 +42,3 @@ This project is licensed under [CC0 1.0 Universal](https://github.com/aahnik/cbs
 
 This project has been authored by me [Aahnik Daw](https://github.com/aahnik).
 You may connect with me via the links provided below.
-

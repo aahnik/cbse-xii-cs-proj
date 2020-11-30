@@ -1,0 +1,13 @@
+user: aahnikd
+password: Hojfkjkjn90294oisjfoiJHhjafh*&*(U#
+host: localhost
+database: py_sql
+port: 3306
+raise_on_warnings: True
+# it is extremely insecure to upload passwords to GitHub.
+# i know that
+# this is a file with dummy data
+# this file is just for demo
+# if you want to run questions 17 to 20,
+# change the values to actual values
+# for the SQL Server running on your machine
