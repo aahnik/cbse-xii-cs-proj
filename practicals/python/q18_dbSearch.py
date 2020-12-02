@@ -1,15 +1,11 @@
 from utils import clear_screen
 from sqlTor import SqlTor
+from q17_dbRecord import input_emp_id
 
 
-def search_employee(cursor, emp_id=None):
+def get_employee(cursor):
 
-    if not emp_id:
-        try:
-            emp_id = int(input('Enter the emp_id: '))
-        except ValueError:
-            print('emp_id must be integer')
-            return
+    emp_id = input_emp_id()
 
     query = f'SELECT * FROM employees WHERE emp_id={emp_id}'
 
@@ -29,8 +25,8 @@ if __name__ == "__main__":
 
         while True:
             clear_screen()
-            print('Search Employee')
-            emp = search_employee(cursor)
+            print('SEARCH EMPLOYEE')
+            emp = get_employee(cursor)
             if emp:
                 print('Record found 🥰')
                 print(f'''

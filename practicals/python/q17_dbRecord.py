@@ -5,12 +5,41 @@ from tabulate import tabulate
 from utils import clear_screen
 
 
+def input_employee_details():
+    while True:
+        try:
+            name = input('name: ')
+            assert 5 < len(name) < 20
+            department = input('department: ')
+            assert len(department) < 20
+            salary = int(input('salary: '))
+            assert salary >= 0
+        except Exception as err:
+            print(f'Please enter valid details. {err}')
+        else:
+            break
+
+    return name, department, salary
+
+
+def input_emp_id():
+    while True:
+        try:
+            emp_id = int(input('Enter employee id: '))
+        except ValueError:
+            print('Invalid Employee id. It must be integer.')
+        else:
+            break
+
+    return emp_id
+
+
 def create_table(cursor):
-    table_creation = ("CREATE TABLE employees("
-                      "emp_id integer NOT NULL PRIMARY KEY,"
-                      "name char(20) NOT NULL,"
-                      "department char(20) NOT NULL,"
-                      "salary integer NOT NULL);")
+    table_creation = ("CREATE TABLE employees(\
+                      emp_id integer NOT NULL PRIMARY KEY,\
+                      name char(20) NOT NULL,\
+                      department char(20) NOT NULL,\
+                      salary integer NOT NULL);")
 
     try:
         cursor.execute(table_creation)
@@ -24,7 +53,7 @@ def create_table(cursor):
 
 
 def display_all(cursor):
-    query = 'SELECT * FROM employees'
+    query = "SELECT * FROM employees"
 
     try:
         cursor.execute(query)
@@ -41,23 +70,19 @@ def display_all(cursor):
 
 def record_new(cursor):
     print('Enter the details to add new employee.\n')
-    try:
-        emp_id = int(input('employee id: '))
-        name = input('name: ')
-        department = input('department: ')
-        salary = int(input('salary: '))
-    except ValueError as err:
-        print(err)
-        print('emp_id and salary must be integers')
-        return
 
-    insert_employee = f"INSERT INTO employees VALUES({emp_id},'{name}','{department}',{salary})"
+    emp_id = input_emp_id()
+
+    name, department, salary = input_employee_details()
+
+    insert_employee = f"INSERT INTO employees \
+                        VALUES({emp_id},\
+                            '{name}','{department}',{salary})"
     try:
         cursor.execute(insert_employee)
     except Exception as err:
         if err.errno == errorcode.ER_DUP_ENTRY:
-            print('Duplicate entry: emp_id must be unique')
-            print('If you want to update the data run `q19_dbUpdate.py`')
+            print('Duplicate entry. emp_id must be unique.')
     else:
         print('New employee added successfully 😃')
 
@@ -70,5 +95,6 @@ if __name__ == "__main__":
         while True:
             clear_screen()
             display_all(cursor)
+            print('RECORD NEW EMPLOYEES')
             record_new(cursor)
             my_con.commit()

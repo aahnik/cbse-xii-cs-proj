@@ -1,25 +1,32 @@
 from sqlTor import SqlTor
 from utils import clear_screen
+from q18_dbSearch import get_employee
 
 
-def delete_employee(cursor, emp_id=None):
-    if not emp_id:
-        emp_id = int(input('Enter the emp_id to delete: '))
+def delete_employee(cursor):
 
-    employee_deletion = f'DELETE FROM employees WHERE emp_id={emp_id}'
+    emp = get_employee(cursor)
+
+    if not emp:
+        print('Employee does not exist.')
+        return
+
+    employee_deletion = f'DELETE FROM employees WHERE emp_id={emp[0]}'
 
     try:
         cursor.execute(employee_deletion)
     except Exception as err:
         print(err)
     else:
-        print('Successfully deleted')
+        print('Successfully deleted.')
 
 
-with SqlTor() as my_con:
-    cursor = my_con.cursor()
-    while True:
-        clear_screen()
+if __name__ == "__main__":
 
-        delete_employee(cursor)
-        my_con.commit()
+    with SqlTor() as my_con:
+        cursor = my_con.cursor()
+        while True:
+            clear_screen()
+            print('DELETE EMPLOYEE')
+            delete_employee(cursor)
+            my_con.commit()
