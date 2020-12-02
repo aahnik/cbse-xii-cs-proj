@@ -1,6 +1,6 @@
-# cbse-xii-cs-proj
+# CBSE XII Practicals
 
-CBSE XII Boards Computer Science Project Solutions. Python and SQL.
+CBSE XII Boards Computer Science Practicals. Python and SQL.
 
 [![GitHub license](https://img.shields.io/github/license/aahnik/cbse-xii-cs-proj)](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/aahnik/cbse-xii-cs-proj)](https://github.com/aahnik/cbse-xii-cs-proj/stargazers)
@@ -41,4 +41,4 @@ This project is licensed under [CC0 1.0 Universal](https://github.com/aahnik/cbs
 ## Author
 
 This project has been authored by me [Aahnik Daw](https://github.com/aahnik).
-You may connect with me via the links provided below.
+
