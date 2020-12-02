@@ -1,9 +1,23 @@
 import os
 from tabulate import tabulate
+import sys
+import signal
+
+
+def handle_interrupt(*args):
+    print('\nInterrupt recieved. Quitting.')
+    sys.exit(0)
 
 
 def clear_screen():
-    input('ENTER to continue: ')  # wait for user to see current screen
+
+    # handle user interrupt
+    signal.signal(signal.SIGTERM, handle_interrupt)
+    signal.signal(signal.SIGINT, handle_interrupt)
+
+    # wait for user to see current screen
+    input('\nPress [ENTER] to continue or CTRL+C to quit\n')
+
     if os.name == 'posix':
         # for Linux and Mac
         os.system('clear')
@@ -12,7 +26,7 @@ def clear_screen():
         os.system('cls')
 
 
-def drive_menu(heading:str, menus:dict) -> None:
+def drive_menu(heading: str, menus: dict) -> None:
     table = [[ch, menu['desc']] for ch, menu in menus.items()]
     menu_chart = f'''
         MENU for {heading}
