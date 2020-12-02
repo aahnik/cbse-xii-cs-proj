@@ -1,23 +1,21 @@
-'''
-Write a menu driven program to perform read and write operations using a text file
+''' Write a menu driven program to perform read and write operations using a text file
 called “student.txt” counting student roll_no, name and address.
 '''
 
+
 import os
-from utils import clear_screen, drive_menu
+from utils import drive_menu
 
 filename = ''
 
 
-def init(path: str):
-    '''Creates an file `student.txt` in desired directory, if not exists
+def init(path: str) -> None:
+    ''' Creates an file `student.txt` in desired directory, if not exists.
 
-    # Parameters:
-        - path:str directory path
-
-    # Returns: None
-
+    Args:
+        path (str): Directory path
     '''
+
     try:
         os.makedirs(path)
         print("directory created")
@@ -39,15 +37,14 @@ def init(path: str):
 
 
 def search_student(roll: int) -> list:
-    '''Searches the roll no. in the text file.
-    - If exists returns line no else -1
+    ''' Searches the roll no. in the text file.
 
-    # Parameters:
-        - roll:int the roll number of student
+    Args:
+        roll (int): The roll number of student
 
-    # Returns:
-        - record:list the record list which looks like [roll,name,address]
-                None if student's record is absent
+    Returns:
+        list: The record list which looks like [roll,name,address]
+            None if student's record is absent
     '''
 
     with open(filename, 'r') as file:
@@ -64,11 +61,10 @@ def search_student(roll: int) -> list:
     return None
 
 
-def record_student():
-    '''
-    Records a new student in the text file.
-    - Roll numbers must be unique.
-    - If roll number already exists, returns False
+def record_student() -> None:
+    ''' Records a new student in the text file.
+        - Roll numbers must be unique.
+        - If roll number already exists, returns False
     '''
     try:
         roll = int(input("Enter Student's roll number\n>>> "))
@@ -93,7 +89,7 @@ def record_student():
 
 
 def read_data() -> None:
-    '''Displays the details of the student searhced
+    ''' Displays the details of the student searhced
     '''
     roll = input("Enter roll no. to search\n>>> ")
     record = search_student(roll)
@@ -109,12 +105,16 @@ def read_data() -> None:
         ''')
 
 
-def display_all():
+def display_all() -> None:
+    ''' Display all records.
+    '''
     with open(filename, 'r') as file:
         print(file.read())
 
 
 def main():
+    ''' Drive the application.
+    '''
 
     path = input('Enter directory path to store/retrieve data\n>>> ')
     init(path)
@@ -126,7 +126,7 @@ def main():
                   'func': display_all}
     menus['3'] = {'desc': 'Search student by roll no',
                   'func': read_data}
-    drive_menu('Student Management Portal',menus)
+    drive_menu('Student Management Portal', menus)
 
 
 if __name__ == "__main__":

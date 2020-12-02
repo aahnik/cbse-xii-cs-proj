@@ -1,7 +1,8 @@
-'''
-Create a binary file with name and roll number. Search for a given roll
+''' Create a binary file with name and roll number. Search for a given roll
 number and display the name, if not found display appropriate message.
 '''
+
+
 import pickle
 import os
 from utils import drive_menu
@@ -10,7 +11,13 @@ students = {}
 filename = ''
 
 
-def init(path):
+def init(path: str) -> None:
+    ''' Load the file. If file does not exist, creates it.
+
+    Args:
+        path (str): file path
+    '''
+
     global students
     if not os.path.isdir(path):
         os.makedirs(path)
@@ -25,6 +32,8 @@ def init(path):
 
 
 def record() -> None:
+    ''' Record a new student.
+    '''
     roll = input('Enter roll: ')
     name = input('Enter name: ')
     student = {roll: name}
@@ -38,6 +47,8 @@ def record() -> None:
 
 
 def search() -> None:
+    ''' Search for an existing student.
+    '''
     roll = input('Enter roll to search student: ')
     try:
         print(f'Student found : {students[roll]}')
@@ -46,6 +57,8 @@ def search() -> None:
 
 
 def main():
+    ''' Driving the app.
+    '''
 
     path = input('Enter directory path to store/retrieve data\n >>> ')
     init(path)
@@ -56,6 +69,7 @@ def main():
                   'func': record}
     menus['2'] = {'desc': 'Search student by roll',
                   'func': search}
+
     drive_menu('Student Management', menus)
 
 

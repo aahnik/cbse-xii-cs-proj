@@ -1,17 +1,16 @@
-'''
-Read a text file and display the number of vowels/consonants/uppercase/lowercase
-characters and digits in the file
+''' Read a text file and display the number of vowels/consonants/uppercase/lowercase
+characters and digits in the file.
 '''
 
 
 def analyse(path: str) -> dict:
-    '''
-    Analyses a text file and displays the number of vowels/consonants/uppercase/lowercase characters and digits in the file
+    ''' Analyses a text file and displays the number of vowels/consonants/uppercase/lowercase characters and digits in the file.
 
-    ### Parameters:
-        - path:str path of the file to analyse
-    ### Returns: 
-        - analysis:dict dictionary containing the analysis
+    Args:
+        path (str): path of the file to analyse
+
+    Returns:
+        dict: dictionary containing the analysis
     '''
 
     with open(path, 'r') as file:
@@ -48,5 +47,6 @@ def analyse(path: str) -> dict:
 
 
 if __name__ == "__main__":
+    # Test the function
     result = analyse(input('Enter file path\n>>> '))
     print(result)

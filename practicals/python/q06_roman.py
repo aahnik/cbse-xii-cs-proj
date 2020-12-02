@@ -1,8 +1,8 @@
-'''
-Write a program using Dictionary and Text file to store roman numbers and find their
-equivalent.
+''' Write a program using Dictionary and Text file to store roman numbers and find their equivalent.
 '''
 
+
+# base roman numbers and their integer equivalents
 ROMAN = {
     'I': 1,
     'V': 5,
@@ -15,7 +15,19 @@ ROMAN = {
 
 
 def parse_roman(roman_num: str) -> int:
-    ''' parses a string which is roman numeral and returns equivalent integer'''
+    ''' Parses a string which is roman numeral and returns equivalent integer.
+
+    Args:
+        roman_num (str): Roman numeral to parse
+
+    Raises:
+        ValueError: Invalid character in roman numeral
+        ValueError: Character occured more than 3 times consecutivel
+        ValueError: Invalid roman numeral, incorrect subtractive notation
+
+    Returns:
+        int: Integer equivalent
+    '''
 
     # stripping any space
     roman_num = roman_num.strip()
@@ -80,7 +92,8 @@ def parse_roman(roman_num: str) -> int:
 
 
 if __name__ == "__main__":
-    ''' Checking whether our algorithm passes all test cases'''
+    # Checking whether our algorithm passes all test cases
+
     with open('data/romans.txt') as file:
         for line in file:
             roman, decimal = line.split(',')

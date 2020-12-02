@@ -1,6 +1,6 @@
+''' Read a text file line by line and display each word separated by a # .
 '''
-Read a text file line by line and display each word separated by a #
-'''
+
 
 path = input('Enter path of the file to read \n >>> ')
 
@@ -11,7 +11,7 @@ try:
             if line == '':
                 break
             for word in line.split():
-                print(word,end='#')
+                print(word, end='#')
 
 except FileNotFoundError:
     print("Sorry ! File does not exist")

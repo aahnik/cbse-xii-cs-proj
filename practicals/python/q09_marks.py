@@ -1,11 +1,10 @@
-'''
-Create a binary file with roll number, name and marks. Input a roll
+''' Create a binary file with roll number, name and marks. Input a roll
 number and update the marks
 '''
 
 
 import pickle
-from utils import clear_screen, drive_menu
+from utils import drive_menu
 from tabulate import tabulate
 import os
 
@@ -15,13 +14,13 @@ filename = os.path.join('data', 'marks.bin')
 students = {}  # dictionary containing students
 
 
-def load_file():
+def load_file() -> None:
     with open(filename, 'rb') as file:
         global students
         students = pickle.load(file)
 
 
-def write_to_file():
+def write_to_file() -> None:
     with open(filename, 'wb') as file:
         pickle.dump(students, file)
 
@@ -35,7 +34,7 @@ def record_student() -> None:
     print('Sucessfully recorded')
 
 
-def update_marks():
+def update_marks() -> None:
     roll, marks = input(
         'Enter roll, and new marks seperated by comma\n ').split(',')
     if roll in students.keys():
@@ -46,7 +45,7 @@ def update_marks():
         print('Student does not exist in records')
 
 
-def display():
+def display() -> None:
     table = []
     for key, value in students.items():
         table.append([key, value[0], value[1]])
@@ -55,6 +54,8 @@ def display():
 
 
 def main():
+    ''' Driving the app.
+    '''
     if not os.path.isfile(filename):
         write_to_file()
     else:
@@ -63,13 +64,13 @@ def main():
     menus = {}
 
     menus['1'] = {'desc': 'Record new student',
-                 'func': record_student}
+                  'func': record_student}
     menus['2'] = {'desc': 'Update marks of existing student',
-                 'func': update_marks}
+                  'func': update_marks}
     menus['3'] = {'desc': 'Display all records',
-                 'func': display}
+                  'func': display}
 
-    drive_menu('Marks Manager',menus)
+    drive_menu('Marks Manager', menus)
 
 
 if __name__ == "__main__":

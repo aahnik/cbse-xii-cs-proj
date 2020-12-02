@@ -1,16 +1,20 @@
-'''
-Write a program to calculate the n-th term of Fibonacci series using function
+''' A program to calculate the n-th term of Fibonacci series using function.
 '''
 
 
 def fibo(n: int) -> int:
-    '''
-    Returns the n-th term of fibbonaci series. Returns -1 for invalid input
+    ''' The name 'Fibonacci' is due to a 13th-century Italian mathematician Leonardo of Pisa, who later came to be known as Fibonacci. However, what we Indians popularly call 'Fibonacci numbers' find their earliest mention in the 2nd century BCE work of Acharya Pingala.
 
     By definition,the 0-th term of the series is zero, and the 1-st term is 1. 
     Any other term is the sum of previous two terms.
 
-    The name 'Fibonacci' is due to a 13th-century Italian mathematician Leonardo of Pisa, who later came to be known as Fibonacci. However, what we Indians popularly call 'Fibonacci numbers' find their earliest mention in the 2nd century BCE work of Acharya Pingala.
+    Returns the n-th term of fibbonaci series. Returns -1 for invalid input.
+
+    Args:
+        n (int): the term
+
+    Returns:
+        int: the nth fibonacci number
     '''
 
     if n < 0:
@@ -25,7 +29,7 @@ def fibo(n: int) -> int:
 
 
 if __name__ == "__main__":
-    ''' Testing whether the function works correctly'''
+    # Testing whether the function works correctly
 
     assert fibo(0) == 0
     assert fibo(1) == 1
