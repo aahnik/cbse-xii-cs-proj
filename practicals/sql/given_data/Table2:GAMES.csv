@@ -1,6 +1,9 @@
-"GCode","GameName","Number","PrizeMoney","ScheduleDate"
-"101","Carom Board","2","5000","23-Jan-2021"
-"102","Badminton","2","1200","12-Dec-2020"
-"103","Table Tennis","4","8000","14-Feb-2021"
-"105","Chess","2","9000","02-Jan-2021"
-"108","Lawn Tennis","4","25000","19-Mar-2021"
+GCode,GameName,Number,PrizeMoney,ScheduleDate
+101,'Carom Board',2,5000,'23-Jan-2021'
+102,'Badminton',2,1200,'12-Dec-2020'
+103,'Table Tennis',4,8000,'14-Feb-2021'
+105,'Chess',2,9000,'02-Jan-2021'
+108,'Lawn Tennis',4,25000,'19-Mar-2021'
+
+
+
