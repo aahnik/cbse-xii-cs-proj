@@ -1,3 +1,7 @@
+''' General purpose utility module, to reduce number of lines of code in solution 
+Enables my code to be DRY (Dont Repeat Yourself)
+'''
+
 import os
 from tabulate import tabulate
 import sys
@@ -27,6 +31,14 @@ def clear_screen():
 
 
 def drive_menu(heading: str, menus: dict) -> None:
+    ''' Function to allow a menu driven program
+
+    Args:
+        heading (str): heading to be displayed on top of menu
+        menus (dict): dictionary of menus containing 
+        key (menu id) value (another dictionary having `desc` and `func` )
+    '''
+
     table = [[ch, menu['desc']] for ch, menu in menus.items()]
     menu_chart = f'''
         MENU for {heading}

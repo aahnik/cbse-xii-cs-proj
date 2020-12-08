@@ -1,9 +1,14 @@
+''' Program to connect with database and search employee number in table employee
+and display record, if empno not found display appropriate message. '''
+
 from utils import clear_screen
 from sqlTor import SqlTor
 from q17_dbRecord import input_emp_id
 
 
-def get_employee(cursor):
+def get_employee(cursor) -> tuple or None:
+    ''' Input employee id and fetch details of employee. 
+    Returns a tuple or None if not found '''
 
     emp_id = input_emp_id()
 
@@ -20,6 +25,7 @@ def get_employee(cursor):
 
 
 if __name__ == "__main__":
+
     with SqlTor() as my_con:
         cursor = my_con.cursor()
 

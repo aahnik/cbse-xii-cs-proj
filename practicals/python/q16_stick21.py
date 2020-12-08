@@ -1,5 +1,4 @@
-'''
-Program to create 21 Stick Game so that computer always wins
+''' Program to create 21 Stick Game so that computer always wins
 
 21 Matchstick Puzzle game
 - In this Puzzle there are 21 Match Sticks.
@@ -16,23 +15,33 @@ def display_rules():
 
 
 def game():
+    ''' The game '''
+
     sticks = 21
 
     while sticks != 1:
         clear_screen()
         print(f'Currently there are {sticks} sticks')
+
+        # ensure user enters an integer
         try:
             user_choice = int(input('Choose from 1 to 4 sticks\n>>> '))
         except ValueError:
             print('You have entered a non integer value')
             return 'Game Aborted'
+
+        # ensure user choice is valid
         try:
             assert user_choice in (1, 2, 3, 4)
         except AssertionError:
             print('You can choose only between 1 to 4 sticks')
             return 'Game Aborted'
+
+        # calculate remaining no. of sticks
         sticks -= user_choice
         print(f'Now we have {sticks} sticks left. Its my turn now')
+
+        # strategy to win
         computer_choice = 5-user_choice
         sticks -= computer_choice
         print(f'I have picked {computer_choice} sticks')

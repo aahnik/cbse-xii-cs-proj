@@ -1,6 +1,6 @@
+''' Program to implement Stack in Python using List
 '''
-Program to implement Stack in Python using List
-'''
+
 from tabulate import tabulate
 from utils import drive_menu
 
@@ -29,8 +29,6 @@ class Stack():
             print('Stack Overflow : Size of stack exceeded limit')
             return
         self.stk.append(data)
-        # if __name__ == "__main__":
-        #     print(f'{data} succesfully pushed')
 
     def pop(self):
         if self.is_empty():

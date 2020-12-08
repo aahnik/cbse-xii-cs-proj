@@ -1,3 +1,5 @@
+''' Program to connect with database and update the employee record of entered empno. '''
+
 from utils import clear_screen
 from sqlTor import SqlTor
 
@@ -6,6 +8,7 @@ from q17_dbRecord import input_employee_details
 
 
 def update_employee(cursor):
+    ''' Update an employee '''
 
     emp = get_employee()
 
@@ -28,6 +31,7 @@ def update_employee(cursor):
         print(err)
     else:
         print('Update Successful!')
+
 
 if __name__ == "__main__":
     with SqlTor() as my_con:

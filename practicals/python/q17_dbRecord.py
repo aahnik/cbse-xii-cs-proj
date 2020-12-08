@@ -1,3 +1,6 @@
+''' Program to connect with database and store record of employee and display records.
+'''
+
 from sqlTor import SqlTor
 import mysql.connector
 from mysql.connector import errorcode
@@ -30,11 +33,12 @@ def input_emp_id():
             print('Invalid Employee id. It must be integer.')
         else:
             break
-
     return emp_id
 
 
 def create_table(cursor):
+    ''' Takes the cursor object and creates table '''
+
     table_creation = ("CREATE TABLE employees(\
                       emp_id integer NOT NULL PRIMARY KEY,\
                       name char(20) NOT NULL,\
@@ -53,6 +57,8 @@ def create_table(cursor):
 
 
 def display_all(cursor):
+    ''' Display all employees '''
+
     query = "SELECT * FROM employees"
 
     try:
@@ -69,6 +75,8 @@ def display_all(cursor):
 
 
 def record_new(cursor):
+    ''' Record a new employee '''
+
     print('Enter the details to add new employee.\n')
 
     emp_id = input_emp_id()
@@ -78,6 +86,7 @@ def record_new(cursor):
     insert_employee = f"INSERT INTO employees \
                         VALUES({emp_id},\
                             '{name}','{department}',{salary})"
+
     try:
         cursor.execute(insert_employee)
     except Exception as err:

@@ -1,5 +1,4 @@
-'''
-Take a sample of ten phishing e-mails (or any text file) and find most.
+''' Take a sample of ten phishing e-mails (or any text file) and find most.
 commonly occurring word(s)
 
 the file `data/phishing.txt` contains the text extracted from 10 phishing emails
@@ -16,8 +15,10 @@ filename = os.path.join('data', 'phishing.txt')
 with open(filename, 'r') as file:
     content = file.read()
 
+# take all the words
 words = Counter(content.split())
 
+# count the most common words
 most_common = words.most_common(20)
 
 print('Top 20 Commonly used words\n')

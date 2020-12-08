@@ -1,9 +1,12 @@
+''' Program to connect with database and delete the record of entered employee number. '''
+
 from sqlTor import SqlTor
 from utils import clear_screen
 from q18_dbSearch import get_employee
 
 
 def delete_employee(cursor):
+    ''' Delete an employee '''
 
     emp = get_employee(cursor)
 

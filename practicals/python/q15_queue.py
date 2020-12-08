@@ -1,6 +1,6 @@
+''' Program to implement Queue in Python using List
 '''
-Program to implement Queue in Python using List
-'''
+
 from tabulate import tabulate
 from utils import drive_menu
 
