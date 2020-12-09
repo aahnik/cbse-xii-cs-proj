@@ -1,0 +1,207 @@
+
+RSA algorithm
+From Simple English Wikipedia, the free encyclopedia
+Jump to navigationJump to search
+
+The English used in this article or section may not be easy for everybody to understand. You can help Wikipedia by reading Wikipedia:How to write Simple English pages, then simplifying the article.
+RSA (Rivest–Shamir–Adleman) is an algorithm used by modern computers to encrypt and decrypt messages. It is an asymmetric cryptographic algorithm. Asymmetric means that there are two different keys. This is also called public key cryptography, because one of the keys can be given to anyone. The other key must be kept private. The algorithm is based on the fact that finding the factors of a large composite number is difficult: when the factors are prime numbers, the problem is called prime factorization. It is also a key pair (public and private key) generator.
+
+RSA involves a public key and private key. The public key can be known to everyone- it is used to encrypt messages. Messages encrypted using the public key can only be decrypted with the private key. The keys for the RSA algorithm are generated the following way:
+
+Choose two different large random prime numbers {\displaystyle p\,}{\displaystyle p\,} and {\displaystyle q\,}{\displaystyle q\,}
+Calculate {\displaystyle n=pq\,}{\displaystyle n=pq\,}
+{\displaystyle n\,}{\displaystyle n\,} is the modulus for the public key and the private keys
+Calculate the totient: {\displaystyle \phi (n)\,=(p-1)(q-1)\,}{\displaystyle \phi (n)\,=(p-1)(q-1)\,}.
+Choose an integer {\displaystyle e\,}{\displaystyle e\,} such that 1 < {\displaystyle e\,}{\displaystyle e\,} < {\displaystyle \phi (n)\,}{\displaystyle \phi (n)\,}, and {\displaystyle e\,}{\displaystyle e\,}is co-prime to {\displaystyle \phi (n)\,}{\displaystyle \phi (n)\,} i.e.: {\displaystyle e\,}{\displaystyle e\,} and {\displaystyle \phi (n)\,}{\displaystyle \phi (n)\,} share no factors other than 1; gcd({\displaystyle e\,}{\displaystyle e\,},{\displaystyle \phi (n)\,}{\displaystyle \phi (n)\,}) = 1.
+{\displaystyle e\,}{\displaystyle e\,} is released as the public key exponent
+Compute {\displaystyle d\,}{\displaystyle d\,} to satisfy the congruence relation {\displaystyle de\equiv 1{\pmod {\phi (n)}}\,}{\displaystyle de\equiv 1{\pmod {\phi (n)}}\,} i.e.: {\displaystyle de=1+x\phi (n)\,}{\displaystyle de=1+x\phi (n)\,} for some integer {\displaystyle x\,}{\displaystyle x\,}. (Simply to say : Calculate {\displaystyle d=(1+x\phi (n))/e\,}{\displaystyle d=(1+x\phi (n))/e\,} to be an integer)
+{\displaystyle d\,}{\displaystyle d\,} is kept as the private key exponent
+Notes on the above steps:
+
+Step 1: Numbers can be probabilistically tested for primality.
+Step 3: changed in PKCS#1 [en] v2.0 to {\displaystyle \lambda (n)={\rm {lcm}}(p-1,q-1)\,}{\displaystyle \lambda (n)={\rm {lcm}}(p-1,q-1)\,} instead of {\displaystyle \phi (n)=(p-1)(q-1)\,}{\displaystyle \phi (n)=(p-1)(q-1)\,}.
+Step 4: A popular choice for the public exponents is {\displaystyle e\,}{\displaystyle e\,} = 216 + 1 = 65537. Some applications choose smaller values such as {\displaystyle e\,}{\displaystyle e\,} = 3, 5, or 35 instead. This is done to make encryption and signature verification faster on small devices like smart cards but small public exponents may lead to greater security risks.
+Steps 4 and 5 can be performed with the extended Euclidean algorithm [en]; see modular arithmetic.
+
+The public key is made of the modulus {\displaystyle n\,}{\displaystyle n\,} and the public (or encryption) exponent {\displaystyle e\,}{\displaystyle e\,}.
+The personal key is made of p,q and the private (or decryption) exponent {\displaystyle d\,}{\displaystyle d\,} which must be kept secret.
+
+For efficiency a different form of the private key can be stored:
+{\displaystyle p\,}{\displaystyle p\,} and {\displaystyle q\,}{\displaystyle q\,}: the primes from the key generation,
+{\displaystyle d\mod (p-1)\,}{\displaystyle d\mod (p-1)\,} and {\displaystyle d\mod (q-1)\,}{\displaystyle d\mod (q-1)\,}: often called dmp1 and dmq1.
+{\displaystyle q^{-1}\mod (p)\,}{\displaystyle q^{-1}\mod (p)\,}: often called iqmp
+All parts of the private key must be kept secret in this form. {\displaystyle p\,}{\displaystyle p\,} and {\displaystyle q\,}{\displaystyle q\,} are sensitive since they are the factors of {\displaystyle n\,}{\displaystyle n\,}, and allow computation of {\displaystyle d\,}{\displaystyle d\,} given {\displaystyle e\,}{\displaystyle e\,}. If {\displaystyle p\,}{\displaystyle p\,} and {\displaystyle q\,}{\displaystyle q\,} are not stored in this form of the private key then they are securely deleted along with other intermediate values from key generation.
+Although this form allows faster decryption and signing by using the Chinese Remainder Theorem (CRT) it is considerably less secure since it enables side channel attacks [en]. This is a particular problem if implemented on smart cards, which benefit most from the improved efficiency. (Start with {\displaystyle y=x^{e}{\pmod {n}}}{\displaystyle y=x^{e}{\pmod {n}}} and let the card decrypt that. So it computes {\displaystyle y^{d}{\pmod {p}}}{\displaystyle y^{d}{\pmod {p}}} or {\displaystyle y^{d}{\pmod {q}}}{\displaystyle y^{d}{\pmod {q}}} whose results give some value {\displaystyle z}{\displaystyle z}. Now, induce an error in one of the computations. Then {\displaystyle \gcd(z-x,n)}{\displaystyle \gcd(z-x,n)} will reveal {\displaystyle p}{\displaystyle p} or {\displaystyle q}q.)
+
+Contents
+1	Encrypting message
+2	Decrypting message
+2.1	A working example
+3	Deriving RSA equation from Euler's theorem
+4	Padding schemes
+5	Signing messages
+6	References
+7	Other websites
+Encrypting message
+Alice gives her public key ({\displaystyle n\,}{\displaystyle n\,} & {\displaystyle e\,}{\displaystyle e\,}) to Bob and keeps her private key secret. Bob wants to send message M to Alice.
+
+First he turns M into a number {\displaystyle m}m smaller than {\displaystyle n}n by using an agreed-upon reversible protocol known as a padding scheme. He then computes the ciphertext {\displaystyle c\,}{\displaystyle c\,} corresponding to:
+
+{\displaystyle c=m^{e}\mod {n}}{\displaystyle c=m^{e}\mod {n}}
+This can be done quickly using the method of exponentiation by squaring. Bob then sends {\displaystyle c\,}{\displaystyle c\,} to Alice.
+
+Decrypting message
+Alice can recover {\displaystyle m\,}{\displaystyle m\,} from {\displaystyle c\,}{\displaystyle c\,} by using her private key {\displaystyle d\,}{\displaystyle d\,} in the following procedure:
+
+Given {\displaystyle m\,}{\displaystyle m\,}, she can recover the original distinct prime numbers, applying the Chinese remainder theorem to these two congruences yields
+
+{\displaystyle m^{ed}\equiv m{\bmod {pq}}}{\displaystyle m^{ed}\equiv m{\bmod {pq}}}.
+Thus,
+
+{\displaystyle c^{d}\equiv m{\bmod {n}}}{\displaystyle c^{d}\equiv m{\bmod {n}}}.
+A working example
+Here is an example of RSA encryption and decryption. The prime numbers used here are too small to let us securely encrypt anything. You can use OpenSSL to generate and examine a real keypair.
+
+Choose two random prime numbers.
+:{\displaystyle p=61}{\displaystyle p=61} and {\displaystyle q=53;}{\displaystyle q=53;}Compute {\displaystyle n=pq\,}{\displaystyle n=pq\,}
+:{\displaystyle n=61*53=3233}{\displaystyle n=61*53=3233}
+Compute the totient {\displaystyle \phi (n)=(p-1)(q-1)\,}{\displaystyle \phi (n)=(p-1)(q-1)\,}
+:{\displaystyle \phi (n)=(61-1)(53-1)=3120}{\displaystyle \phi (n)=(61-1)(53-1)=3120}
+Choose {\displaystyle e>1}{\displaystyle e>1} coprime to 3120
+:{\displaystyle e=17}{\displaystyle e=17}
+Choose {\displaystyle d\,}{\displaystyle d\,} to satisfy {\displaystyle de{\bmod {\phi (n)}}\equiv 1\,}{\displaystyle de{\bmod {\phi (n)}}\equiv 1\,}
+:{\displaystyle d=2753}{\displaystyle d=2753}
+:{\displaystyle 17*2753=46801=1+15*3120}{\displaystyle 17*2753=46801=1+15*3120}.
+
+The public key is ({\displaystyle n=3233}{\displaystyle n=3233}, {\displaystyle e=17}{\displaystyle e=17}). For a padded message {\displaystyle m\,}{\displaystyle m\,}the encryption function {\displaystyle c=m^{e}{\bmod {n}}}{\displaystyle c=m^{e}{\bmod {n}}} becomes:
+
+{\displaystyle c=m^{17}{\bmod {3}}233\,}{\displaystyle c=m^{17}{\bmod {3}}233\,}
+The private key is ({\displaystyle n=3233}{\displaystyle n=3233}, {\displaystyle d=2753}{\displaystyle d=2753}). The decryption function {\displaystyle m=c^{d}{\bmod {n}}}{\displaystyle m=c^{d}{\bmod {n}}} becomes:
+
+{\displaystyle m=c^{2753}{\bmod {3}}233\,}{\displaystyle m=c^{2753}{\bmod {3}}233\,}
+
+For example, to encrypt {\displaystyle m=123}{\displaystyle m=123}, we calculate
+
+{\displaystyle c=123^{17}{\bmod {3}}233=855}{\displaystyle c=123^{17}{\bmod {3}}233=855}
+To decrypt {\displaystyle c=855}{\displaystyle c=855}, we calculate
+
+{\displaystyle m=855^{2753}{\bmod {3}}233=123}{\displaystyle m=855^{2753}{\bmod {3}}233=123}
+Both of these calculations can be computed fast and easily using the square-and-multiply algorithm for modular exponentiation.
+
+Deriving RSA equation from Euler's theorem
+RSA can easily be derived using Euler's theorem and Euler's totient function.
+
+Starting with Euler's theorem,
+
+{\displaystyle m^{\phi (n)}\equiv 1{\pmod {n}}}{\displaystyle m^{\phi (n)}\equiv 1{\pmod {n}}}
+
+we must show that decrypting an encrypted message, with the correct key, will give the original message. Given a padded message m, the ciphertext c, is calculated by
+
+{\displaystyle c\equiv m^{e}{\pmod {n}}}{\displaystyle c\equiv m^{e}{\pmod {n}}}
+
+Substituting into the decryption algorithm, we have
+
+{\displaystyle c^{d}\equiv (m^{e})^{d}\equiv m^{ed}{\pmod {n}}}{\displaystyle c^{d}\equiv (m^{e})^{d}\equiv m^{ed}{\pmod {n}}}
+
+We want to show this value is also congruent to m. The values of e and d were chosen to satify,
+
+{\displaystyle ed\equiv 1{\pmod {\phi (n)}}}{\displaystyle ed\equiv 1{\pmod {\phi (n)}}}
+
+Which is to say, there exists some integer k, such that
+
+{\displaystyle ed=k\times \phi (n)+1}{\displaystyle ed=k\times \phi (n)+1}
+
+Now we substitute into the encrypted then decrypted message,
+
+{\displaystyle {\begin{aligned}m^{ed}&\equiv m^{k\phi (n)+1}\\&\equiv m\times m^{k\phi (n)}\\&\equiv m\times \left(m^{\phi (n)}\right)^{k}{\pmod {n}}\end{aligned}}}{\displaystyle {\begin{aligned}m^{ed}&\equiv m^{k\phi (n)+1}\\&\equiv m\times m^{k\phi (n)}\\&\equiv m\times \left(m^{\phi (n)}\right)^{k}{\pmod {n}}\end{aligned}}}
+
+We apply Euler's theorem, and achive the result.
+
+{\displaystyle m\times (1)^{k}\equiv m{\pmod {n}}}{\displaystyle m\times (1)^{k}\equiv m{\pmod {n}}}
+
+Padding schemes
+When used in practice, RSA must be combined with some form of padding scheme, so that no values of M result in insecure ciphertexts. RSA used without padding may have some problems:
+
+The values m = 0 or m = 1 always produce ciphertexts equal to 0 or 1 respectively, due to the properties of exponentiation.
+When encrypting with small encryption exponents (e.g., e = 3) and small values of the m, the (non-modular) result of {\displaystyle m^{e}}{\displaystyle m^{e}} may be strictly less than the modulus n. In this case, ciphertexts may be easily decrypted by taking the eth root of the ciphertext with no regard to the modulus.
+RSA encryption is a deterministic encryption algorithm. It has no random component. Therefore, an attacker can successfully launch a chosen plaintext attack against the cryptosystem. They can make a dictionary by encrypting likely plaintexts under the public key, and storing the resulting ciphertexts. The attacker can then observe the communication channel. As soon as they see ciphertexts that match the ones in their dictionary, the attackers can then use this dictionary in order to learn the content of the message.
+In practice, the first two problems can arise when short ASCII messages are sent. In such messages, m might be the concatenation of one or more ASCII-encoded character(s). A message consisting of a single ASCII NUL character (whose numeric value is 0) would be encoded as m = 0, which produces a ciphertext of 0 no matter which values of e and N are used. Likewise, a single ASCII SOH (whose numeric value is 1) would always produce a ciphertext of 1. For systems which conventionally use small values of e, such as 3, all single character ASCII messages encoded using this scheme would be insecure, since the largest m would have a value of 255, and 2553 is less than any reasonable modulus. Such plaintexts could be recovered by simply taking the cube root of the ciphertext.
+
+To avoid these problems, practical RSA implementations typically embed some form of structured, randomized padding into the value m before encrypting it. This padding ensures that m does not fall into the range of insecure plaintexts, and that a given message, once padded, will encrypt to one of a large number of different possible ciphertexts. The latter property can increase the cost of a dictionary attack beyond the capabilities of a reasonable attacker.
+
+Standards such as PKCS have been carefully designed to securely pad messages prior to RSA encryption. Because these schemes pad the plaintext m with some number of additional bits, the size of the un-padded message M must be somewhat smaller. RSA padding schemes must be carefully designed so as to prevent sophisticated attacks. This may be made easier by a predictable message structure. Early versions of the PKCS standard used ad-hoc constructions, which were later found vulnerable to a practical adaptive chosen ciphertext attack. Modern constructions use secure techniques such as Optimal Asymmetric Encryption Padding (OAEP) to protect messages while preventing these attacks. The PKCS standard also has processing schemes designed to provide additional security for RSA signatures, e.g., the Probabilistic Signature Scheme for RSA (RSA-PSS).
+
+Signing messages
+Suppose Alice uses Bob's public key to send him an encrypted message. In the message, she can claim to be Alice but Bob has no way of verifying that the message was actually from Alice since anyone can use Bob's public key to send him encrypted messages. So, in order to verify the origin of a message, RSA can also be used to sign a message.
+
+Suppose Alice wishes to send a signed message to Bob. She produces a hash value of the message, raises it to the power of d mod n (just like when decrypting a message), and attaches it as a "signature" to the message. When Bob receives the signed message, he raises the signature to the power of e mod n (just like encrypting a message), and compares the resulting hash value with the message's actual hash value. If the two agree, he knows that the author of the message was in possession of Alice's secret key, and that the message has not been tampered with since.
+
+Note that secure padding schemes such as RSA-PSS are as essential for the security of message signing as they are for message encryption, and that the same key should never be used for both encryption and signing purposes.
+
+References
+Other websites
+The Original RSA Patent as filed with the U.S. Patent Office by Rivest; Ronald L. (Belmont, MA), Shamir; Adi (Cambridge, MA), Adleman; Leonard M. (Arlington, MA), December 14, 1977, U.S. Patent 4,405,829 .
+PKCS #1: RSA Cryptography Standard (RSA Laboratories website)
+The PKCS #1 standard "provides recommendations for the implementation of public-key cryptography based on the RSA algorithm, covering the following aspects: cryptographic primitives; encryption schemes; signature schemes with appendix; ASN.1 syntax for representing keys and for identifying the schemes".
+Explanation of RSA using colored lamps at YouTube
+Thorough walk through of RSA
+Prime Number Hide-And-Seek: How the RSA Cipher Works
+Onur Aciicmez, Cetin Kaya Koc, Jean-Pierre Seifert: On the Power of Simple Branch Prediction Analysis
+A New Vulnerability In RSA Cryptography, CAcert NEWS Blog
+Example of an RSA implementation with PKCS#1 padding (GPL source code)
+Kocher's article about timing attacks
+An animated explanation of RSA with its mathematical background by CrypTool
+An interactive walkthrough going through all stages to make small example RSA keys
+Hacking Secret Ciphers with Python, Chapter 24, Public Key Cryptography and the RSA Cipher
+Grime, James. "RSA Encryption". Numberphile. Brady Haran.
+How RSA Key used for Encryption in real world
+Prime Numbers, Factorization, and their Relationship with Encryption
+Categories: Interlanguage link template existing linkCryptographyAlgorithms
+Navigation menu
+Not logged in
+Talk
+Contributions
+Create account
+Log in
+PageTalk
+ReadChangeChange sourceView historySearch
+Search Wikipedia
+Main page
+Simple start
+Simple talk
+New changes
+Show any page
+Help
+Contact us
+Give to Wikipedia
+About Wikipedia
+Tools
+What links here
+Related changes
+Upload file
+Special pages
+Permanent link
+Page information
+Cite this page
+Wikidata item
+Sandbox
+Print/export
+Make a book
+Download as PDF
+Page for printing
+
+In other languages
+العربية
+বাংলা
+English
+Español
+Bahasa Indonesia
+മലയാളം
+Bahasa Melayu
+Русский
+中文
+40 more
+Change links
+This page was last changed on 6 December 2020, at 18:14.
+Text is available under the Creative Commons Attribution/Share-Alike License and the GFDL; additional terms may apply. See Terms of Use for details.
+Privacy policyAbout WikipediaDisclaimersMobile viewDevelopersStatisticsCookie statementWikimedia FoundationPowered by MediaWiki

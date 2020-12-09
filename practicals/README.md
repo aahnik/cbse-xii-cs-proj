@@ -2,11 +2,6 @@
 
 CBSE XII Boards Computer Science Practicals. Python and SQL.
 
-[![GitHub license](https://img.shields.io/github/license/aahnik/cbse-xii-cs-proj)](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/aahnik/cbse-xii-cs-proj)](https://github.com/aahnik/cbse-xii-cs-proj/stargazers)
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Faahnik%2Fcbse-xii-cs-proj)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Faahnik%2Fcbse-xii-cs-proj)
-
-## Usage
 
 ## Python
 
@@ -26,9 +21,13 @@ python <question no> and hit [TAB] to autocomplete.
 >For example, if you write `python 01[TAB]`,
 >then your shell will autocomplete it to `python 01_fibo.py`.
 
+[Click here](/python/README.md) to see the outputs of all Python Programs.
+
 ## SQL
 
-Use SQL Workbench to open a script and then click the execute button.
+Use SQL Workbench to open a script, select a particular question and then click the execute button.
+
+[Click here](/sql/README.md) to see the outputs of all SQL scripts.
 
 ## Doubts
 
