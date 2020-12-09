@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 version = re.search(
     '^__version__\s*=\s*"(.*)"',
-    open('py_package/__init__.py', 'r').read(),
+    open('marksman/__init__.py', 'r').read(),
     re.M).group(1)
 
 
@@ -18,7 +18,7 @@ setuptools.setup(
     description="A simple command-line app to manage marks of students.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/aahnik/",
+    url="https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project",
     packages=setuptools.find_packages(),
     install_requires=['pytest'],
     include_package_data=True,
