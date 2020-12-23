@@ -71,6 +71,9 @@ class Modelz:
         self.table = table
         self.cursor = cursor
 
+    def __str__(self)->str:
+        return f'Modelz object for {self.table}'
+
     def fetch(self, **conds) -> list:
         ''' Fetches a list of results based on condition parameters
 
@@ -127,3 +130,5 @@ class Modelz:
         cond_str = gen_kv_str(conds)
         self.cursor.execute(f'''DELETE FROM {self.table}
                                 WHERE {cond_str} ''')
+
+
