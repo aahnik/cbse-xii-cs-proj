@@ -1,3 +1,4 @@
+import logging
 from sqlite3 import Cursor
 
 
@@ -36,8 +37,7 @@ def create_tables(cursor: Cursor):
         DROP TABLE IF EXISTS exams ;
         CREATE TABLE exams(
                     id INTEGER NOT NULL PRIMARY KEY,
-                    title TEXT NOT NULL,
-                    full_marks INTEGER NOT NULL
+                    title TEXT NOT NULL
                         );
         
         DROP TABLE IF EXISTS marks ;
@@ -70,8 +70,9 @@ class Modelz:
         '''
         self.table = table
         self.cursor = cursor
+        logging.info(f'Created {self}')
 
-    def __str__(self)->str:
+    def __str__(self) -> str:
         return f'Modelz object for {self.table}'
 
     def fetch(self, **conds) -> list:
@@ -110,6 +111,7 @@ class Modelz:
 
         self.cursor.execute(f'''INSERT INTO {self.table} 
                                 VALUES{values} ''')
+        logging.info(f'{values} were inserted using {self}')
 
     def update(self, set_string: str, **conds) -> None:
         ''' Updates the table using set_string, based on given conditions
@@ -130,5 +132,3 @@ class Modelz:
         cond_str = gen_kv_str(conds)
         self.cursor.execute(f'''DELETE FROM {self.table}
                                 WHERE {cond_str} ''')
-
-
