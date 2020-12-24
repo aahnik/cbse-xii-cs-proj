@@ -47,4 +47,12 @@ def fill_dummy():
 
 
 def tests():
-    pass
+    import sqlite3
+    from marksman.settings import DB_PATH
+    my_conn = sqlite3.connect(DB_PATH)
+    cursor = my_conn.cursor()
+
+    from marksman.plot import plot_student_performance
+
+    # for s in range(1, 10):
+    plot_student_performance(cursor, 10, 3)
