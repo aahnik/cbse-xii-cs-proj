@@ -11,13 +11,16 @@ def _roll():
 def _uid():
     return get_pos_int('Enter the unique id of exam: ')
 
+class CrudHandler:
+    def __init__(self) -> None:
+        pass
 
+    
 def crud_students(cursor: Cursor):
     students = Modelz('students', cursor)
-    roll = _roll()
-    st = students.exists(roll=roll)
-    if st:
-        print(st)
+    student = students.exists(roll=_roll())
+    if student:
+        print(student)
         print('Update/delete')
     else:
         print('Create')
@@ -25,8 +28,7 @@ def crud_students(cursor: Cursor):
 
 def crud_exams(cursor: Cursor):
     exams = Modelz('exams', cursor)
-    uid = _uid()
-    exam = exams.exists(uid=uid)
+    exam = exams.exists(uid=_uid())
     if exam:
         print(exam)
         print('u/d')
@@ -36,7 +38,7 @@ def crud_exams(cursor: Cursor):
 
 def crud_marks(cursor: Cursor):
     marks = Modelz('marks', cursor)
-    marks_entry = marks.exists(roll=_roll(), uid=_uid())
+    marks_entry = marks.exists(student=_roll(), exam=_uid())
     if marks_entry:
         print(marks_entry)
     else:
