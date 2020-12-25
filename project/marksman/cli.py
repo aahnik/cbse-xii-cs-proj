@@ -13,7 +13,7 @@ def main():
     '''
 
     main_parser = argparse.ArgumentParser(
-        description='Command Line Tool to manage marks of students',
+        description='CLI Tool to manage marks of students',
         epilog='''To learn how to use an action (crud|email|visualize) use \n\tmarksman <action> -h
         \n\nFor tutorials and documentation visit https://git.io/JL1iI ''', formatter_class=RawTextHelpFormatter)
 

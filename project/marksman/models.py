@@ -15,7 +15,7 @@ def gen_kv_str(kwargs) -> str:
 
     for key, value in kwargs.items():
         if c >= 1:
-            key_val_string += 'and'
+            key_val_string += ' AND '
         key_val_string += f'{key} = {value}'
         c += 1
 
