@@ -1,10 +1,14 @@
-def crud_handler():
-    pass
+import logging
+from sqlite3 import Cursor
 
 
-def email_handler():
-    pass
+def crud_handler(args, cursor: Cursor):
+    logging.info(f'called crud handler with {args.what}')
 
 
-def visualization_handler():
-    pass
+def email_handler(args, cursor: Cursor):
+    logging.info(f'called email handler with {args.exam}')
+
+
+def visualization_handler(args, cursor: Cursor):
+    logging.info(f'called vis handler with {args.exam} and {args.student}')
