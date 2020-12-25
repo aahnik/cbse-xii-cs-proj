@@ -1,3 +1,4 @@
+import logging
 import re
 
 
@@ -19,21 +20,32 @@ def get_pos_int(msg: str) -> int:
             return integer
 
 
-def get_str(msg: str, max_len: int = 64) -> str:
+def get_str(default: str = '') -> str:
+    max_len = 64
     while True:
         try:
-            string = input(msg)
+            string = input('Enter name: ')
             assert len(string) <= max_len
         except AssertionError:
             print(f'The string must not be longer than {max_len} characters')
         else:
-            return string
+            if string:
+                return string
+
+            if default:
+                return default
+
+            print('You cant keep this empty')
 
 
-def get_email(msg: str) -> str:
+def get_email(default: str = '') -> str:
     while True:
         try:
-            email = get_str(msg)
+            email = get_str('Enter email: ', default=default)
+            if email == default:
+                logging.info('Email unchanged, not checking')
+                return email
+            logging.info('Checking email for validity')
             regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
             assert re.search(regex, email)
         except AssertionError:
