@@ -36,7 +36,7 @@ def create_tables(cursor: Cursor):
 
         DROP TABLE IF EXISTS exams ;
         CREATE TABLE exams(
-                    id INTEGER NOT NULL PRIMARY KEY,
+                    uid INTEGER NOT NULL PRIMARY KEY,
                     title TEXT NOT NULL
                         );
         
@@ -51,7 +51,7 @@ def create_tables(cursor: Cursor):
                         ON DELETE CASCADE,
                     
                     FOREIGN KEY (exam) 
-                        REFERENCES exams(id)
+                        REFERENCES exams(uid)
                         ON DELETE CASCADE,
 
                     PRIMARY KEY (student,exam)
@@ -74,12 +74,6 @@ class Modelz:
 
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
-
-    def coloumns(self):
-        self.cursor.execute(f'''SELECT COLUMN_NAME 
-        FROM INFORMATION_SCHEMA.COLUMNS 
-        WHERE TABLE_NAME = {self.table}''')
-        return self.cursor.fetchall()
 
     def fetch(self, **conds) -> list:
         ''' Fetches a list of results based on condition parameters
