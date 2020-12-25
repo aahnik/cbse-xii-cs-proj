@@ -75,6 +75,12 @@ class Modelz:
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
 
+    def coloumns(self):
+        self.cursor.execute(f'''SELECT COLUMN_NAME 
+        FROM INFORMATION_SCHEMA.COLUMNS 
+        WHERE TABLE_NAME = {self.table}''')
+        return self.cursor.fetchall()
+
     def fetch(self, **conds) -> list:
         ''' Fetches a list of results based on condition parameters
 
