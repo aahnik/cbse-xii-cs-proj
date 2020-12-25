@@ -20,7 +20,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project",
     packages=setuptools.find_packages(),
-    install_requires=['pytest'],
+    install_requires=['matplotlib', 'PyQt5'],
     include_package_data=True,
     zip_safe=False,
     entry_points={
