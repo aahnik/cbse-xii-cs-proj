@@ -1,3 +1,3 @@
 ''' A command line utitility to manage marks of students. Perform CRUD, email results or visualize data. '''
 
-__version__ = "0.1.2"
+__version__ = "0.1.7"
