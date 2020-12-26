@@ -16,9 +16,8 @@ logger = logging.getLogger(__name__)
 def parse_commands():
 
     main_parser = argparse.ArgumentParser(
-        description='CLI Tool to manage marks of students',
-        epilog='''To learn how to use an action (crud|email|visualize) use \n\tmarksman <action> -h
-        \n\nFor tutorials and documentation visit https://git.io/JL1iI ''', formatter_class=RawTextHelpFormatter)
+        description='CLI Tool to manage marks of students efficiently',
+        epilog='''For tutorials and documentation visit https://git.io/JL1iI ''', formatter_class=RawTextHelpFormatter)
 
     main_parser.add_argument('-l', '--loud',
                              help='increase output verbosity',
