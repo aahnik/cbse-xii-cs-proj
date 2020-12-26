@@ -36,5 +36,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-
+    license='Creative Commons Zero v1.0 Universal',
+    keywords=['sql', 'database', 'crud', 'marks management',
+              'cms', 'data management', 'cli', 'utility', 'tool'],
 )
