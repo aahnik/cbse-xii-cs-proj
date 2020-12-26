@@ -1,7 +1,12 @@
 import logging
 from sqlite3 import Cursor
+from marksman.utils import ___
 
 logger = logging.getLogger(__name__)
+
+
+
+
 def gen_kv_str(kwargs) -> str:
     ''' Generate key value strings
 
@@ -23,40 +28,47 @@ def gen_kv_str(kwargs) -> str:
 
 
 def create_tables(cursor: Cursor):
+    logger.info('Starting creation of tables')
+    try:
+        cursor.executescript(___('''
+            PRAGMA foreign_keys = ON;
 
-    cursor.executescript('''
-        PRAGMA foreign_keys = ON;
+            DROP TABLE IF EXISTS students ;
+            CREATE TABLE students(
+                        roll INTEGER NOT NULL PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        email TEXT NOT NULL
+                                );
 
-        DROP TABLE IF EXISTS students ;
-        CREATE TABLE students(
-                    roll INTEGER NOT NULL PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    email TEXT NOT NULL
+            DROP TABLE IF EXISTS exams ;
+            CREATE TABLE exams(
+                        uid INTEGER NOT NULL PRIMARY KEY,
+                        name TEXT NOT NULL
                             );
+            
+            DROP TABLE IF EXISTS marks ;
+            CREATE TABLE marks(
+                        student INTEGER NOT NULL,
+                        exam INTEGER NOT NULL,
+                        marks INTEGER NOT NULL,
 
-        DROP TABLE IF EXISTS exams ;
-        CREATE TABLE exams(
-                    uid INTEGER NOT NULL PRIMARY KEY,
-                    name TEXT NOT NULL
-                        );
-        
-        DROP TABLE IF EXISTS marks ;
-        CREATE TABLE marks(
-                    student INTEGER NOT NULL,
-                    exam INTEGER NOT NULL,
-                    marks INTEGER NOT NULL,
+                        FOREIGN KEY (student) 
+                            REFERENCES students(roll)
+                            ON DELETE CASCADE,
+                        
+                        FOREIGN KEY (exam) 
+                            REFERENCES exams(uid)
+                            ON DELETE CASCADE,
 
-                    FOREIGN KEY (student) 
-                        REFERENCES students(roll)
-                        ON DELETE CASCADE,
-                    
-                    FOREIGN KEY (exam) 
-                        REFERENCES exams(uid)
-                        ON DELETE CASCADE,
-
-                    PRIMARY KEY (student,exam)
-                        );
-                ''')
+                        PRIMARY KEY (student,exam)
+                            );
+                '''))
+    except Exception as err:
+        logger.warning(
+            'Failed to create tables. Delete the database file and try again')
+        logger.exception(err)
+    else:
+        logger.info('Successfully created tables')
 
 
 class Modelz:
@@ -83,8 +95,8 @@ class Modelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(f'''SELECT * FROM {self.table} 
-                            {'WHERE' if cond_str else ''} {cond_str}''')
+        self.cursor.execute(___(f'''SELECT * FROM {self.table} 
+                            {'WHERE' if cond_str else ''} {cond_str}'''))
         return self.cursor.fetchall()
 
     def exists(self, **conds) -> tuple or None:
@@ -96,9 +108,9 @@ class Modelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(f'''SELECT * 
+        self.cursor.execute(___(f'''SELECT * 
                                 FROM {self.table} 
-                                WHERE {cond_str}''')
+                                WHERE {cond_str}'''))
 
         return self.cursor.fetchone()
 
@@ -109,8 +121,8 @@ class Modelz:
             values (tuple): values to insert
         '''
 
-        self.cursor.execute(f'''INSERT INTO {self.table} 
-                                VALUES{values} ''')
+        self.cursor.execute(___(f'''INSERT INTO {self.table} 
+                                VALUES{values} '''))
         logger.info(f'{values} were inserted using {self}')
 
     def update(self, set_string: str, **conds) -> None:
@@ -121,16 +133,14 @@ class Modelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        upd_str = f'''UPDATE  {self.table}
+        self.cursor.execute(___(f'''UPDATE  {self.table}
                                 SET {set_string}
-                                WHERE {cond_str} '''
-        logger.info(upd_str)
-        self.cursor.execute(upd_str)
+                                WHERE {cond_str} '''))
 
     def delete(self, **conds) -> None:
         ''' Deletes the entries satisfying given condtions
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(f'''DELETE FROM {self.table}
-                                WHERE {cond_str} ''')
+        self.cursor.execute(___(f'''DELETE FROM {self.table}
+                                WHERE {cond_str} '''))

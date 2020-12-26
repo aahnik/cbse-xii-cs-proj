@@ -9,6 +9,7 @@ from email import encoders
 
 from .settings import sender_address, sender_name
 
+logger = logging.getLogger(__name__)
 
 def send_email(server, recipient: str, message: str, files: list) -> bool:
 
@@ -28,6 +29,7 @@ def send_email(server, recipient: str, message: str, files: list) -> bool:
     multipart_msg.attach(part2)
 
     for attachment, filename in files:
+        logger.info(f'Attaching {filename}')
         attach_part = MIMEBase('application', 'octet-stream')
         attach_part.set_payload((attachment).read())
         encoders.encode_base64(attach_part)
@@ -40,7 +42,9 @@ def send_email(server, recipient: str, message: str, files: list) -> bool:
                         recipient,
                         multipart_msg.as_string())
     except Exception as err:
-        logging.exception(err)
+        logger.warning(f'Failed to send email to {recipient}')
+        logger.exception(err)
         return False
     else:
+        logger.info(f'Successfully sent email to {recipient}')
         return True

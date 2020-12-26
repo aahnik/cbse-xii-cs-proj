@@ -4,11 +4,11 @@ from marksman.validators import get_pos_int, get_str, get_email
 
 
 def _roll():
-    return get_pos_int('Enter roll number of student: ')
+    return get_pos_int('\nEnter roll number of student: ')
 
 
 def _uid():
-    return get_pos_int('Enter the unique id of exam: ')
+    return get_pos_int('\nEnter the unique id of exam: ')
 
 
 class Student:

@@ -1,12 +1,15 @@
 import argparse
 from argparse import RawTextHelpFormatter
-from marksman.settings import DB_PATH
+from marksman.db import create_tables
+from marksman.utils import ensure_parent
+from marksman.settings import DB_PATH, LOUD, SHOW_PATH, SENDER_EMAIL, SENDER_AUTH
 from marksman import __version__
 import sys
 from marksman.app import crud_handler, email_handler, visualization_handler
 import logging
 import sqlite3
 from rich.logging import RichHandler
+import os
 logger = logging.getLogger(__name__)
 
 
@@ -67,21 +70,32 @@ def main():
 
     args = main_parser.parse_args()
 
-    if args.loud:
+    if args.loud or LOUD:
         level = logging.INFO
     else:
         level = logging.WARNING
 
     logging.basicConfig(level=level,
-                        format='[dim]%(name)s[/dim] \t [i]%(message)s[/i]', handlers=[RichHandler(markup=True, show_path=False,)])
+                        format='[dim]%(name)s[/dim]\t%(message)s', handlers=[RichHandler(markup=True, show_path=SHOW_PATH,)])
 
     logger.info('Verbosity turned on')
 
     if hasattr(args, 'func'):
+
         logger.info('Starting database connection')
+        ensure_parent(DB_PATH)
+
+        pre_exists = os.path.isfile(DB_PATH)
+
         my_conn = sqlite3.connect(DB_PATH)
         cursor = my_conn.cursor()
-        args.func(args, cursor)
+
+        if not pre_exists:
+            create_tables(cursor)
+        try:
+            args.func(args, cursor)
+        except Exception as err:
+            logger.exception(err)
         my_conn.commit()
         my_conn.close()
         logger.info('Closed database connection')

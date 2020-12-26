@@ -11,7 +11,7 @@ def crud_handler(args, cursor: Cursor):
                         'exams': Exam,
                         'marks': MarksEntry}
 
-    logger.info(f'called crud handler with {args.what}')
+    logger.info(f'Called crud handler with {args.what}')
 
     AptClass = _handler_classes.get(args.what)
     modelz = Modelz(args.what, cursor)
@@ -22,7 +22,7 @@ def crud_handler(args, cursor: Cursor):
 
     if not apt.object:
         # if does not exist -> create
-        print(f'Does not exist')
+        logging.warn('Object does not Exist')
         handle_choice({'create': apt.create})
     else:
         # if exists -> update/delete
@@ -31,8 +31,8 @@ def crud_handler(args, cursor: Cursor):
 
 
 def email_handler(args, cursor: Cursor):
-    logging.info(f'called email handler with {args.exam}')
+    logging.info(f'Called email handler with {args.exam}')
 
 
 def visualization_handler(args, cursor: Cursor):
-    logging.info(f'called vis handler with {args.exam} and {args.student}')
+    logging.info(f'Called vis handler with {args.exam} and {args.student}')

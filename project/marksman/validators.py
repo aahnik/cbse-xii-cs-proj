@@ -2,6 +2,7 @@ import logging
 import re
 logger = logging.getLogger(__name__)
 
+
 def get_pos_int(msg: str) -> int:
     ''' takes input and returns after assuring that it is a positive integer
 
@@ -13,9 +14,9 @@ def get_pos_int(msg: str) -> int:
             integer = int(input(msg))
             assert integer > 0
         except ValueError:
-            print('The value you entered is not an integer')
+            logger.warn('The value you entered is not an integer')
         except AssertionError:
-            print('You must enter an integer greater than zero')
+            logger.warn('You must enter an integer greater than zero')
         else:
             return integer
 
@@ -27,7 +28,8 @@ def get_str(msg='Enter name: ', default: str = '') -> str:
             string = input(msg)
             assert len(string) <= max_len
         except AssertionError:
-            print(f'The string must not be longer than {max_len} characters')
+            logger.warn(
+                f'The string must not be longer than {max_len} characters')
         else:
             if string:
                 return string
@@ -35,7 +37,7 @@ def get_str(msg='Enter name: ', default: str = '') -> str:
             if default:
                 return default
 
-            print('You cant keep this empty')
+            logger.warn('You cant keep this empty')
 
 
 def get_email(default: str = '') -> str:
@@ -49,8 +51,6 @@ def get_email(default: str = '') -> str:
             regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
             assert re.search(regex, email)
         except AssertionError:
-            print('The email you enterd is invalid')
+            logger.warn('The email you enterd is invalid')
         else:
             return email
-
-
