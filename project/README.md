@@ -1,13 +1,17 @@
 # marksman
 
-A simple command-line app to manage marks of students.
+CLI Tool to manage marks of students efficiently.
+
+[![MIT license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/project/LICENSE)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![telegram-chat](https://img.shields.io/badge/chat-@aahnikdaw-blue?logo=telegram)](https://telegram.me/aahnikdaw)
 
 ## Features
 
 - **CRUD** ( create / read / update / delete )
 - **Email** ( email results to students)
 - **Visualize** ( visualize the data )
-- **Utils** ( fill dummy data / import from csv / export csv)
+- **Utils** ( fill dummy data / import from csv / export csv )
 
 ## Installation
 
@@ -136,4 +140,4 @@ If the above command fails, use the full path to `marksman`.
 
 ## API Reference
 
-As `marksman` is written in python, it can easily be imported by other Python programs and easily extended. Read the full API Reference which is published from the docstrings.
+As `marksman` is written purely in python, it can easily be imported by other Python programs and easily extended. Read the full API Reference which is published from the docstrings.
