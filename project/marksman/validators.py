@@ -20,11 +20,11 @@ def get_pos_int(msg: str) -> int:
             return integer
 
 
-def get_str(default: str = '') -> str:
+def get_str(msg='Enter name: ', default: str = '') -> str:
     max_len = 64
     while True:
         try:
-            string = input('Enter name: ')
+            string = input(msg)
             assert len(string) <= max_len
         except AssertionError:
             print(f'The string must not be longer than {max_len} characters')
@@ -52,3 +52,5 @@ def get_email(default: str = '') -> str:
             print('The email you enterd is invalid')
         else:
             return email
+
+
