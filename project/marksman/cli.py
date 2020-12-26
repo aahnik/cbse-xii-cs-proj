@@ -6,6 +6,8 @@ import sys
 from marksman.app import crud_handler, email_handler, visualization_handler
 import logging
 import sqlite3
+from rich.logging import RichHandler
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -20,6 +22,7 @@ def main():
     main_parser.add_argument('-l', '--loud',
                              help='increase output verbosity',
                              action='store_true')
+
     main_parser.add_argument(
         '-v', '--version', action='version', version=__version__)
 
@@ -65,12 +68,20 @@ def main():
     args = main_parser.parse_args()
 
     if args.loud:
-        logging.basicConfig(level=logging.INFO)
-        logging.info('Verbosity turned on')
+        level = logging.INFO
+    else:
+        level = logging.WARNING
+
+    logging.basicConfig(level=level,
+                        format='[dim]%(name)s[/dim] \t [i]%(message)s[/i]', handlers=[RichHandler(markup=True, show_path=False,)])
+
+    logger.info('Verbosity turned on')
 
     if hasattr(args, 'func'):
+        logger.info('Starting database connection')
         my_conn = sqlite3.connect(DB_PATH)
         cursor = my_conn.cursor()
         args.func(args, cursor)
         my_conn.commit()
         my_conn.close()
+        logger.info('Closed database connection')

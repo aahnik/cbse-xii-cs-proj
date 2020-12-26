@@ -1,4 +1,6 @@
 from sqlite3 import Cursor
+import logging
+logger = logging.getLogger(__name__)
 
 def analyse_exam(cursor:Cursor,exam_id:int)->dict:
     ''' Gives all stats about the exam
@@ -11,6 +13,7 @@ def analyse_exam(cursor:Cursor,exam_id:int)->dict:
         dict: all the stats
     '''
     
+    logger.info('Analyzing exam with id ')
     cursor.execute(f'SELECT AVG(marks) FROM marks WHERE exam={exam_id}')
     average = cursor.fetchone()[0]
     cursor.execute(f'SELECT MAX(marks) FROM marks WHERE exam={exam_id}')

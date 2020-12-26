@@ -1,7 +1,7 @@
 from sqlite3 import Cursor
 from marksman.analyser import analyse_exam
 from matplotlib import pyplot as plt
-
+logger = logging.getLogger(__name__)
 
 def plot_student_performance(cursor: Cursor, roll: int, exam: int, cache: dict = {}):
     ''' Plots students performance against the batch

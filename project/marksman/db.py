@@ -1,7 +1,7 @@
 import logging
 from sqlite3 import Cursor
 
-
+logger = logging.getLogger(__name__)
 def gen_kv_str(kwargs) -> str:
     ''' Generate key value strings
 
@@ -70,7 +70,7 @@ class Modelz:
         '''
         self.table = table
         self.cursor = cursor
-        logging.info(f'Created {self}')
+        logger.info(f'Created {self}')
 
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
@@ -111,7 +111,7 @@ class Modelz:
 
         self.cursor.execute(f'''INSERT INTO {self.table} 
                                 VALUES{values} ''')
-        logging.info(f'{values} were inserted using {self}')
+        logger.info(f'{values} were inserted using {self}')
 
     def update(self, set_string: str, **conds) -> None:
         ''' Updates the table using set_string, based on given conditions
@@ -124,7 +124,7 @@ class Modelz:
         upd_str = f'''UPDATE  {self.table}
                                 SET {set_string}
                                 WHERE {cond_str} '''
-        logging.info(upd_str)
+        logger.info(upd_str)
         self.cursor.execute(upd_str)
 
     def delete(self, **conds) -> None:

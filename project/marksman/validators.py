@@ -1,6 +1,6 @@
 import logging
 import re
-
+logger = logging.getLogger(__name__)
 
 def get_pos_int(msg: str) -> int:
     ''' takes input and returns after assuring that it is a positive integer
@@ -43,7 +43,7 @@ def get_email(default: str = '') -> str:
         try:
             email = get_str('Enter email: ', default=default)
             if email == default:
-                logging.info('Email unchanged, not checking')
+                logger.info('Email unchanged, not checking')
                 return email
             logging.info('Checking email for validity')
             regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'

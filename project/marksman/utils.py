@@ -1,3 +1,5 @@
+import  logging
+logger = logging.getLogger(__name__)
 
 
 def handle_choice(choices: dict) -> None:

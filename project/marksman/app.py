@@ -4,13 +4,14 @@ from marksman.models import Student, Exam, MarksEntry
 from marksman.db import Modelz
 from marksman.utils import handle_choice
 
+logger = logging.getLogger(__name__)
 
 def crud_handler(args, cursor: Cursor):
     _handler_classes = {'students': Student,
                         'exams': Exam,
                         'marks': MarksEntry}
 
-    logging.info(f'called crud handler with {args.what}')
+    logger.info(f'called crud handler with {args.what}')
 
     AptClass = _handler_classes.get(args.what)
     modelz = Modelz(args.what, cursor)
