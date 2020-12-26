@@ -1,9 +1,11 @@
+from marksman.utils import ___
 from sqlite3 import Cursor
 import logging
 from marksman.analyser import analyse_exam
 from matplotlib import pyplot as plt
 logger = logging.getLogger(__name__)
-from marksman.utils import ___
+
+
 def plot_student_performance(cursor: Cursor, roll: int, exam: int, cache: dict = {}):
     ''' Plots students performance against the batch
 
@@ -15,7 +17,11 @@ def plot_student_performance(cursor: Cursor, roll: int, exam: int, cache: dict =
 
     cursor.execute(
         ___(f'SELECT marks FROM marks WHERE exam={exam} AND student={roll} '))
-    marks = cursor.fetchone()[0]
+    marks = cursor.fetchone()
+
+    if not marks:
+        logger.warn('Marks entry does not exist')
+        return
 
     if not cache.get(exam):
         cache[exam] = analyse_exam(cursor, exam)
@@ -23,7 +29,7 @@ def plot_student_performance(cursor: Cursor, roll: int, exam: int, cache: dict =
     analysis = cache[exam]
 
     x = ['student', 'highest', 'average']
-    y = [marks, analysis.get('highest'), analysis.get('average')]
+    y = [marks[0], analysis.get('highest'), analysis.get('average')]
 
     plt.barh(x, y)
 
