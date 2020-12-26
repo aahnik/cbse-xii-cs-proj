@@ -9,10 +9,10 @@ CLI Tool to manage marks of students efficiently.
 
 ## Features
 
-- **CRUD** ( create / read / update / delete )
-- **Email** ( email results to students )
-- **Visualize** ( visualize the data )
-- **Utils** ( fill dummy data / import from csv / export csv )
+- [**CRUD**](##CRUD) ( create / read / update / delete )
+- [**Email**](##Email) ( email results to students )
+- [**Visualize**](##Visualize) ( visualize the data )
+- [**Utils**](##Utils) ( fill dummy data / import from csv / export csv )
 
 ## Installation
 
@@ -26,12 +26,14 @@ pip install marksman
 
 >Note: Linux and Mac users might have to use `pip3` to invoke pip
 
-## Usage
 
 <details>
-<summary> 👉 Read this if you are new to command-line-interfaces. </summary>
+<summary> Read this if you are new to command-line-interfaces. </summary>
 
 </details>
+
+<details>
+<summary> Usage </summary>
 
 Open your terminal and run `marksman --help` and you will get the following output.
 
@@ -44,7 +46,7 @@ CLI Tool to manage marks of students efficiently
 optional arguments:
   -h, --help            show this help message and exit
   -l, --loud            increase output verbosity
-  -v, --version         show program's version number and exit
+  -v, --version         show programs version number and exit
 
 actions:
   {crud,email,visualize,utils}
@@ -55,14 +57,22 @@ actions:
     utils               Additional utility tools for marksman
 
 For tutorials and documentation visit https://git.io/JL1iI 
+
 ```
+
+</details>
+
 
 > **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
 
-### `marksman crud`
+## CRUD
+
+Description of the crud 
 
 <details>
-<summary> 👉 Running `marksman crud --help` will give this.  </summary>
+<summary> Usage </summary>
+
+Running `marksman crud --help` will give this.
 
 ```shell
 
@@ -78,15 +88,18 @@ optional arguments:
 
 </details>
 
-Description of the crud 
+
 
 <details>
-<summary> 👉 See examples of the `crud` action. </summary>
+<summary> Examples </summary>
 
 </details>
 
 
-### `marksman email`
+## Email
+
+<details>
+<summary> Usage </summary>
 
 Running `marksman email --help` will give this.
 
@@ -100,12 +113,18 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 ```
-<details>
-<summary> 👉 See examples of the `email` action. </summary>
 
 </details>
 
-### `marksman visualize`
+<details>
+<summary> Examples </summary>
+
+</details>
+
+## Visualize
+
+<details>
+<summary> Usage </summary>
 
 Running `marksman visualize --help` will give this.
 
@@ -120,12 +139,18 @@ optional arguments:
   -h, --help  show this help message and exit
   --r ROLL    roll number of student (default=0 for all)
 ```
-<details>
-<summary> 👉 See examples of the `visualize` action. </summary>
 
 </details>
 
-### `marksman utils`
+<details>
+<summary> Examples </summary>
+
+</details>
+
+## Utils
+
+<details>
+<summary> Usage </summary>
 
 Running `marksman utils --help` will give this.
 
@@ -141,8 +166,11 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
+</details>
+
+
 <details>
-<summary> 👉 See examples of the `utils` action. </summary>
+<summary> Examples </summary>
 
 </details>
 
@@ -166,7 +194,7 @@ Now run the following:
 pytest --pyargs marksman
 ```
 <details>
-<summary> 👉 What if the above method fails ? </summary>
+<summary> Alternate way </summary>
 If the above command fails, use the full path to `marksman`.
 </details>
 
