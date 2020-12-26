@@ -15,54 +15,59 @@ class Student:
 
     def __init__(self, students: Modelz) -> None:
         self.students = students
+        self.roll = _roll()
         self.object = self.read()
 
     def read(self):
-        return self.students.exists(roll=_roll())
+        return self.students.exists(roll=self.roll)
 
-    def create(self, roll):
-        self.students.insert((roll, get_str(), get_email()))
+    def create(self):
+        self.students.insert((self.roll, get_str(), get_email()))
 
     def update(self):
-        self.students.update(roll=self.object[0],
-                             name=get_str(default=self.object[1]),
-                             email=get_email(default=self.object[2]))
+        self.students.update(f'''name="{get_str(default=self.object[1])}",\
+            email="{get_email(default=self.object[2])}"''', roll=self.roll)
 
     def delete(self):
-        self.students.delete(self.object[0])
+        self.students.delete(roll=self.roll)
 
 
 class Exam:
     def __init__(self, exams: Modelz) -> None:
         self.exams = exams
+        self.uid = _uid()
         self.object = self.read()
 
     def read(self):
-        return self.exams.exists(uid=_uid())
+        return self.exams.exists(uid=self.uid)
 
-    def create(self, uid):
-        self.exams.insert((uid, get_str()))
+    def create(self):
+        self.exams.insert((self.uid, get_str()))
 
     def update(self):
-        self.exams.update(uid=self.object[0], name=get_str(default=self.object[1]))
+        self.exams.update(f'''name="{get_str(default=self.object[1])}"''',
+                          uid=self.uid)
 
     def delete(self):
-        self.exams.delete(self.object[0])
+        self.exams.delete(uid=self.uid)
 
 
 class MarksEntry:
     def __init__(self, marks: Modelz) -> None:
         self.marks = marks
+        self.roll = _roll()
+        self.uid = _uid()
         self.object = self.read()
 
     def read(self):
-        return self.marks.exists(roll=_roll(), uid=_uid())
+        return self.marks.exists(student=self.roll, exam=self.uid)
 
-    def create(self, roll, uid):
-        self.exams.insert((roll, uid, get_pos_int('Enter marks: ')))
+    def create(self):
+        self.marks.insert((self.roll, self.uid, get_pos_int('Enter marks: ')))
 
     def update(self):
-        self.exams.update(marks=get_pos_int('Enter marks: '))
+        self.marks.update(
+            f"marks={get_pos_int('Enter marks: ')}", student=self.roll, exam=self.uid)
 
     def delete(self):
-        self.exams.delete(self.exam[0])
+        self.marks.delete(student=self.roll, exam=self.uid)
