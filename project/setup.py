@@ -15,7 +15,7 @@ setuptools.setup(
     version=version,
     author="Aahnik Daw",
     author_email="meet.aahnik@gmail.com",
-    description="A simple command-line app to manage marks of students.",
+    description="CLI Tool to manage marks of students efficiently.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project",
@@ -28,15 +28,15 @@ setuptools.setup(
     include_package_data=True,
     zip_safe=False,
     entry_points={
-        'console_scripts': ['marksman=marksman.cli:main'],
+        'console_scripts': ['marksman=marksman.cli:main', 'mm=marksman.cli:main'],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
-    license='Creative Commons Zero v1.0 Universal',
+    python_requires='>=3.8',
+    license='MIT License',
     keywords=['sql', 'database', 'crud', 'marks management',
               'cms', 'data management', 'cli', 'utility', 'tool'],
 )
