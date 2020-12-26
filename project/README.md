@@ -9,10 +9,10 @@ CLI Tool to manage marks of students efficiently.
 
 ## Features
 
-- [**CRUD**](##CRUD) ( create / read / update / delete )
-- [**Email**](##Email) ( email results to students )
-- [**Visualize**](##Visualize) ( visualize the data )
-- [**Utils**](##Utils) ( fill dummy data / import from csv / export csv )
+- [**CRUD**](#crud) ( create / read / update / delete )
+- [**Email**](#crud) ( email results to students )
+- [**Visualize**](#visualize) ( visualize the data )
+- [**Utils**](#utils) ( fill dummy data / import from csv / export csv )
 
 ## Installation
 
