@@ -2,35 +2,7 @@ import logging
 from sqlite3 import Cursor
 from marksman.models import Student, Exam, MarksEntry
 from marksman.db import Modelz
-
-
-# def crud_students(cursor: Cursor):
-#     students = Modelz('students', cursor)
-#     student = students.exists(roll=_roll())
-#     if student:
-#         print(student)
-#         print('Update/delete')
-#     else:
-#         print('Create')
-
-
-# def crud_exams(cursor: Cursor):
-#     exams = Modelz('exams', cursor)
-#     exam = exams.exists(uid=_uid())
-#     if exam:
-#         print(exam)
-#         print('u/d')
-#     else:
-#         print('create')
-
-
-# def crud_marks(cursor: Cursor):
-#     marks = Modelz('marks', cursor)
-#     marks_entry = marks.exists(student=_roll(), exam=_uid())
-#     if marks_entry:
-#         print(marks_entry)
-#     else:
-#         print('create')
+from marksman.utils import handle_choice
 
 
 def crud_handler(args, cursor: Cursor):
@@ -43,15 +15,17 @@ def crud_handler(args, cursor: Cursor):
     AptClass = _handler_classes.get(args.what)
     modelz = Modelz(args.what, cursor)
 
-    
+    # display_table(modelz.fetch())
 
     apt = AptClass(modelz)
 
     if not apt.object:
         # if does not exist -> create
+        print(f'Does not exist')
         handle_choice({'create': apt.create})
     else:
         # if exists -> update/delete
+        print(apt.object)
         handle_choice({'update': apt.update, 'delete': apt.delete})
 
 
