@@ -5,8 +5,6 @@ from marksman.utils import ___
 logger = logging.getLogger(__name__)
 
 
-
-
 def gen_kv_str(kwargs) -> str:
     ''' Generate key value strings
 
@@ -31,8 +29,6 @@ def create_tables(cursor: Cursor):
     logger.info('Starting creation of tables')
     try:
         cursor.executescript(___('''
-            PRAGMA foreign_keys = ON;
-
             DROP TABLE IF EXISTS students ;
             CREATE TABLE students(
                         roll INTEGER NOT NULL PRIMARY KEY,
@@ -69,6 +65,10 @@ def create_tables(cursor: Cursor):
         logger.exception(err)
     else:
         logger.info('Successfully created tables')
+
+
+def foreign_key_constraint(cursor: Cursor):
+    cursor.execute(___('PRAGMA foreign_keys = ON;'))
 
 
 class Modelz:
