@@ -2,7 +2,6 @@
 
 CBSE XII Boards Computer Science Practicals. Python and SQL.
 
-
 ## Python
 
 To run the python programs,
@@ -29,15 +28,6 @@ Use SQL Workbench to open a script, select a particular question and then click 
 
 [Click here](/sql/README.md) to see the outputs of all SQL scripts.
 
-## Doubts
-
-If you have any query regarding this project, create an issue in this repository.
-
-## License
-
-This project is licensed under [CC0 1.0 Universal](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/LICENSE). You are free to take ideas or even copy directly from this project.
-
 ## Author
 
 This project has been authored by me [Aahnik Daw](https://github.com/aahnik).
-
