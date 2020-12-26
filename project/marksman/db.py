@@ -121,9 +121,11 @@ class Modelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(f'''UPDATE  {self.table}
+        upd_str = f'''UPDATE  {self.table}
                                 SET {set_string}
-                                WHERE {cond_str} ''')
+                                WHERE {cond_str} '''
+        logging.info(upd_str)
+        self.cursor.execute(upd_str)
 
     def delete(self, **conds) -> None:
         ''' Deletes the entries satisfying given condtions
