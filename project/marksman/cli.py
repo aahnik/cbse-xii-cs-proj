@@ -1,11 +1,11 @@
 import argparse
 from argparse import RawTextHelpFormatter
-from marksman.db import create_tables
+from marksman.db import create_tables, foreign_key_constraint
 from marksman.utils import ensure_parent
 from marksman.settings import DB_PATH, LOUD, SHOW_PATH, SENDER_EMAIL, SENDER_AUTH
 from marksman import __version__
 import sys
-from marksman.app import crud_handler, email_handler, visualization_handler
+from marksman.app import crud_handler, email_handler, visualization_handler, utils_handler
 import logging
 import sqlite3
 from rich.logging import RichHandler
@@ -13,9 +13,7 @@ import os
 logger = logging.getLogger(__name__)
 
 
-def main():
-    ''' Command line entry point
-    '''
+def parse_commands():
 
     main_parser = argparse.ArgumentParser(
         description='CLI Tool to manage marks of students',
@@ -41,26 +39,35 @@ def main():
     vis_parser = subparsers.add_parser('visualize',
                                        help='Visualize the results',)
 
+    utils_parser = subparsers.add_parser(
+        'utils', help='Additional utility tools for marksman')
+
     crud_parser.add_argument('what',
                              help='Choose what data you want to crud',
                              choices=['students', 'exams', 'marks'])
-    crud_parser.set_defaults(func=crud_handler, which='crud_parser')
+    crud_parser.set_defaults(func=crud_handler)
 
     email_parser.add_argument('exam',
-                              help='exam id',
+                              help='exam uid',
                               type=int)
     email_parser.set_defaults(func=email_handler, which='email_parser')
 
     vis_parser.add_argument('exam',
-                            help='exam id',
+                            help='exam uid',
                             type=int)
 
-    vis_parser.add_argument('student',
-                            help='roll number of student',
+    vis_parser.add_argument('--r',
+                            metavar='ROLL',
+                            help='roll number of student (default=0 for all)',
                             type=int,
                             default=0)
 
     vis_parser.set_defaults(func=visualization_handler, which='vis_parser')
+
+    utils_parser.add_argument('task', help='Choose the task you want to perform', choices=[
+                              'dummy', 'import', 'export'])
+
+    utils_parser.set_defaults(func=utils_handler)
 
     if len(sys.argv) == 1:
         print(f'marksman {__version__}')
@@ -68,7 +75,38 @@ def main():
         main_parser.print_help(sys.stderr)
         sys.exit(0)
 
-    args = main_parser.parse_args()
+    return main_parser.parse_args()
+
+
+def call_func(args):
+    if hasattr(args, 'func'):
+
+        logger.info('Starting database connection')
+        ensure_parent(DB_PATH)
+
+        pre_exists = os.path.isfile(DB_PATH)
+
+        my_conn = sqlite3.connect(DB_PATH)
+        cursor = my_conn.cursor()
+
+        foreign_key_constraint(cursor)
+
+        if not pre_exists:
+            create_tables(cursor)
+        try:
+            args.func(args, cursor)
+        except Exception as err:
+            logger.exception(err)
+        my_conn.commit()
+        my_conn.close()
+        logger.info('Closed database connection')
+
+
+def main():
+    ''' Command line entry point
+    '''
+
+    args = parse_commands()
 
     if args.loud or LOUD:
         level = logging.INFO
@@ -80,22 +118,4 @@ def main():
 
     logger.info('Verbosity turned on')
 
-    if hasattr(args, 'func'):
-
-        logger.info('Starting database connection')
-        ensure_parent(DB_PATH)
-
-        pre_exists = os.path.isfile(DB_PATH)
-
-        my_conn = sqlite3.connect(DB_PATH)
-        cursor = my_conn.cursor()
-
-        if not pre_exists:
-            create_tables(cursor)
-        try:
-            args.func(args, cursor)
-        except Exception as err:
-            logger.exception(err)
-        my_conn.commit()
-        my_conn.close()
-        logger.info('Closed database connection')
+    call_func(args)
