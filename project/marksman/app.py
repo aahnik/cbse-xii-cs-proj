@@ -35,6 +35,12 @@ def crud_handler(args, cursor: Cursor):
 
 def email_handler(args, cursor: Cursor):
     logger.info(f'Called email handler with {args.exam}')
+    from marksman.settings import SENDER_EMAIL,SENDER_AUTH
+    from marksman.validators import get_email
+
+    if not SENDER_EMAIL:
+        SENDER_EMAIL = get_email()
+
 
 
 def visualization_handler(args, cursor: Cursor):

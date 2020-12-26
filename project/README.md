@@ -5,6 +5,7 @@ CLI Tool to manage marks of students efficiently.
 [![MIT license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/project/LICENSE)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![telegram-chat](https://img.shields.io/badge/chat-@aahnikdaw-blue?logo=telegram)](https://telegram.me/aahnikdaw)
+[![PyPI](https://img.shields.io/pypi/v/marksman)](https://pypi.org/project/marksman/)
 
 ## Features
 
@@ -26,6 +27,11 @@ pip install marksman
 >Note: Linux and Mac users might have to use `pip3` to invoke pip
 
 ## Usage
+
+<details>
+<summary> 👉 Read this if you are new to command-line-interfaces. </summary>
+
+</details>
 
 Open your terminal and run `marksman --help` and you will get the following output.
 
@@ -51,9 +57,12 @@ actions:
 For tutorials and documentation visit https://git.io/JL1iI 
 ```
 
+> **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
+
 ### `marksman crud`
 
-Running `marksman crud --help` will give this.
+<details>
+<summary> 👉 Running `marksman crud --help` will give this.  </summary>
 
 ```shell
 
@@ -67,7 +76,15 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-> **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
+</details>
+
+Description of the crud 
+
+<details>
+<summary> 👉 See examples of the `crud` action. </summary>
+
+</details>
+
 
 ### `marksman email`
 
@@ -83,6 +100,10 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 ```
+<details>
+<summary> 👉 See examples of the `email` action. </summary>
+
+</details>
 
 ### `marksman visualize`
 
@@ -99,6 +120,10 @@ optional arguments:
   -h, --help  show this help message and exit
   --r ROLL    roll number of student (default=0 for all)
 ```
+<details>
+<summary> 👉 See examples of the `visualize` action. </summary>
+
+</details>
 
 ### `marksman utils`
 
@@ -115,6 +140,11 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
 ```
+
+<details>
+<summary> 👉 See examples of the `utils` action. </summary>
+
+</details>
 
 ## Configuration
 
@@ -135,9 +165,15 @@ Now run the following:
 ```shell
 pytest --pyargs marksman
 ```
-
+<details>
+<summary> 👉 What if the above method fails ? </summary>
 If the above command fails, use the full path to `marksman`.
+</details>
+
 
 ## API Reference
 
-As `marksman` is written purely in python, it can easily be imported by other Python programs and easily extended. Read the full API Reference which is published from the docstrings.
+As `marksman` is written purely in python, it can easily be imported and extended by other Python programs.
+
+Read the [full API Reference]() which is published from the docstrings.
+

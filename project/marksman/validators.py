@@ -40,10 +40,10 @@ def get_str(msg='Enter name: ', default: str = '') -> str:
             logger.warn('You cant keep this empty')
 
 
-def get_email(default: str = '') -> str:
+def get_email(msg='Enter email: ', default: str = '') -> str:
     while True:
         try:
-            email = get_str('Enter email: ', default=default)
+            email = get_str(msg, default=default)
             if email == default:
                 logger.info('Email unchanged, not checking')
                 return email
