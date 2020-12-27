@@ -177,25 +177,6 @@ optional arguments:
 
 You can configure
 
-## Tests
-
-There are test scripts that check whether `marksman` is working correctly. You can easily invoke the tests using `pytest`.
-
-If you do not have pytest installed, install it via `pip`.
-
-```shell
-pip install pytest
-```
-
-Now run the following:
-
-```shell
-pytest --pyargs marksman
-```
-<details>
-<summary> Alternate way </summary>
-If the above command fails, use the full path to `marksman`.
-</details>
 
 
 ## API Reference
