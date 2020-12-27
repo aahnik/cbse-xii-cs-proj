@@ -1,15 +1,14 @@
-
 import logging
 from sqlite3 import Cursor
-from marksman.models import Student, Exam, MarksEntry
-from marksman.db import Modelz
-from marksman.utils import handle_choice, fill_dummy, load_csv, export_csv
+from rich import print
 
 logger = logging.getLogger(__name__)
 
 
 def crud_handler(args, cursor: Cursor):
-
+    from marksman.db import Modelz
+    from marksman.models import Student, Exam, MarksEntry
+    from marksman.utils import handle_choice
     _handler_classes = {'students': Student,
                         'exams': Exam,
                         'marks': MarksEntry}
@@ -34,13 +33,12 @@ def crud_handler(args, cursor: Cursor):
 
 
 def email_handler(args, cursor: Cursor):
+    from marksman.utils import configure_email
     logger.info(f'Called email handler with {args.exam}')
-    from marksman.settings import SENDER_EMAIL,SENDER_AUTH
-    from marksman.validators import get_email
+    SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER = configure_email()
 
-    if not SENDER_EMAIL:
-        SENDER_EMAIL = get_email()
 
+    
 
 
 def visualization_handler(args, cursor: Cursor):
@@ -57,6 +55,8 @@ def visualization_handler(args, cursor: Cursor):
 
 
 def utils_handler(args, cursor: Cursor):
+    from marksman.db import Modelz
+    from marksman.utils import fill_dummy, load_csv, export_csv
     logger.info(f'Called utils with {args.task}')
     students = Modelz('students', cursor)
     exams = Modelz('exams', cursor)
