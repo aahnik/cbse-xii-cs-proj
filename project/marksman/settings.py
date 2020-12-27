@@ -17,7 +17,7 @@ LOUD = bool(os.getenv('marksman_loud'))
 SHOW_PATH = bool(os.getenv('marksman_show_path'))
 SMTP_SERVER = os.getenv('marksman_smtp', 'smtp.gmail.com')
 SMTP_PORT = int(os.getenv('marksman_smtp_port', 587))
-
+INST_NAME = os.getenv('marksman_inst')
 
 if LOUD:
     print(f'''\n\t[red]YOU ARE WORKING IN A LOUD ENVIRONMENT[/red]
