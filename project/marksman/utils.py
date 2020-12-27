@@ -94,7 +94,7 @@ def save_email_config(thing, env_var, value):
 
 
 def configure_email():
-    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT
+    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT,INST_NAME,
     from marksman.validators import get_email, get_str
 
     if not SENDER_EMAIL:
@@ -117,10 +117,13 @@ def configure_email():
         SMTP_PORT = 587
     if not SMTP_PORT in (587, 2525):
         logger.warn(
-            'The SMPTP Port you have set is probably incorrect or insecure.')
+            'The SMPTP Port you have set is probably incorrect or insecure')
         input('Confirm ?')
+    if not INST_NAME:
+        logger.warn(
+            'Institute Name not set thus your email will be visible on top, Learn More https://git.io/JLMFl')
 
-    return SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT
+    return SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT,INST_NAME
 
 
 def load_csv(students, exams, marks):
