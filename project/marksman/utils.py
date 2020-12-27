@@ -94,7 +94,7 @@ def save_email_config(thing, env_var, value):
 
 
 def configure_email():
-    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT,INST_NAME,
+    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
     from marksman.validators import get_email, get_str
 
     if not SENDER_EMAIL:
@@ -106,14 +106,23 @@ def configure_email():
         save_email_config('auth-code', 'marksman_auth', SENDER_AUTH)
 
     if not SENDER_EMAIL.endswith('@gmail.com'):
-        logger.warn(
-            'SMTP sever url could not be derrived from email address.\n Learn more https://git.io/JLMFl ')
-        SMTP_SERVER = get_str(
-            'Enter SMTP server address of your email provider: ')
-        save_email_config('smtp server', 'marksman_smptp', SMTP_SERVER)
+        if not SMTP_HOST:
+            logger.warn(
+                'SMTP sever url could not be derrived from email address. Continuing with default. \n Learn more https://git.io/JLMFl ')
+            SMTP_HOST = get_str(
+                'Enter SMTP host server address of your email provider: ')
+            save_email_config('smtp host address',
+                              'marksman_smptp_host', SMTP_HOST)
+        else:
+            logger.info(
+                f'Sender Email does not end with gmail.com > SMTP_HOST is {SMTP_HOST}')
+    else:
+        SMTP_HOST = 'smtp.gmail.com'
+        logger.info(f'SMTP_HOST is set to {SMTP_HOST}')
+
     if not isinstance(SMTP_PORT, int):
         logger.warn(
-            'The SMTP Port you have set is not an integer, using default 587')
+            'The SMTP Port you have set is not an integer > using default 587')
         SMTP_PORT = 587
     if not SMTP_PORT in (587, 2525):
         logger.warn(
@@ -123,7 +132,7 @@ def configure_email():
         logger.warn(
             'Institute Name not set thus your email will be visible on top, Learn More https://git.io/JLMFl')
 
-    return SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT,INST_NAME
+    return SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
 
 
 def load_csv(students, exams, marks):

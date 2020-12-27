@@ -1,4 +1,5 @@
 import logging
+from smtplib import SMTPAuthenticationError
 from sqlite3 import Cursor
 from rich import print
 
@@ -34,14 +35,14 @@ def crud_handler(args, cursor: Cursor):
 
 def email_handler(args, cursor: Cursor):
     from marksman.utils import configure_email
-    from marksman.mailer import MarksEmail
+    from marksman.mailer import Mailer
     from smtplib import SMTP
     logger.info(f'Called email handler with {args.exam}')
-    SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT, INST_NAME = configure_email()
+    SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME = configure_email()
 
     try:
-        server = SMTP(host=SMTP_SERVER, port=SMTP_PORT)
-        server.connect(host=SMTP_SERVER, port=SMTP_PORT)
+        server = SMTP(host=SMTP_HOST, port=SMTP_PORT)
+        server.connect(host=SMTP_HOST, port=SMTP_PORT)
     except Exception as err:
         logger.warn('Could not connect to SMTP server.')
         logger.exception(err)
@@ -55,14 +56,17 @@ def email_handler(args, cursor: Cursor):
 
     try:
         server.login(user=SENDER_EMAIL, password=SENDER_AUTH)
-    except Exception as err:
+    except SMTPAuthenticationError as err:
         logger.warn(
             'Could not login to SMTP server using credentials you provided')
-        logger.exception(err)
+        print(
+            f'\nMost probably you gave incorrect password! Error Code {err.smtp_code}\n{err.smtp_error}\n')
+        return
 
-    mailer = MarksEmail(server, SENDER_EMAIL, INST_NAME, args.exam)
+    mailer = Mailer(server=server, cursor=cursor,
+                    sender=SENDER_EMAIL, inst=INST_NAME, exam_uid=args.exam)
 
-    mailer.send_mails()
+    mailer.mail_all_students()
 
     server.quit()
     logger.info('Disconnected from SMTP server')
@@ -70,13 +74,16 @@ def email_handler(args, cursor: Cursor):
 
 def visualization_handler(args, cursor: Cursor):
     from marksman.plot import plot_student_performance, plot_batch_performance
+    from marksman.analyser import analyse_exam
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
         # plot performance of batch
         plot_batch_performance(cursor, args.exam)
     elif args.r > 0:
         # plot performance of specific student
-        plot_student_performance(cursor, args.r, args.exam)
+
+        plot_student_performance(
+            cursor, args.r, args.exam, analyse_exam(cursor, args.exam))
     else:
         logger.warn('Roll number must be greater than 0')
 
