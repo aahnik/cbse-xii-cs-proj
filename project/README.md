@@ -14,7 +14,7 @@ CLI Tool to manage marks of students efficiently.
 - [**Visualize**](#visualize) ( visualize the data )
 - [**Utils**](#utils) ( fill dummy data / import from csv / export csv )
 
-## Installation
+## Getting Started
 
 You must have Python 3.9 installed on your system.
 
@@ -59,11 +59,10 @@ actions:
 For tutorials and documentation visit https://git.io/JL1iI 
 
 ```
+> **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
 
 </details>
 
-
-> **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
 
 ## CRUD
 
