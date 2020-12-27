@@ -34,11 +34,38 @@ def crud_handler(args, cursor: Cursor):
 
 def email_handler(args, cursor: Cursor):
     from marksman.utils import configure_email
+    from marksman.mailer import MarksEmail
+    from smtplib import SMTP
     logger.info(f'Called email handler with {args.exam}')
-    SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER = configure_email()
+    SENDER_EMAIL, SENDER_AUTH, SMTP_SERVER, SMTP_PORT, INST_NAME = configure_email()
 
+    try:
+        server = SMTP(host=SMTP_SERVER, port=SMTP_PORT)
+        server.connect(host=SMTP_SERVER, port=SMTP_PORT)
+    except Exception as err:
+        logger.warn('Could not connect to SMTP server.')
+        logger.exception(err)
+        return
+    else:
+        logger.info('Connected to SMTP server')
 
-    
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+    try:
+        server.login(user=SENDER_EMAIL, password=SENDER_AUTH)
+    except Exception as err:
+        logger.warn(
+            'Could not login to SMTP server using credentials you provided')
+        logger.exception(err)
+
+    mailer = MarksEmail(server, SENDER_EMAIL, INST_NAME, args.exam)
+
+    mailer.send_mails()
+
+    server.quit()
+    logger.info('Disconnected from SMTP server')
 
 
 def visualization_handler(args, cursor: Cursor):
