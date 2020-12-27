@@ -1,3 +1,4 @@
+from rich import print
 import logging
 import re
 logger = logging.getLogger(__name__)
@@ -11,7 +12,8 @@ def get_pos_int(msg: str) -> int:
     '''
     while True:
         try:
-            integer = int(input(msg))
+            print(f'\n{msg}')
+            integer = int(input())
             assert integer > 0
         except ValueError:
             logger.warn('The value you entered is not an integer')
@@ -21,11 +23,12 @@ def get_pos_int(msg: str) -> int:
             return integer
 
 
-def get_str(msg='Enter name: ', default: str = '') -> str:
+def get_str(msg='Enter [bold]name[/bold]: ', default: str = '') -> str:
     max_len = 64
     while True:
         try:
-            string = input(msg)
+            print(f'\n{msg}')
+            string = input()
             assert len(string) <= max_len
         except AssertionError:
             logger.warn(
@@ -40,7 +43,7 @@ def get_str(msg='Enter name: ', default: str = '') -> str:
             logger.warn('You cant keep this empty')
 
 
-def get_email(msg='Enter email: ', default: str = '') -> str:
+def get_email(msg='Enter [bold]email[/bold]: ', default: str = '') -> str:
     while True:
         try:
             email = get_str(msg, default=default)
