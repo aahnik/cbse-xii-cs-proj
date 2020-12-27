@@ -1,5 +1,5 @@
 import logging
-
+import os
 import markdown
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -7,44 +7,65 @@ from email.mime.base import MIMEBase
 
 from email import encoders
 
-from .settings import sender_address, sender_name
 
 logger = logging.getLogger(__name__)
 
-def send_email(server, recipient: str, message: str, files: list) -> bool:
 
-    multipart_msg = MIMEMultipart("alternative")
+class MarksEmail:
+    def __init__(self,server, sender, inst,exam):
+        pass
 
-    multipart_msg["Subject"] = message.splitlines()[0]
-    multipart_msg["From"] = sender_name
-    multipart_msg["To"] = recipient
+    def parse_template(self):
+        pass
 
-    text = message
-    html = markdown.markdown(text)
+    def get_files(self):
+        pass
 
-    part1 = MIMEText(text, "plain")
-    part2 = MIMEText(html, "html")
+    def send_mails(self) -> bool:
 
-    multipart_msg.attach(part1)
-    multipart_msg.attach(part2)
+        message = self.parse_template()
+        recipient = self.recipient
+        files = self.get_files()
 
-    for attachment, filename in files:
-        logger.info(f'Attaching {filename}')
-        attach_part = MIMEBase('application', 'octet-stream')
-        attach_part.set_payload((attachment).read())
-        encoders.encode_base64(attach_part)
-        attach_part.add_header('Content-Disposition',
-                               f"attachment; filename= {filename}")
-        multipart_msg.attach(attach_part)
+        multipart_msg = MIMEMultipart("alternative")
 
-    try:
-        server.sendmail(sender_address,
-                        recipient,
-                        multipart_msg.as_string())
-    except Exception as err:
-        logger.warning(f'Failed to send email to {recipient}')
-        logger.exception(err)
-        return False
-    else:
-        logger.info(f'Successfully sent email to {recipient}')
-        return True
+        multipart_msg["Subject"] = message.splitlines()[0]
+        multipart_msg["From"] = self.inst + f' {self.sender}'
+        multipart_msg["To"] = recipient
+
+        text = message
+        html = markdown.markdown(text)
+
+        part1 = MIMEText(text, "plain")
+        part2 = MIMEText(html, "html")
+
+        multipart_msg.attach(part1)
+        multipart_msg.attach(part2)
+
+        for file in files:
+
+            file_name = os.path.split(file)[1]
+
+            with open(file, 'rb') as f:
+                file_content = f.read()
+
+            logger.info(f'Attaching {file_name}')
+            attach_part = MIMEBase('application', 'octet-stream')
+            attach_part.set_payload(file_content)
+            encoders.encode_base64(attach_part)
+            attach_part.add_header('Content-Disposition',
+                                   f"attachment; filename= {file_name}")
+            multipart_msg.attach(attach_part)
+
+        try:
+            logger.info(f'Sending email to {recipient} ...')
+            self.server.sendmail(self.sender,
+                                 recipient,
+                                 multipart_msg.as_string())
+        except Exception as err:
+            logger.warning(f'Failed to send email to {recipient}')
+            logger.exception(err)
+            return False
+        else:
+            logger.info(f'Successfully sent email to {recipient}')
+            return True
