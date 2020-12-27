@@ -15,6 +15,8 @@ SENDER_EMAIL = os.getenv('marksman_sender')
 SENDER_AUTH = os.getenv('marksman_auth')
 LOUD = bool(os.getenv('marksman_loud'))
 SHOW_PATH = bool(os.getenv('marksman_show_path'))
+SMTP_SERVER = os.getenv('marksman_smtp', 'smtp.gmail.com')
+SMTP_PORT = int(os.getenv('marksman_smtp_port', 587))
 
 
 if LOUD:
