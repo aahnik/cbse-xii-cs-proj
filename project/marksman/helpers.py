@@ -44,8 +44,8 @@ def clear_screen():
     pass
 
 
-def display_table():
-    pass
+def display_table(table:list):
+    print(table)
 
 
 def ensure_parent(filename: str) -> None:
@@ -122,3 +122,4 @@ def intify(string: str):
         return int(string)
     except ValueError:
         return string
+

@@ -71,7 +71,7 @@ def foreign_key_constraint(cursor: Cursor):
     cursor.execute(___('PRAGMA foreign_keys = ON;'))
 
 
-class Modelz:
+class DbModelz:
 
     def __init__(self, table: str, cursor: Cursor) -> None:
         ''' 
@@ -86,6 +86,10 @@ class Modelz:
 
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
+
+    def query(self, query_string):
+        self.cursor.execute(___(query_string))
+        return self.cursor.fetchall()
 
     def fetch(self, **conds) -> list:
         ''' Fetches a list of results based on condition parameters

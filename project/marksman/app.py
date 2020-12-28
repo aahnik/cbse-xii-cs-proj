@@ -1,10 +1,11 @@
+from argparse import Namespace
 import logging
 from smtplib import SMTP, SMTPAuthenticationError
 
 from sqlite3 import Cursor
 from rich import print
 
-from marksman.db import Modelz
+from marksman.db import DbModelz
 from marksman.models import Student, Exam, MarksEntry
 from marksman.helpers import handle_choice, configure_email
 from marksman.mailer import Mailer
@@ -24,24 +25,26 @@ def crud_handler(args, cursor: Cursor):
 
     logger.info(f'Called crud handler with {args.what}')
 
-    AptClass = _handler_classes.get(args.what)
-    modelz = Modelz(args.what, cursor)
+    apt_class = _handler_classes.get(args.what)
+    modelz = DbModelz(args.what, cursor)
 
     # display_table(modelz.fetch())
 
-    apt = AptClass(modelz)
+    apt = apt_class(modelz)
 
     if not apt.object:
         # if does not exist -> create
-        logging.warn('Object does not Exist')
+        logging.warning('Object does not Exist')
         handle_choice({'create': apt.create})
     else:
         # if exists -> update/delete
         print(apt.object)
+        apt.display()
         handle_choice({'update': apt.update, 'delete': apt.delete})
 
 
-def email_handler(args, cursor: Cursor):
+def email_handler(args:Namespace, cursor: Cursor):
+    ''' Handles the email action '''
 
     logger.info(f'Called email handler with {args.exam}')
     SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME = configure_email()
@@ -66,7 +69,8 @@ def email_handler(args, cursor: Cursor):
         logger.warn(
             'Could not login to SMTP server using credentials you provided')
         print(
-            f'\nMost probably you gave incorrect email and password! Error Code {err.smtp_code}\n{err.smtp_error}\n')
+            f'''\nMost probably you gave incorrect email and password! 
+            Error Code {err.smtp_code}\n{err.smtp_error}\n''')
         return
 
     mailer = Mailer(server=server, cursor=cursor,
@@ -78,7 +82,7 @@ def email_handler(args, cursor: Cursor):
     logger.info('Disconnected from SMTP server')
 
 
-def visualization_handler(args, cursor: Cursor):
+def visualization_handler(args:Namespace, cursor: Cursor):
 
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
@@ -93,12 +97,12 @@ def visualization_handler(args, cursor: Cursor):
         logger.warn('Roll number must be greater than 0')
 
 
-def utils_handler(args, cursor: Cursor):
+def utils_handler(args:Namespace, cursor: Cursor):
 
     logger.info(f'Called utils with {args.task}')
-    students = Modelz('students', cursor)
-    exams = Modelz('exams', cursor)
-    marks = Modelz('marks', cursor)
+    students = DbModelz('students', cursor)
+    exams = DbModelz('exams', cursor)
+    marks = DbModelz('marks', cursor)
 
     if args.task == 'dummy':
         fill_dummy(students, exams, marks)

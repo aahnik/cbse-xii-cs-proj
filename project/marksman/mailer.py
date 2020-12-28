@@ -139,7 +139,7 @@ class Mailer:
 
     def mail_all_students(self):
         self.cursor.execute(
-            ___(f'SELECT student,marks FROM marks WHERE exam={self.exam_uid} ORDER BY marks'))
+            ___(f'SELECT student,marks FROM marks WHERE exam={self.exam_uid} ORDER BY marks DESC'))
         students_roll_list = self.cursor.fetchall()
 
         for rank, roll_marks in enumerate(students_roll_list, start=1):

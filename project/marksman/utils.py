@@ -5,7 +5,7 @@ from marksman.settings import DB_PATH
 import os
 import logging
 from datetime import datetime
-from marksman.db import Modelz
+from marksman.db import DbModelz
 from marksman.helpers import intify
 logger = logging.getLogger(__name__)
 
