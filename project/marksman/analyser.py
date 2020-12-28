@@ -1,3 +1,7 @@
+''' This module is used analyse marks of students in exams.
+This will help us obtain statistics about the exam.
+'''
+
 from sqlite3 import Cursor
 import logging
 from marksman.helpers import ___
