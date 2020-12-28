@@ -1,57 +1,13 @@
 
-from rich import print
+import csv
+from marksman.validators import get_str
 from marksman.settings import DB_PATH
 import os
 import logging
-
-
+from datetime import datetime
+from marksman.db import Modelz
+from marksman.helpers import intify
 logger = logging.getLogger(__name__)
-
-
-def ___(text):
-    logger = logging.getLogger('SQL Executor')
-    logger.info(f'{text}')
-    return text
-
-
-def handle_choice(choices: dict) -> None:
-
-    # this function is specific to my use case and not generic
-    # the number of choices in the dict is expected to be one or two and not large
-    # the choices dict should be like this -> key : choice str, value : choice func
-    # all choice str are meant to have unique prefix chars
-    # this handler does not resolve prefix collisions, the first come first server
-
-    ch_list = []
-    prefix = '[dim]Choose your action[/dim] '
-    msg = prefix
-    for ch in choices.keys():
-        ch_list.append(ch[0])
-        msg += f'[reverse]{ch[0]}[/reverse]{ch[1:]} '
-    print('\n'+msg)
-    user_choice = input().lower().strip()
-    if not user_choice:
-        logger.warn('You did not choose anything')
-        return
-    for ch in choices.keys():
-        if ch.startswith(user_choice):
-            func = choices.get(ch)
-            return func()
-    logger.warn('Invalid Choice ...quitting')
-
-
-def clear_screen():
-    pass
-
-
-def display_table():
-    pass
-
-
-def ensure_parent(filename: str) -> None:
-    parent_folder = os.path.split(filename)[0]
-    os.makedirs(parent_folder, exist_ok=True)
-    logger.info(f'Ensured that parent folder of {DB_PATH} exists')
 
 
 def fill_dummy(students, exams, marks):
@@ -72,72 +28,52 @@ def fill_dummy(students, exams, marks):
     logger.info('Filled with random dummy marks entries')
 
 
-def save_email_config(thing, env_var, value):
-    from marksman.settings import GLOBAL_CONFIG_PATH
+class ImportExport:
+    def __init__(self, students, exams, marks):
+        self.structure = [('students', ('roll', 'name', 'email'), students),
+                          ('exams', ('uid', 'name'), exams),
+                          ('marks', ('student', 'exam', 'marks'), marks)]
 
-    text = f'''[red]If you do not want to enter [bold]{thing}[/bold] every time, then save it in [blue]{env_var}[/blue] environment variable.[/red]
-        \nYou can write the following line in your {GLOBAL_CONFIG_PATH} file:\n
-        [center][dim]{env_var}={value}[/dim][/center]
-        \nRead more about configuring your marksman environment https://git.io/JLMFl\n'''
-    logger.warn(text)
-    print(
-        f'Do you want [bold]marksman[/bold] to save your [blue]{thing}[/blue] ? [reverse]Y[/reverse]es or [reverse]n[/reverse]o')
-    choice = input().lower()
-    if choice in 'yes':
-        with open(GLOBAL_CONFIG_PATH, 'a') as f:
-            f.write(f'{env_var}={value}\n')
-        print(f'Saved [bold]{thing}[/bold] to {GLOBAL_CONFIG_PATH}')
-    elif choice in 'no':
-        print('Ok. Not saving')
-    else:
-        print('Invalid Choice ...not saving')
+    def load_csv(self):
+        import_dir = get_str(
+            'Enter the path of the directory which has the csv files: ( leave empty if files in current directory )', default=os.getcwd())
+        if not os.path.isdir(import_dir):
+            logger.warn('Given path is not a directory... quitting')
+            return
 
+        for item in self.structure:
+            path = f'{import_dir}/{item[0]}.csv'
+            try:
+                with open(path) as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        values = []
+                        for _, value in row.items():
+                            values.append(intify(value))
+                        item[2].insert(tuple(values))
+            except FileNotFoundError:
+                logger.warn(
+                    f'Could not find {path} > Skipped importing {item[0]}')
+            except Exception as err:
+                logger.warn(
+                    f'''Problem occured while trying to import data from {path}
+                    \nPlease follow specified format.  Read more''')  # TODO
+                logger.exception(err)
+            else:
+                logger.info(f'Finished loading {item[0]}')
 
-def configure_email():
-    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
-    from marksman.validators import get_email, get_str
+    def export_csv(self):
 
-    if not SENDER_EMAIL:
-        SENDER_EMAIL = get_email('Enter [bold]sender email[/bold] address: ')
-        save_email_config('email', 'marksman_sender', SENDER_EMAIL)
-    if not SENDER_AUTH:
-        SENDER_AUTH = get_str(
-            f'Enter password or auth-code to login into email account {SENDER_EMAIL}')
-        save_email_config('auth-code', 'marksman_auth', SENDER_AUTH)
+        timestamp = str(datetime.now().strftime("%d %b %I:%M %p"))
 
-    if not SENDER_EMAIL.endswith('@gmail.com'):
-        if not SMTP_HOST:
-            logger.warn(
-                'SMTP sever url could not be derrived from email address. Continuing with default. \n Learn more https://git.io/JLMFl ')
-            SMTP_HOST = get_str(
-                'Enter SMTP host server address of your email provider: ')
-            save_email_config('smtp host address',
-                              'marksman_smptp_host', SMTP_HOST)
-        else:
-            logger.info(
-                f'Sender Email does not end with gmail.com > SMTP_HOST is {SMTP_HOST}')
-    else:
-        SMTP_HOST = 'smtp.gmail.com'
-        logger.info(f'SMTP_HOST is set to {SMTP_HOST}')
+        export_dir = f'Marksman Export {timestamp}'  # export directory
+        os.makedirs(export_dir, exist_ok=True)
 
-    if not isinstance(SMTP_PORT, int):
-        logger.warn(
-            'The SMTP Port you have set is not an integer > using default 587')
-        SMTP_PORT = 587
-    if not SMTP_PORT in (587, 2525):
-        logger.warn(
-            'The SMPTP Port you have set is probably incorrect or insecure')
-        input('Confirm ?')
-    if not INST_NAME:
-        logger.warn(
-            'Institute Name not set thus your email will be visible on top, Learn More https://git.io/JLMFl')
+        for item in self.structure:
+            with open(f'{export_dir}/{item[0]}.csv', 'w') as f:
+                writer = csv.writer(f)
+                writer.writerow(item[1])
+                writer.writerows(item[2].fetch())
 
-    return SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
-
-
-def load_csv(students, exams, marks):
-    pass
-
-
-def export_csv(students, exams, marks):
-    pass
+    def do(self, task):
+        return self.load_csv() if task == 'import' else self.export_csv()
