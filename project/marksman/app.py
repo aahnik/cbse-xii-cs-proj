@@ -1,15 +1,23 @@
 import logging
-from smtplib import SMTPAuthenticationError
+from smtplib import SMTP, SMTPAuthenticationError
+
 from sqlite3 import Cursor
 from rich import print
+
+from marksman.db import Modelz
+from marksman.models import Student, Exam, MarksEntry
+from marksman.helpers import handle_choice, configure_email
+from marksman.mailer import Mailer
+
+from marksman.plot import plot_student_performance, plot_batch_performance
+from marksman.analyser import analyse_exam
+from marksman.utils import ImportExport, fill_dummy
 
 logger = logging.getLogger(__name__)
 
 
 def crud_handler(args, cursor: Cursor):
-    from marksman.db import Modelz
-    from marksman.models import Student, Exam, MarksEntry
-    from marksman.utils import handle_choice
+
     _handler_classes = {'students': Student,
                         'exams': Exam,
                         'marks': MarksEntry}
@@ -34,9 +42,7 @@ def crud_handler(args, cursor: Cursor):
 
 
 def email_handler(args, cursor: Cursor):
-    from marksman.utils import configure_email
-    from marksman.mailer import Mailer
-    from smtplib import SMTP
+
     logger.info(f'Called email handler with {args.exam}')
     SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME = configure_email()
 
@@ -60,7 +66,7 @@ def email_handler(args, cursor: Cursor):
         logger.warn(
             'Could not login to SMTP server using credentials you provided')
         print(
-            f'\nMost probably you gave incorrect password! Error Code {err.smtp_code}\n{err.smtp_error}\n')
+            f'\nMost probably you gave incorrect email and password! Error Code {err.smtp_code}\n{err.smtp_error}\n')
         return
 
     mailer = Mailer(server=server, cursor=cursor,
@@ -73,8 +79,7 @@ def email_handler(args, cursor: Cursor):
 
 
 def visualization_handler(args, cursor: Cursor):
-    from marksman.plot import plot_student_performance, plot_batch_performance
-    from marksman.analyser import analyse_exam
+
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
         # plot performance of batch
@@ -89,8 +94,7 @@ def visualization_handler(args, cursor: Cursor):
 
 
 def utils_handler(args, cursor: Cursor):
-    from marksman.db import Modelz
-    from marksman.utils import fill_dummy, load_csv, export_csv
+
     logger.info(f'Called utils with {args.task}')
     students = Modelz('students', cursor)
     exams = Modelz('exams', cursor)
@@ -98,7 +102,6 @@ def utils_handler(args, cursor: Cursor):
 
     if args.task == 'dummy':
         fill_dummy(students, exams, marks)
-    if args.task == 'import':
-        load_csv(students, exams, marks)
-    if args.task == 'export':
-        export_csv(students, exams, marks)
+    if args.task in ['import', 'export']:
+        ie = ImportExport(students, exams, marks)
+        ie.do(args.task)
