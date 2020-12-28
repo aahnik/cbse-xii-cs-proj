@@ -1,6 +1,6 @@
 import logging
 from sqlite3 import Cursor
-from marksman.utils import ___
+from marksman.helpers import ___
 
 logger = logging.getLogger(__name__)
 

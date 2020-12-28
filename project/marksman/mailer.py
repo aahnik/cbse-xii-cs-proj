@@ -8,7 +8,7 @@ import markdown
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
-from marksman.db import ___
+from marksman.helpers import ___
 from email import encoders
 
 
@@ -76,6 +76,7 @@ class Mailer:
 
         _vars.update({'exam': self.exam_name, 'inst': self.inst})
         logger.info(f'varibles supplied to template\n{_vars}')
+
         for var in _vars.keys():
             message = message.replace(
                 f'::{var}::', str(_vars.get(var)))

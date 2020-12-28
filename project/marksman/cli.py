@@ -1,8 +1,8 @@
 import argparse
 from argparse import RawTextHelpFormatter
 from marksman.db import create_tables, foreign_key_constraint
-from marksman.utils import ensure_parent
-from marksman.settings import DB_PATH, LOUD, SHOW_PATH, SENDER_EMAIL, SENDER_AUTH
+from marksman.helpers import ensure_parent
+from marksman.settings import DB_PATH, LOUD, SHOW_PATH
 from marksman import __version__
 import sys
 from marksman.app import crud_handler, email_handler, visualization_handler, utils_handler
