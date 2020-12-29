@@ -1,11 +1,11 @@
 import logging
 from sqlite3 import Cursor
-from marksman.helpers import ___
+from marksman.helpers import ___, intify
 
 logger = logging.getLogger(__name__)
 
 
-def gen_kv_str(kwargs) -> str:
+def gen_kv_str(kv_dict, delim='AND') -> str:
     ''' Generate key value strings
 
     Returns:
@@ -16,11 +16,16 @@ def gen_kv_str(kwargs) -> str:
 
     c = 0
 
-    for key, value in kwargs.items():
-        if c >= 1:
-            key_val_string += ' AND '
-        key_val_string += f'{key} = {value}'
-        c += 1
+    for key, value in kv_dict.items():
+        if value:
+            if c >= 1:
+                key_val_string += f' {delim} '
+            if not isinstance(intify(value), int):
+                quote = '"'
+            else:
+                quote = ''
+            key_val_string += f'{key} = {quote}{value}{quote}'
+            c += 1
 
     return key_val_string
 
@@ -129,13 +134,14 @@ class DbModelz:
                                 VALUES{values} '''))
         logger.info(f'{values} were inserted using {self}')
 
-    def update(self, set_string: str, **conds) -> None:
+    def update(self, set_dict:dict, **conds) -> None:
         ''' Updates the table using set_string, based on given conditions
 
         Args:
             set_string (str): the string to put beside SET keyword in SQL
         '''
-
+        
+        set_string = gen_kv_str(set_dict,delim=',')
         cond_str = gen_kv_str(conds)
         self.cursor.execute(___(f'''UPDATE  {self.table}
                                 SET {set_string}
