@@ -1,12 +1,12 @@
 from argparse import Namespace
 import logging
+from marksman.validators import get_email, get_pos_int, get_str, roll, uid
 from smtplib import SMTP, SMTPAuthenticationError
-
 from sqlite3 import Cursor
 from rich import print
 
 from marksman.db import DbModelz
-from marksman.models import Student, Exam, MarksEntry
+from marksman.models import Models
 from marksman.helpers import handle_choice, configure_email
 from marksman.mailer import Mailer
 
@@ -18,32 +18,36 @@ logger = logging.getLogger(__name__)
 
 
 def crud_handler(args, cursor: Cursor):
-
-    _handler_classes = {'students': Student,
-                        'exams': Exam,
-                        'marks': MarksEntry}
-
     logger.info(f'Called crud handler with {args.what}')
 
-    apt_class = _handler_classes.get(args.what)
-    modelz = DbModelz(args.what, cursor)
+    pks_fns = {
+        'students': {'roll': roll},
+        'exams': {'uid': uid},
+        'marks': {'student': roll, 'exam': uid}
+    }
 
-    # display_table(modelz.fetch())
+    values_fns = {
+        'students': {'name': get_str, 'email': get_email},
+        'exams': {'name': get_str},
+        'marks': {'marks': get_pos_int}
+    }
 
-    apt = apt_class(modelz)
+    db_modelz = DbModelz(args.what, cursor)
+    pks_fn = pks_fns.get(args.what)
+    values_fn = values_fns.get(args.what)
 
-    if not apt.object:
-        # if does not exist -> create
-        logging.warning('Object does not Exist')
-        handle_choice({'create': apt.create})
+    model = Models(db_modelz=db_modelz, pks_fn=pks_fn, values_fn=values_fn)
+    obj = model.read()
+
+    if not obj:
+        logger.warning('Object does not exist')
+        handle_choice({'create': model.create})
     else:
-        # if exists -> update/delete
-        print(apt.object)
-        apt.display()
-        handle_choice({'update': apt.update, 'delete': apt.delete})
+        print(obj)
+        handle_choice({'update': model.update, 'delete': model.delete})
 
 
-def email_handler(args:Namespace, cursor: Cursor):
+def email_handler(args: Namespace, cursor: Cursor):
     ''' Handles the email action '''
 
     logger.info(f'Called email handler with {args.exam}')
@@ -82,7 +86,7 @@ def email_handler(args:Namespace, cursor: Cursor):
     logger.info('Disconnected from SMTP server')
 
 
-def visualization_handler(args:Namespace, cursor: Cursor):
+def visualization_handler(args: Namespace, cursor: Cursor):
 
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
@@ -97,7 +101,7 @@ def visualization_handler(args:Namespace, cursor: Cursor):
         logger.warn('Roll number must be greater than 0')
 
 
-def utils_handler(args:Namespace, cursor: Cursor):
+def utils_handler(args: Namespace, cursor: Cursor):
 
     logger.info(f'Called utils with {args.task}')
     students = DbModelz('students', cursor)
