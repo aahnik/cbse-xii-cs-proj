@@ -4,7 +4,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def get_pos_int(msg: str) -> int:
+def get_pos_int(msg: str = 'Enter marks: ') -> int:
     ''' takes input and returns after assuring that it is a positive integer
 
     Returns:
@@ -23,7 +23,7 @@ def get_pos_int(msg: str) -> int:
             return integer
 
 
-def get_str(msg='Enter [bold]name[/bold]: ', default: str = '') -> str:
+def get_str(msg='Enter [bold]name[/bold]: ') -> str:
     max_len = 64
     while True:
         try:
@@ -34,26 +34,26 @@ def get_str(msg='Enter [bold]name[/bold]: ', default: str = '') -> str:
             logger.warn(
                 f'The string must not be longer than {max_len} characters')
         else:
-            if string:
-                return string
-
-            if default:
-                return default
-
-            logger.warn('You cant keep this empty')
+            return string
 
 
-def get_email(msg='Enter [bold]email[/bold]: ', default: str = '') -> str:
+def get_email(msg='Enter [bold]email[/bold]: ') -> str:
     while True:
         try:
-            email = get_str(msg, default=default)
-            if email == default:
-                logger.info('Email unchanged, not checking')
-                return email
-            logging.info('Checking email for validity')
-            regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
-            assert re.search(regex, email)
+            email = get_str(msg)
+            if email:
+                logging.info('Checking email for validity')
+                regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
+                assert re.search(regex, email)
         except AssertionError:
             logger.warn('The email you enterd is invalid')
         else:
             return email
+
+
+def roll():
+    return get_pos_int('Enter [bold]roll number[/bold] of student:')
+
+
+def uid():
+    return get_pos_int('Enter the [bold]unique id[/bold] of exam:')
