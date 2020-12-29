@@ -5,7 +5,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def get_pos_int(msg: str = 'Enter marks: ') -> int:
+def get_pos_int(msg: str = 'Enter marks: ') -> int or None:
     ''' takes input and returns after assuring that it is a positive integer
 
     Returns:
@@ -26,7 +26,7 @@ def get_pos_int(msg: str = 'Enter marks: ') -> int:
         sys.exit(1)
 
 
-def get_str(msg='Enter [bold]name[/bold]: ') -> str:
+def get_str(msg:str='Enter [bold]name[/bold]: ') -> str or None:
     max_len = 64
     while True:
         try:
@@ -40,7 +40,7 @@ def get_str(msg='Enter [bold]name[/bold]: ') -> str:
             return string
 
 
-def get_email(msg='Enter [bold]email[/bold]: ') -> str:
+def get_email(msg:str='Enter [bold]email[/bold]: ') -> str or None:
     while True:
         try:
             email = get_str(msg)
@@ -54,9 +54,9 @@ def get_email(msg='Enter [bold]email[/bold]: ') -> str:
             return email
 
 
-def roll():
+def roll()->int or None:
     return get_pos_int('Enter [bold]roll number[/bold] of student:')
 
 
-def uid():
+def uid()->int or None:
     return get_pos_int('Enter the [bold]unique id[/bold] of exam:')

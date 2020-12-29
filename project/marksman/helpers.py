@@ -73,7 +73,7 @@ def ensure_parent(filename: str) -> None:
     logger.info(f'Ensured that parent folder of {DB_PATH} exists')
 
 
-def save_email_config(thing, env_var, value):
+def save_email_config(thing:str, env_var:str, value:str):
     from marksman.settings import GLOBAL_CONFIG_PATH
 
     text = f'''[red]If you do not want to enter [bold]{thing}[/bold] every time, then save it in [blue]{env_var}[/blue] environment variable.[/red]

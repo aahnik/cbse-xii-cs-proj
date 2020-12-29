@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 logger = logging.getLogger(__name__)
 
 
-def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dict, path=''):
+def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dict, path='')->None:
     ''' Plots students performance against the batch
 
     Args:
@@ -42,7 +42,7 @@ def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dic
         plt.show()
 
 
-def plot_batch_performance(cursor: Cursor, exam: int):
+def plot_batch_performance(cursor: Cursor, exam: int)->None:
     cursor.execute(
         ___(f'SELECT student,marks FROM marks WHERE exam={exam}'))
     marks_list = cursor.fetchall()

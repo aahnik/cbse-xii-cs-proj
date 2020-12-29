@@ -5,7 +5,7 @@ from marksman.helpers import ___, intify
 logger = logging.getLogger(__name__)
 
 
-def gen_kv_str(kv_dict, delim='AND') -> str:
+def gen_kv_str(kv_dict:dict, delim:str='AND') -> str:
     ''' Generate key value strings
 
     Returns:

@@ -18,7 +18,7 @@ class Models:
 
         if not all(self.pks.values()):
             matches = self.db_modelz.fetch(**self.pks)
-            self.display(data=matches)
+            self.display(_data=matches)
             sys.exit(0)
 
         self.values_fn = values_fn  # dict of value_field_name : func
@@ -27,16 +27,16 @@ class Models:
     def read(self):
         return self.db_modelz.exists(**self.pks)
 
-    def display(self, data=None):
+    def display(self, _data=None):
         what = self.db_modelz.table
-        if not data:
-            data = [self.object]
+        if not _data:
+            _data = [self.object]
         if what == 'students':
-            display_table('Student Data', ['Roll', 'Name', 'Email'], data)
+            display_table('Student Data', ['Roll', 'Name', 'Email'], _data)
         elif what == 'exams':
-            display_table('Exam Data', ['Uid', 'Name'], data)
+            display_table('Exam Data', ['Uid', 'Name'], _data)
         else:  # marks
-            display_table('Marks Data', ['Student', 'Uid', 'Marks'], data)
+            display_table('Marks Data', ['Student', 'Uid', 'Marks'], _data)
 
     def create(self):
         calculated = []

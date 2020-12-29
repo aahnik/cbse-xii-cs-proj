@@ -12,7 +12,6 @@ from marksman.helpers import ___
 from email import encoders
 from rich.progress import track
 import time
-import sys
 logger = logging.getLogger(__name__)
 
 

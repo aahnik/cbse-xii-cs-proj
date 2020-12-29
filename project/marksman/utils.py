@@ -29,12 +29,12 @@ def fill_dummy(students, exams, marks):
 
 
 class ImportExport:
-    def __init__(self, students, exams, marks):
+    def __init__(self, students:DbModelz, exams:DbModelz, marks:DbModelz):
         self.structure = [('students', ('roll', 'name', 'email'), students),
                           ('exams', ('uid', 'name'), exams),
                           ('marks', ('student', 'exam', 'marks'), marks)]
 
-    def load_csv(self):
+    def load_csv(self)->None:
         import_dir = get_str(
             'Enter the path of the directory which has the csv files: ( leave empty if files in current directory )', default=os.getcwd())
         if not os.path.isdir(import_dir):
@@ -62,7 +62,7 @@ class ImportExport:
             else:
                 logger.info(f'Finished loading {item[0]}')
 
-    def export_csv(self):
+    def export_csv(self)->None:
 
         timestamp = str(datetime.now().strftime("%d %b %I:%M %p"))
 

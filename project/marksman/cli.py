@@ -13,7 +13,7 @@ import os
 logger = logging.getLogger(__name__)
 
 
-def parse_commands():
+def parse_commands()->Namespace:
 
     main_parser = argparse.ArgumentParser(
         description='CLI Tool to manage marks of students efficiently',
@@ -77,7 +77,7 @@ def parse_commands():
     return main_parser.parse_args()
 
 
-def call_func(args: Namespace):
+def call_func(args: Namespace)->None:
     if hasattr(args, 'func'):
 
         logger.info('Starting database connection')

@@ -17,7 +17,7 @@ from marksman.utils import ImportExport, fill_dummy
 logger = logging.getLogger(__name__)
 
 
-def crud_handler(args, cursor: Cursor):
+def crud_handler(args, cursor: Cursor)->None:
     logger.info(f'Called crud handler with {args.what}')
 
     pks_fns = {
@@ -49,7 +49,7 @@ def crud_handler(args, cursor: Cursor):
                        'update': model.update, 'delete': model.delete})
 
 
-def email_handler(args: Namespace, cursor: Cursor):
+def email_handler(args: Namespace, cursor: Cursor)->None:
     ''' Handles the email action '''
 
     logger.info(f'Called email handler with {args.exam}')
@@ -88,7 +88,7 @@ def email_handler(args: Namespace, cursor: Cursor):
     logger.info('Disconnected from SMTP server')
 
 
-def visualization_handler(args: Namespace, cursor: Cursor):
+def visualization_handler(args: Namespace, cursor: Cursor)->None:
 
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
@@ -103,7 +103,7 @@ def visualization_handler(args: Namespace, cursor: Cursor):
         logger.warn('Roll number must be greater than 0')
 
 
-def utils_handler(args: Namespace, cursor: Cursor):
+def utils_handler(args: Namespace, cursor: Cursor)->None:
 
     logger.info(f'Called utils with {args.task}')
     students = DbModelz('students', cursor)
