@@ -10,8 +10,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from marksman.helpers import ___
 from email import encoders
-
-
+from rich.progress import track
+import time
+import sys
 logger = logging.getLogger(__name__)
 
 
@@ -84,8 +85,9 @@ class Mailer:
         return message
 
     def get_files(self):
-        path = plot_student_performance(
-            self.cursor, self.recipient['roll'], self.exam_uid, self.analysis, save=True)
+        path = f'temp/{self.recipient["roll"]}_Performance.png'
+        plot_student_performance(
+            self.cursor, self.recipient['roll'], self.exam_uid, self.analysis, path=path)
         return [path]
 
     def send_mail(self) -> bool:
@@ -111,7 +113,9 @@ class Mailer:
 
         for file in files:
 
-            file_name = os.path.split(file)[1]
+            file_name = os.path.split(file)[1].split('_')[1]
+
+            time.sleep(2)
 
             with open(file, 'rb') as f:
                 file_content = f.read()
@@ -141,8 +145,9 @@ class Mailer:
         self.cursor.execute(
             ___(f'SELECT student,marks FROM marks WHERE exam={self.exam_uid} ORDER BY marks DESC'))
         students_roll_list = self.cursor.fetchall()
-
-        for rank, roll_marks in enumerate(students_roll_list, start=1):
+        os.makedirs('temp', exist_ok=True)
+        rank = 1
+        for roll_marks in track(students_roll_list, description='Sending emails'):
             self.cursor.execute(
                 ___(f'SELECT * FROM students WHERE roll={roll_marks[0]}'))
             student = self.cursor.fetchone()
@@ -153,5 +158,5 @@ class Mailer:
             self.recipient['marks'] = roll_marks[1]
 
             self.send_mail()
-
-            os.remove('Performance.png')
+            
+            rank += 1

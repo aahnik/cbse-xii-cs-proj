@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 logger = logging.getLogger(__name__)
 
 
-def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dict, save=False):
+def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dict, path=''):
     ''' Plots students performance against the batch
 
     Args:
@@ -36,10 +36,8 @@ def plot_student_performance(cursor: Cursor, roll: int, exam: int, analysis: dic
     plt.xlabel('Comparison')
     plt.ylabel('Marks')
 
-    if save:
-        path = 'Performance.png'
+    if path:
         plt.savefig(path)
-        return path
     else:
         plt.show()
 
