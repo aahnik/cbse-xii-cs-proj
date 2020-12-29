@@ -1,5 +1,6 @@
 from rich import print
 import logging
+import sys
 import re
 logger = logging.getLogger(__name__)
 
@@ -10,10 +11,11 @@ def get_pos_int(msg: str = 'Enter marks: ') -> int:
     Returns:
         int: the correct integer
     '''
-    while True:
+    print(f'\n{msg}')
+    inp = input()
+    if inp:
         try:
-            print(f'\n{msg}')
-            integer = int(input())
+            integer = int(inp)
             assert integer > 0
         except ValueError:
             logger.warn('The value you entered is not an integer')
@@ -21,6 +23,7 @@ def get_pos_int(msg: str = 'Enter marks: ') -> int:
             logger.warn('You must enter an integer greater than zero')
         else:
             return integer
+        sys.exit(1)
 
 
 def get_str(msg='Enter [bold]name[/bold]: ') -> str:
