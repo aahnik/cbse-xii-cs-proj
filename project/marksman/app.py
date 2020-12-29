@@ -7,7 +7,7 @@ from rich import print
 
 from marksman.db import DbModelz
 from marksman.models import Models
-from marksman.helpers import handle_choice, configure_email
+from marksman.helpers import  handle_choice, configure_email
 from marksman.mailer import Mailer
 
 from marksman.plot import plot_student_performance, plot_batch_performance
@@ -37,14 +37,16 @@ def crud_handler(args, cursor: Cursor):
     values_fn = values_fns.get(args.what)
 
     model = Models(db_modelz=db_modelz, pks_fn=pks_fn, values_fn=values_fn)
-    obj = model.read()
+    obj = model.object
 
     if not obj:
         logger.warning('Object does not exist')
         handle_choice({'create': model.create})
     else:
-        print(obj)
-        handle_choice({'update': model.update, 'delete': model.delete})
+        model.display()
+
+        handle_choice({'more': model.show_related,
+                       'update': model.update, 'delete': model.delete})
 
 
 def email_handler(args: Namespace, cursor: Cursor):
