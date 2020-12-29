@@ -1,10 +1,12 @@
 
+from typing import Iterable
 from rich import print
+from rich.console import Console
 from marksman.settings import DB_PATH
 import os
 import logging
-
-
+from rich.table import Table
+import sys
 logger = logging.getLogger(__name__)
 
 
@@ -12,6 +14,13 @@ def ___(text):
     logger = logging.getLogger('SQL Executor')
     logger.info(f'{text}')
     return text
+
+
+def not_empty(inp):
+    if not inp:
+        logger.warn('Empty value not allowed. > Quitting ...')
+        sys.exit(1)
+    return inp
 
 
 def handle_choice(choices: dict) -> None:
@@ -40,12 +49,22 @@ def handle_choice(choices: dict) -> None:
     logger.warn('Invalid Choice ...quitting')
 
 
-def clear_screen():
-    pass
+def display_table(title: str, headers: Iterable, table_list: Iterable):
+
+    table = Table(title=title, show_lines=True)
+
+    for heading in headers:
+        table.add_column(heading, justify='center')
+
+    for row in table_list:
+        renderable = [str(c) for c in row]
+        table.add_row(*renderable)
+
+    console = Console()
+    console.print(table)
 
 
-def display_table(table:list):
-    print(table)
+
 
 
 def ensure_parent(filename: str) -> None:
@@ -80,19 +99,20 @@ def configure_email():
     from marksman.validators import get_email, get_str
 
     if not SENDER_EMAIL:
-        SENDER_EMAIL = get_email('Enter [bold]sender email[/bold] address: ')
+        SENDER_EMAIL = not_empty(
+            get_email('Enter [bold]sender email[/bold] address: '))
         save_email_config('email', 'marksman_sender', SENDER_EMAIL)
     if not SENDER_AUTH:
-        SENDER_AUTH = get_str(
-            f'Enter password or auth-code to login into email account {SENDER_EMAIL}')
+        SENDER_AUTH = not_empty(get_str(
+            f'Enter password or auth-code to login into email account {SENDER_EMAIL}'))
         save_email_config('auth-code', 'marksman_auth', SENDER_AUTH)
 
     if not SENDER_EMAIL.endswith('@gmail.com'):
         if not SMTP_HOST:
             logger.warn(
                 'SMTP sever url could not be derrived from email address. Continuing with default. \n Learn more https://git.io/JLMFl ')
-            SMTP_HOST = get_str(
-                'Enter SMTP host server address of your email provider: ')
+            SMTP_HOST = not_empty(get_str(
+                'Enter address of your email provider\'s SMTP host server : '))
             save_email_config('smtp host address',
                               'marksman_smptp_host', SMTP_HOST)
         else:
@@ -103,13 +123,12 @@ def configure_email():
         logger.info(f'SMTP_HOST is set to {SMTP_HOST}')
 
     if not isinstance(SMTP_PORT, int):
-        logger.warn(
+        logger.warning(
             'The SMTP Port you have set is not an integer > using default 587')
         SMTP_PORT = 587
     if not SMTP_PORT in (587, 2525):
-        logger.warn(
-            'The SMPTP Port you have set is probably incorrect or insecure')
-        input('Confirm ?')
+        logger.warning(
+            'The SMTP Port you have set is probably incorrect or insecure')
     if not INST_NAME:
         logger.warn(
             'Institute Name not set thus your email will be visible on top, Learn More https://git.io/JLMFl')
@@ -122,4 +141,3 @@ def intify(string: str):
         return int(string)
     except ValueError:
         return string
-
