@@ -1,5 +1,5 @@
 import argparse
-from argparse import RawTextHelpFormatter,Namespace
+from argparse import RawTextHelpFormatter, Namespace
 from marksman.db import create_tables, foreign_key_constraint
 from marksman.helpers import ensure_parent
 from marksman.settings import DB_PATH, LOUD, SHOW_PATH
@@ -77,7 +77,7 @@ def parse_commands():
     return main_parser.parse_args()
 
 
-def call_func(args:Namespace):
+def call_func(args: Namespace):
     if hasattr(args, 'func'):
 
         logger.info('Starting database connection')
