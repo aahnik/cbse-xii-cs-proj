@@ -2,4 +2,4 @@
 Perform CRUD, email results or visualize data.
 '''
 
-__version__ = "0.4.5"
+__version__ = "0.5.4"
