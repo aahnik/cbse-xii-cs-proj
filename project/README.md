@@ -279,5 +279,5 @@ If a value is required, `marksman` will prompt you to to enter it during program
 
 As `marksman` is written purely in python, it can easily be imported and extended by other Python programs.
 
-Read the [full API Reference]() which is published from the docstrings.
+Read the full [API Reference](https://aahnik.github.io/cbse-xii-cs-proj/marksman/) which is published from the docstrings.
 
