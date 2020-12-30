@@ -117,7 +117,6 @@ def visualization_handler(args: Namespace, cursor: Cursor) -> None:
         plot_batch_performance(cursor, args.exam)
     elif args.r > 0:
         # plot performance of specific student
-
         plot_student_performance(
             cursor, args.r, args.exam, analyse_exam(cursor, args.exam))
     else:

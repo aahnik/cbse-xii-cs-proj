@@ -90,7 +90,7 @@ class ImportExport:
             except Exception as err:
                 logger.warning(
                     f'''Problem occured while trying to import data from {path}
-                    \nPlease follow specified format.  Read more''')  # TODO
+                    \nPlease follow specified format.  Read more http://bit.ly/marksman-utils''')
                 logger.exception(err)
             else:
                 console.print(f'Finished loading {item[0]} from CSV.')

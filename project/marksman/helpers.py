@@ -127,7 +127,7 @@ def save_email_config(thing: str, env_var: str, value: str) -> None:
     then save it in [blue]{env_var}[/blue] environment variable.[/red]
         \nYou can write the following line in your {GLOBAL_CONFIG_PATH} file:\n
         [center][dim]{env_var}={value}[/dim][/center]
-        \nRead more about configuring your marksman environment https://git.io/JLMFl\n'''
+        \nRead more about configuring your marksman environment http://bit.ly/configure-marksman \n'''
     logger.warning(text)
     console.print(
         f'''Do you want[bold]marksman[/bold] to save your[blue]{thing}[/blue] ?
