@@ -1,23 +1,13 @@
 # cbse-xii-cs-proj
 
+Table of Contents
 
-| Stuff | Link |
-|--|--|
-| Source code of practicals | [![python-code](https://img.shields.io/badge/code-python-green?style=flat-square&logo=github)](https://github.com/aahnik/cbse-xii-cs-proj/tree/main/practicals/python) [![sql-code](https://img.shields.io/badge/code-sql-blue?style=flat-square&logo=github)](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/sql/solutions.sql)  |
-| Output of practicals | [![python-output](https://img.shields.io/badge/code-python-green?style=flat-square&logo=github)]() |
-| Practicals Video |  |
-| Project source code | [![python-code](https://img.shields.io/badge/code-marksman-green?style=flat-square&logo=github)](https://link.com) |
-| Project Usage Guide |  |
-| Project Documentation |  |
-| Project PyPI Release |  |
-| Project Video |  |
+1. [Source code and output of practicals](https://github.com/aahnik/cbse-xii-cs-proj/tree/main/practicals#cbse-xii-practicals)
+2. Practicals Video
+3. [Project source code](https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project)
+4. [Project Documentation](https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project#marksman)
+5. Project Video
 
 
 
 
- [![telegram-chat](https://img.shields.io/badge/chat-@aahnikdaw-blue?logo=youtube)](https://telegram.me/aahnikdaw)
-```
-[![alt](https://img.shields.io/badge/key-val-blue?logo=)](link)
-```
-
-?style=for-the-badge&logo=appveyor
