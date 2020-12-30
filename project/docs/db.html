@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>marksman.db API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="A module that implements low level access to the database,
+for commonly used SQL operations." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,6 +23,8 @@
 <h1 class="title">Module <code>marksman.db</code></h1>
 </header>
 <section id="section-intro">
+<p>A module that implements low level access to the database,
+for commonly used SQL operations.</p>
 </section>
 <section>
 </section>
@@ -34,23 +37,40 @@
 <span>def <span class="ident">create_tables</span></span>(<span>cursor: sqlite3.Cursor)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Create all tables required by marksman</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cursor</code></strong> :&ensp;<code>Cursor</code></dt>
+<dd>a sqlite3 Cursor object</dd>
+</dl></div>
 </dd>
 <dt id="marksman.db.foreign_key_constraint"><code class="name flex">
 <span>def <span class="ident">foreign_key_constraint</span></span>(<span>cursor: sqlite3.Cursor)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Turn on foreign key constraints</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cursor</code></strong> :&ensp;<code>Cursor</code></dt>
+<dd>sqlite3 Cursor object</dd>
+</dl></div>
 </dd>
 <dt id="marksman.db.gen_kv_str"><code class="name flex">
 <span>def <span class="ident">gen_kv_str</span></span>(<span>kv_dict: dict, delim: str = 'AND') ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generate key value strings</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>kv_dict</code></strong> :&ensp;<code>dict</code></dt>
+<dd>dictionary containing keys and values</dd>
+<dt><strong><code>delim</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>the stuff to put in between. Defaults to 'AND'.</dd>
+</dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>str</code></dt>
-<dd>key value string</dd>
+<dd>the rendered key value string</dd>
 </dl></div>
 </dd>
 </dl>
@@ -63,12 +83,14 @@
 <span>(</span><span>table: str, cursor: sqlite3.Cursor)</span>
 </code></dt>
 <dd>
-<div class="desc"><h2 id="args">Args</h2>
+<div class="desc"><p>Class to implement low level access to the database for common tasks</p>
+<p>Constructor to initialize DbModelz object</p>
+<h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>table</code></strong> :&ensp;<code>str</code></dt>
-<dd>[description]</dd>
+<dd>name of the table to work with</dd>
 <dt><strong><code>cursor</code></strong> :&ensp;<code>Cursor</code></dt>
-<dd>[description]</dd>
+<dd>sqlite3 Cursor object</dd>
 </dl></div>
 <h3>Methods</h3>
 <dl>
@@ -98,7 +120,7 @@ else None</dd>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>list</code></dt>
-<dd>results</dd>
+<dd>[description]</dd>
 </dl></div>
 </dd>
 <dt id="marksman.db.DbModelz.insert"><code class="name flex">
@@ -113,10 +135,20 @@ else None</dd>
 </dl></div>
 </dd>
 <dt id="marksman.db.DbModelz.query"><code class="name flex">
-<span>def <span class="ident">query</span></span>(<span>self, query_string)</span>
+<span>def <span class="ident">query</span></span>(<span>self, query_string: str)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Execute a query using the Cursor and return all results</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query_string</code></strong> :&ensp;<code>str</code></dt>
+<dd>the query to execute</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>results</dd>
+</dl></div>
 </dd>
 <dt id="marksman.db.DbModelz.update"><code class="name flex">
 <span>def <span class="ident">update</span></span>(<span>self, set_dict: dict, **conds) ‑> NoneType</span>
