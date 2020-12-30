@@ -1,23 +1,34 @@
+''' All the handlers for actions the app supports are registered in this module
+'''
+
 from argparse import Namespace
 import logging
 from marksman.validators import get_email, get_pos_int, get_str, roll, uid
 from smtplib import SMTP, SMTPAuthenticationError
 from sqlite3 import Cursor
-from rich import print
+from rich.console import Console
 
-from marksman.db import DbModelz
+from marksman.db import DbModelz, create_tables
 from marksman.models import Models
-from marksman.helpers import  handle_choice, configure_email
+from marksman.helpers import handle_choice, configure_email
 from marksman.mailer import Mailer
 
-from marksman.plot import plot_student_performance, plot_batch_performance
-from marksman.analyser import analyse_exam
+from marksman.plot import analyse_exam, plot_student_performance, plot_batch_performance
+
 from marksman.utils import ImportExport, fill_dummy
 
 logger = logging.getLogger(__name__)
 
+console = Console()
 
-def crud_handler(args, cursor: Cursor)->None:
+
+def crud_handler(args: Namespace, cursor: Cursor) -> None:
+    ''' Handle the crud action
+
+    Args:
+        args (Namespace): the arguments provided at command line
+        cursor (Cursor): sqlite3 cursor object
+    '''
     logger.info(f'Called crud handler with {args.what}')
 
     pks_fns = {
@@ -49,8 +60,13 @@ def crud_handler(args, cursor: Cursor)->None:
                        'update': model.update, 'delete': model.delete})
 
 
-def email_handler(args: Namespace, cursor: Cursor)->None:
-    ''' Handles the email action '''
+def email_handler(args: Namespace, cursor: Cursor) -> None:
+    ''' Handles the email action
+
+    Args:
+        args (Namespace): the arguments provided at command line
+        cursor (Cursor): sqlite3 cursor object
+    '''
 
     logger.info(f'Called email handler with {args.exam}')
     SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME = configure_email()
@@ -72,10 +88,10 @@ def email_handler(args: Namespace, cursor: Cursor)->None:
     try:
         server.login(user=SENDER_EMAIL, password=SENDER_AUTH)
     except SMTPAuthenticationError as err:
-        logger.warn(
+        logger.warning(
             'Could not login to SMTP server using credentials you provided')
-        print(
-            f'''\nMost probably you gave incorrect email and password! 
+        console.print(
+            f'''\nMost probably you gave incorrect email and password!
             Error Code {err.smtp_code}\n{err.smtp_error}\n''')
         return
 
@@ -88,7 +104,13 @@ def email_handler(args: Namespace, cursor: Cursor)->None:
     logger.info('Disconnected from SMTP server')
 
 
-def visualization_handler(args: Namespace, cursor: Cursor)->None:
+def visualization_handler(args: Namespace, cursor: Cursor) -> None:
+    ''' Handles the visualize action
+
+    Args:
+        args (Namespace): the arguments provided at command line
+        cursor (Cursor): sqlite3 cursor object
+    '''
 
     logger.info(f'Called vis handler with {args.exam} and {args.r}')
     if args.r == 0:
@@ -103,7 +125,13 @@ def visualization_handler(args: Namespace, cursor: Cursor)->None:
         logger.warn('Roll number must be greater than 0')
 
 
-def utils_handler(args: Namespace, cursor: Cursor)->None:
+def utils_handler(args: Namespace, cursor: Cursor) -> None:
+    ''' Handles the utils action
+
+    Args:
+        args (Namespace): the arguments provided at command line
+        cursor (Cursor): sqlite3 cursor object
+    '''
 
     logger.info(f'Called utils with {args.task}')
     students = DbModelz('students', cursor)
@@ -111,7 +139,11 @@ def utils_handler(args: Namespace, cursor: Cursor)->None:
     marks = DbModelz('marks', cursor)
 
     if args.task == 'dummy':
+        logging.warning(
+            'Any existing data will be deleted. Proceed ? [ENTER] to continue')
+        input()
+        create_tables(cursor)
         fill_dummy(students, exams, marks)
     if args.task in ['import', 'export']:
         ie = ImportExport(students, exams, marks)
-        ie.do(args.task)
+        ie.do_apt(args.task)

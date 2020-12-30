@@ -1,3 +1,5 @@
+''' Command line entry point for marksman '''
+
 import argparse
 from argparse import RawTextHelpFormatter, Namespace
 from marksman.db import create_tables, foreign_key_constraint
@@ -13,7 +15,12 @@ import os
 logger = logging.getLogger(__name__)
 
 
-def parse_commands()->Namespace:
+def parse_commands() -> Namespace:
+    ''' Parse the commands passed to marksman
+
+    Returns:
+        Namespace: [description]
+    '''
 
     main_parser = argparse.ArgumentParser(
         description='CLI Tool to manage marks of students efficiently',
@@ -77,7 +84,12 @@ def parse_commands()->Namespace:
     return main_parser.parse_args()
 
 
-def call_func(args: Namespace)->None:
+def call_func(args: Namespace) -> None:
+    ''' Call the appropriate handler based on args
+
+    Args:
+        args (Namespace): the arguments provided at command line
+    '''
     if hasattr(args, 'func'):
 
         logger.info('Starting database connection')

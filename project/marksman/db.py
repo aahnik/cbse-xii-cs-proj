@@ -5,7 +5,7 @@ from marksman.helpers import ___, intify
 logger = logging.getLogger(__name__)
 
 
-def gen_kv_str(kv_dict:dict, delim:str='AND') -> str:
+def gen_kv_str(kv_dict: dict, delim: str = 'AND') -> str:
     ''' Generate key value strings
 
     Returns:
@@ -46,18 +46,18 @@ def create_tables(cursor: Cursor):
                         uid INTEGER NOT NULL PRIMARY KEY,
                         name TEXT NOT NULL
                             );
-            
+
             DROP TABLE IF EXISTS marks ;
             CREATE TABLE marks(
                         student INTEGER NOT NULL,
                         exam INTEGER NOT NULL,
                         marks INTEGER NOT NULL,
 
-                        FOREIGN KEY (student) 
+                        FOREIGN KEY (student)
                             REFERENCES students(roll)
                             ON DELETE CASCADE,
-                        
-                        FOREIGN KEY (exam) 
+
+                        FOREIGN KEY (exam)
                             REFERENCES exams(uid)
                             ON DELETE CASCADE,
 
@@ -79,7 +79,7 @@ def foreign_key_constraint(cursor: Cursor):
 class DbModelz:
 
     def __init__(self, table: str, cursor: Cursor) -> None:
-        ''' 
+        '''
 
         Args:
             table (str): [description]
@@ -104,7 +104,7 @@ class DbModelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(___(f'''SELECT * FROM {self.table} 
+        self.cursor.execute(___(f'''SELECT * FROM {self.table}
                             {'WHERE' if cond_str else ''} {cond_str}'''))
         return self.cursor.fetchall()
 
@@ -117,8 +117,8 @@ class DbModelz:
         '''
 
         cond_str = gen_kv_str(conds)
-        self.cursor.execute(___(f'''SELECT * 
-                                FROM {self.table} 
+        self.cursor.execute(___(f'''SELECT *
+                                FROM {self.table}
                                 WHERE {cond_str}'''))
 
         return self.cursor.fetchone()
@@ -130,18 +130,18 @@ class DbModelz:
             values (tuple): values to insert
         '''
 
-        self.cursor.execute(___(f'''INSERT INTO {self.table} 
+        self.cursor.execute(___(f'''INSERT INTO {self.table}
                                 VALUES{values} '''))
         logger.info(f'{values} were inserted using {self}')
 
-    def update(self, set_dict:dict, **conds) -> None:
+    def update(self, set_dict: dict, **conds) -> None:
         ''' Updates the table using set_string, based on given conditions
 
         Args:
             set_string (str): the string to put beside SET keyword in SQL
         '''
-        
-        set_string = gen_kv_str(set_dict,delim=',')
+
+        set_string = gen_kv_str(set_dict, delim=',')
         cond_str = gen_kv_str(conds)
         self.cursor.execute(___(f'''UPDATE  {self.table}
                                 SET {set_string}
