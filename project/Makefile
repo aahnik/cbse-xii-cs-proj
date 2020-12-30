@@ -9,10 +9,8 @@ pypi:
 	twine upload dist/*
 	rm -rf build dist *.egg-info
 
-documentation:
-	pdoc3 --force --html --config show_source_code=False -o docs marksman
-	mv docs/marksman/*.html docs
-	rmdir docs/marksman
+docu:
+	pdoc3 --force --html --config show_source_code=False -o ~/temp marksman
 
-	
+
 
