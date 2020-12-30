@@ -43,7 +43,7 @@
 <div class="desc"></div>
 </dd>
 <dt id="marksman.db.gen_kv_str"><code class="name flex">
-<span>def <span class="ident">gen_kv_str</span></span>(<span>kwargs) ‑> str</span>
+<span>def <span class="ident">gen_kv_str</span></span>(<span>kv_dict: dict, delim: str = 'AND') ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generate key value strings</p>
@@ -58,8 +58,8 @@
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="marksman.db.Modelz"><code class="flex name class">
-<span>class <span class="ident">Modelz</span></span>
+<dt id="marksman.db.DbModelz"><code class="flex name class">
+<span>class <span class="ident">DbModelz</span></span>
 <span>(</span><span>table: str, cursor: sqlite3.Cursor)</span>
 </code></dt>
 <dd>
@@ -72,13 +72,13 @@
 </dl></div>
 <h3>Methods</h3>
 <dl>
-<dt id="marksman.db.Modelz.delete"><code class="name flex">
+<dt id="marksman.db.DbModelz.delete"><code class="name flex">
 <span>def <span class="ident">delete</span></span>(<span>self, **conds) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deletes the entries satisfying given condtions</p></div>
 </dd>
-<dt id="marksman.db.Modelz.exists"><code class="name flex">
+<dt id="marksman.db.DbModelz.exists"><code class="name flex">
 <span>def <span class="ident">exists</span></span>(<span>self, **conds) ‑> tuple</span>
 </code></dt>
 <dd>
@@ -90,7 +90,7 @@
 else None</dd>
 </dl></div>
 </dd>
-<dt id="marksman.db.Modelz.fetch"><code class="name flex">
+<dt id="marksman.db.DbModelz.fetch"><code class="name flex">
 <span>def <span class="ident">fetch</span></span>(<span>self, **conds) ‑> list</span>
 </code></dt>
 <dd>
@@ -101,7 +101,7 @@ else None</dd>
 <dd>results</dd>
 </dl></div>
 </dd>
-<dt id="marksman.db.Modelz.insert"><code class="name flex">
+<dt id="marksman.db.DbModelz.insert"><code class="name flex">
 <span>def <span class="ident">insert</span></span>(<span>self, values: tuple) ‑> NoneType</span>
 </code></dt>
 <dd>
@@ -112,8 +112,14 @@ else None</dd>
 <dd>values to insert</dd>
 </dl></div>
 </dd>
-<dt id="marksman.db.Modelz.update"><code class="name flex">
-<span>def <span class="ident">update</span></span>(<span>self, set_string: str, **conds) ‑> NoneType</span>
+<dt id="marksman.db.DbModelz.query"><code class="name flex">
+<span>def <span class="ident">query</span></span>(<span>self, query_string)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="marksman.db.DbModelz.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, set_dict: dict, **conds) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Updates the table using set_string, based on given conditions</p>
@@ -149,13 +155,14 @@ else None</dd>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="marksman.db.Modelz" href="#marksman.db.Modelz">Modelz</a></code></h4>
-<ul class="">
-<li><code><a title="marksman.db.Modelz.delete" href="#marksman.db.Modelz.delete">delete</a></code></li>
-<li><code><a title="marksman.db.Modelz.exists" href="#marksman.db.Modelz.exists">exists</a></code></li>
-<li><code><a title="marksman.db.Modelz.fetch" href="#marksman.db.Modelz.fetch">fetch</a></code></li>
-<li><code><a title="marksman.db.Modelz.insert" href="#marksman.db.Modelz.insert">insert</a></code></li>
-<li><code><a title="marksman.db.Modelz.update" href="#marksman.db.Modelz.update">update</a></code></li>
+<h4><code><a title="marksman.db.DbModelz" href="#marksman.db.DbModelz">DbModelz</a></code></h4>
+<ul class="two-column">
+<li><code><a title="marksman.db.DbModelz.delete" href="#marksman.db.DbModelz.delete">delete</a></code></li>
+<li><code><a title="marksman.db.DbModelz.exists" href="#marksman.db.DbModelz.exists">exists</a></code></li>
+<li><code><a title="marksman.db.DbModelz.fetch" href="#marksman.db.DbModelz.fetch">fetch</a></code></li>
+<li><code><a title="marksman.db.DbModelz.insert" href="#marksman.db.DbModelz.insert">insert</a></code></li>
+<li><code><a title="marksman.db.DbModelz.query" href="#marksman.db.DbModelz.query">query</a></code></li>
+<li><code><a title="marksman.db.DbModelz.update" href="#marksman.db.DbModelz.update">update</a></code></li>
 </ul>
 </li>
 </ul>

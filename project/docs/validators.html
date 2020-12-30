@@ -31,16 +31,28 @@
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="marksman.validators.get_email"><code class="name flex">
-<span>def <span class="ident">get_email</span></span>(<span>msg='Enter [bold]email[/bold]: ', default: str = '') ‑> str</span>
+<span>def <span class="ident">get_email</span></span>(<span>msg: str = 'Enter [bold]email[/bold]: ') ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Takes a string from user and assures that it matches the regex of email.
+Allows empty input.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>msg</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>[description]. Defaults to 'Enter [bold]email[/bold]: '.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code> or <code>None</code></dt>
+<dd>User input</dd>
+</dl></div>
 </dd>
 <dt id="marksman.validators.get_pos_int"><code class="name flex">
-<span>def <span class="ident">get_pos_int</span></span>(<span>msg: str) ‑> int</span>
+<span>def <span class="ident">get_pos_int</span></span>(<span>msg: str = 'Enter marks: ') ‑> int</span>
 </code></dt>
 <dd>
-<div class="desc"><p>takes input and returns after assuring that it is a positive integer</p>
+<div class="desc"><p>Takes input and returns after assuring that it is a positive integer.
+Allows empty input.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>int</code></dt>
@@ -48,10 +60,45 @@
 </dl></div>
 </dd>
 <dt id="marksman.validators.get_str"><code class="name flex">
-<span>def <span class="ident">get_str</span></span>(<span>msg='Enter [bold]name[/bold]: ', default: str = '') ‑> str</span>
+<span>def <span class="ident">get_str</span></span>(<span>msg: str = 'Enter [bold]name[/bold]: ') ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Takes a string input and assures that it is valid.
+Allows empty input.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>msg</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>[description]. Defaults to 'Enter [bold]name[/bold]: '.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code> or <code>None</code></dt>
+<dd>User input</dd>
+</dl></div>
+</dd>
+<dt id="marksman.validators.roll"><code class="name flex">
+<span>def <span class="ident">roll</span></span>(<span>) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Asks the user to enter roll number of student
+!!! Note "Note:&ensp;This wrapper is essential for certain internal implementation reasons."</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code> or <code>None</code></dt>
+<dd>User input</dd>
+</dl></div>
+</dd>
+<dt id="marksman.validators.uid"><code class="name flex">
+<span>def <span class="ident">uid</span></span>(<span>) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Asks the user the uid of exam
+!!! Note "Note:&ensp;This wrapper is essential for certain internal implementation reasons."</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code> or <code>None</code></dt>
+<dd>User input</dd>
+</dl></div>
 </dd>
 </dl>
 </section>
@@ -74,6 +121,8 @@
 <li><code><a title="marksman.validators.get_email" href="#marksman.validators.get_email">get_email</a></code></li>
 <li><code><a title="marksman.validators.get_pos_int" href="#marksman.validators.get_pos_int">get_pos_int</a></code></li>
 <li><code><a title="marksman.validators.get_str" href="#marksman.validators.get_str">get_str</a></code></li>
+<li><code><a title="marksman.validators.roll" href="#marksman.validators.roll">roll</a></code></li>
+<li><code><a title="marksman.validators.uid" href="#marksman.validators.uid">uid</a></code></li>
 </ul>
 </li>
 </ul>
