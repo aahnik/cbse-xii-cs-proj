@@ -26,7 +26,7 @@ pip install marksman
 
 >Note: Linux and Mac users might have to use `pip3` to invoke pip
 
-Read [this](docs/cli_for_begginners.md) if you are new to command-line-interfaces.
+Please [read this](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/project/docs/cli_for_beginners.md) if you are new to command-line-interfaces.
 
 
 <details>
