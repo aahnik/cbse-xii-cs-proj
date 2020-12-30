@@ -27,7 +27,7 @@ def parse_commands() -> Namespace:
 
     main_parser = ArgumentParser(
         description='CLI Tool to manage marks of students efficiently',
-        epilog='''For tutorials and documentation visit http://bit.ly/marksman-cli ''',
+        epilog='''For tutorials and documentation visit https://pypi.org/project/marksman/ ''',
         formatter_class=RawTextHelpFormatter)
 
     main_parser.add_argument('-l', '--loud',
