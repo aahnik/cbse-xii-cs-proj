@@ -1,7 +1,11 @@
-from rich.console import Console
-import logging
+''' This Module has functions validate various user inputs
+'''
+
 import sys
+import logging
 import re
+
+from rich.console import Console
 logger = logging.getLogger(__name__)
 
 console = Console()
@@ -21,9 +25,9 @@ def get_pos_int(msg: str = 'Enter marks: ') -> int or None:
             integer = int(inp)
             assert integer > 0
         except ValueError:
-            logger.warn('The value you entered is not an integer')
+            logger.warning('The value you entered is not an integer')
         except AssertionError:
-            logger.warn('You must enter an integer greater than zero')
+            logger.warning('You must enter an integer greater than zero')
         else:
             return integer
         sys.exit(1)
@@ -46,7 +50,7 @@ def get_str(msg: str = 'Enter [bold]name[/bold]: ') -> str or None:
             string = input()
             assert len(string) <= max_len
         except AssertionError:
-            logger.warn(
+            logger.warning(
                 f'The string must not be longer than {max_len} characters')
         else:
             return string
@@ -67,10 +71,10 @@ def get_email(msg: str = 'Enter [bold]email[/bold]: ') -> str or None:
             email = get_str(msg)
             if email:
                 logging.info('Checking email for validity')
-                regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
+                regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
                 assert re.search(regex, email)
         except AssertionError:
-            logger.warn('The email you enterd is invalid')
+            logger.warning('The email you enterd is invalid')
         else:
             return email
 

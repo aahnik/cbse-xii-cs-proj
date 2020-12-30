@@ -1,17 +1,20 @@
 ''' Command line entry point for marksman '''
 
-import argparse
-from argparse import RawTextHelpFormatter, Namespace
+import os
+import sys
+from argparse import RawTextHelpFormatter, Namespace, ArgumentParser
+import logging
+import sqlite3
+
+from rich.logging import RichHandler
+
+from marksman import __version__
 from marksman.db import create_tables, foreign_key_constraint
 from marksman.helpers import ensure_parent
 from marksman.settings import DB_PATH, LOUD, SHOW_PATH
-from marksman import __version__
-import sys
 from marksman.app import crud_handler, email_handler, visualization_handler, utils_handler
-import logging
-import sqlite3
-from rich.logging import RichHandler
-import os
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -22,9 +25,10 @@ def parse_commands() -> Namespace:
         Namespace: [description]
     '''
 
-    main_parser = argparse.ArgumentParser(
+    main_parser = ArgumentParser(
         description='CLI Tool to manage marks of students efficiently',
-        epilog='''For tutorials and documentation visit https://git.io/JL1iI ''', formatter_class=RawTextHelpFormatter)
+        epilog='''For tutorials and documentation visit https://git.io/JL1iI ''',
+        formatter_class=RawTextHelpFormatter)
 
     main_parser.add_argument('-l', '--loud',
                              help='increase output verbosity',
@@ -125,7 +129,8 @@ def main():
         level = logging.WARNING
 
     logging.basicConfig(level=level,
-                        format='[dim]%(name)s[/dim]\t%(message)s', handlers=[RichHandler(markup=True, show_path=SHOW_PATH,)])
+                        format='[dim]%(name)s[/dim]\t%(message)s',
+                        handlers=[RichHandler(markup=True, show_path=SHOW_PATH,)])
 
     logger.info('Verbosity turned on')
 

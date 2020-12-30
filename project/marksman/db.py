@@ -1,3 +1,6 @@
+''' A module that implements low level access to the database,
+for commonly used SQL operations.'''
+
 import logging
 from sqlite3 import Cursor
 from marksman.helpers import ___, intify
@@ -8,29 +11,39 @@ logger = logging.getLogger(__name__)
 def gen_kv_str(kv_dict: dict, delim: str = 'AND') -> str:
     ''' Generate key value strings
 
+    Args:
+        kv_dict (dict): dictionary containing keys and values
+        delim (str, optional): the stuff to put in between. Defaults to 'AND'.
+
     Returns:
-        str: key value string
+        str: the rendered key value string
     '''
 
     key_val_string = ''
 
-    c = 0
+    count = 0
 
     for key, value in kv_dict.items():
         if value:
-            if c >= 1:
+            if count >= 1:
                 key_val_string += f' {delim} '
             if not isinstance(intify(value), int):
                 quote = '"'
             else:
                 quote = ''
             key_val_string += f'{key} = {quote}{value}{quote}'
-            c += 1
+            count += 1
 
     return key_val_string
 
 
 def create_tables(cursor: Cursor):
+    ''' Create all tables required by marksman
+
+    Args:
+        cursor (Cursor): a sqlite3 Cursor object
+    '''
+
     logger.info('Starting creation of tables')
     try:
         cursor.executescript(___('''
@@ -73,17 +86,24 @@ def create_tables(cursor: Cursor):
 
 
 def foreign_key_constraint(cursor: Cursor):
+    ''' Turn on foreign key constraints
+
+    Args:
+        cursor (Cursor): sqlite3 Cursor object
+    '''
     cursor.execute(___('PRAGMA foreign_keys = ON;'))
 
 
 class DbModelz:
+    ''' Class to implement low level access to the database for common tasks
+    '''
 
     def __init__(self, table: str, cursor: Cursor) -> None:
-        '''
+        ''' Constructor to initialize DbModelz object
 
         Args:
-            table (str): [description]
-            cursor (Cursor): [description]
+            table (str): name of the table to work with
+            cursor (Cursor): sqlite3 Cursor object
         '''
         self.table = table
         self.cursor = cursor
@@ -92,7 +112,16 @@ class DbModelz:
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
 
-    def query(self, query_string):
+    def query(self, query_string:str):
+        ''' Execute a query using the Cursor and return all results
+
+        Args:
+            query_string (str): the query to execute
+
+        Returns:
+            list: results
+        '''
+
         self.cursor.execute(___(query_string))
         return self.cursor.fetchall()
 
@@ -100,7 +129,7 @@ class DbModelz:
         ''' Fetches a list of results based on condition parameters
 
         Returns:
-            list: results
+            list: [description]
         '''
 
         cond_str = gen_kv_str(conds)

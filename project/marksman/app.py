@@ -3,18 +3,17 @@
 
 from argparse import Namespace
 import logging
-from marksman.validators import get_email, get_pos_int, get_str, roll, uid
 from smtplib import SMTP, SMTPAuthenticationError
 from sqlite3 import Cursor
+
 from rich.console import Console
 
 from marksman.db import DbModelz, create_tables
+from marksman.validators import get_email, get_pos_int, get_str, roll, uid
 from marksman.models import Models
 from marksman.helpers import handle_choice, configure_email
 from marksman.mailer import Mailer
-
 from marksman.plot import analyse_exam, plot_student_performance, plot_batch_performance
-
 from marksman.utils import ImportExport, fill_dummy
 
 logger = logging.getLogger(__name__)
@@ -69,13 +68,13 @@ def email_handler(args: Namespace, cursor: Cursor) -> None:
     '''
 
     logger.info(f'Called email handler with {args.exam}')
-    SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME = configure_email()
+    sender_email, sender_auth, smtp_host, smtp_port, inst_name = configure_email()
 
     try:
-        server = SMTP(host=SMTP_HOST, port=SMTP_PORT)
-        server.connect(host=SMTP_HOST, port=SMTP_PORT)
+        server = SMTP(host=smtp_host, port=smtp_port)
+        server.connect(host=smtp_host, port=smtp_port)
     except Exception as err:
-        logger.warn('Could not connect to SMTP server.')
+        logger.warning('Could not connect to SMTP server.')
         logger.exception(err)
         return
     else:
@@ -86,7 +85,7 @@ def email_handler(args: Namespace, cursor: Cursor) -> None:
     server.ehlo()
 
     try:
-        server.login(user=SENDER_EMAIL, password=SENDER_AUTH)
+        server.login(user=sender_email, password=sender_auth)
     except SMTPAuthenticationError as err:
         logger.warning(
             'Could not login to SMTP server using credentials you provided')
@@ -96,7 +95,7 @@ def email_handler(args: Namespace, cursor: Cursor) -> None:
         return
 
     mailer = Mailer(server=server, cursor=cursor,
-                    sender=SENDER_EMAIL, inst=INST_NAME, exam_uid=args.exam)
+                    sender=sender_email, inst=inst_name, exam_uid=args.exam)
 
     mailer.mail_all_students()
 
@@ -122,7 +121,7 @@ def visualization_handler(args: Namespace, cursor: Cursor) -> None:
         plot_student_performance(
             cursor, args.r, args.exam, analyse_exam(cursor, args.exam))
     else:
-        logger.warn('Roll number must be greater than 0')
+        logger.warning('Roll number must be greater than 0')
 
 
 def utils_handler(args: Namespace, cursor: Cursor) -> None:
@@ -145,5 +144,5 @@ def utils_handler(args: Namespace, cursor: Cursor) -> None:
         create_tables(cursor)
         fill_dummy(students, exams, marks)
     if args.task in ['import', 'export']:
-        ie = ImportExport(students, exams, marks)
-        ie.do_apt(args.task)
+        imp_exp = ImportExport(students, exams, marks)
+        imp_exp.do_apt(args.task)

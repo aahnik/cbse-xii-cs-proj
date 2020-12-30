@@ -1,5 +1,6 @@
 ''' A module that defines various helper functions to avoid repeatition of code
 '''
+
 import os
 import logging
 import sys
@@ -8,8 +9,10 @@ from typing import Iterable
 from rich.console import Console
 from rich.table import Table
 
-from marksman.settings import DB_PATH, GLOBAL_CONFIG_PATH
+from marksman.settings import (DB_PATH, GLOBAL_CONFIG_PATH,
+                               SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME)
 from marksman.validators import get_email, get_str
+
 
 logger = logging.getLogger(__name__)
 
@@ -146,43 +149,48 @@ def configure_email() -> tuple:
     Returns:
         tuple: (SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME)
     '''
-    from marksman.settings import SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
 
-    if not SENDER_EMAIL:
-        SENDER_EMAIL = not_empty(
+    (sender_email, sender_auth,
+     smtp_host, smtp_port,
+     inst_name) = (SENDER_EMAIL, SENDER_AUTH,
+                   SMTP_HOST, intify(SMTP_PORT),
+                   INST_NAME)
+
+    if not sender_email:
+        sender_email = not_empty(
             get_email('Enter [bold]sender email[/bold] address: '))
-        save_email_config('email', 'marksman_sender', SENDER_EMAIL)
-    if not SENDER_AUTH:
-        SENDER_AUTH = not_empty(get_str(
-            f'Enter password or auth-code to login into email account {SENDER_EMAIL}'))
-        save_email_config('auth-code', 'marksman_auth', SENDER_AUTH)
+        save_email_config('email', 'marksman_sender', sender_email)
+    if not sender_auth:
+        sender_auth = not_empty(get_str(
+            f'Enter password or auth-code to login into email account {sender_email}'))
+        save_email_config('auth-code', 'marksman_auth', sender_auth)
 
-    if not SENDER_EMAIL.endswith('@gmail.com'):
-        if not SMTP_HOST:
+    if not sender_email.endswith('@gmail.com'):
+        if not smtp_host:
             logger.warning(
                 '''SMTP sever url could not be derrived from email address.
                 Learn more https://git.io/JLMFl ''')
-            SMTP_HOST = not_empty(get_str(
+            smtp_host = not_empty(get_str(
                 '''Enter address of your email provider\'s SMTP host server
                 (keep empty to continue with smtp.gmail.com) : '''))
             save_email_config('smtp host address',
-                              'marksman_smptp_host', SMTP_HOST)
+                              'marksman_smptp_host', smtp_host)
         else:
             logger.info(
                 f'Sender Email does not end with gmail.com > SMTP_HOST is {SMTP_HOST}')
     else:
-        SMTP_HOST = 'smtp.gmail.com'
-        logger.info(f'SMTP_HOST is set to {SMTP_HOST}')
+        smtp_host = 'smtp.gmail.com'
+        logger.info(f'SMTP_HOST is set to {smtp_host}')
 
-    if not isinstance(SMTP_PORT, int):
+    if not isinstance(smtp_port, int):
         logger.warning(
             'The SMTP Port you have set is not an integer > using default 587')
-        SMTP_PORT = 587
-    if not SMTP_PORT in (587, 2525):
+        smtp_port = 587
+    if not smtp_port in (587, 2525):
         logger.warning(
             'The SMTP Port you have set is probably incorrect or insecure')
 
-    return SENDER_EMAIL, SENDER_AUTH, SMTP_HOST, SMTP_PORT, INST_NAME
+    return sender_email, sender_auth, smtp_host, smtp_port, inst_name
 
 
 def intify(string: str) -> int or str:
