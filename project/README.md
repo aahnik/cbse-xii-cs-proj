@@ -236,7 +236,42 @@ optional arguments:
 
 ## Configuration
 
-You can configure
+You can configure marksman by using certain environment variables.
+
+`marksman` loads the environment variables from the system's environment and from two special files:
+1. the `.env` file in `~/.marksman` ( global settings for `marksman` )
+2. the `.env` file in the current directory from which you are running `marksman` ( local settings for `marksman` )
+
+The local settings will override the global settings.
+
+>**Note:** `~` means the user directory. It is different for Unix and Windows.
+> Windows 10: `~` expands to `<root>\Users\<username>`
+> For Linux: `~` expands to `/home/<username>`
+> The `~` symbol can be used directly in the terminal, let your OS expand it for you.
+
+List of environment variables supported:
+
+| Variable | Description | Default |
+|--|--|--|
+| `marksman_db` | the path to store the `.db` file | `~/.marksman/database.db` |
+| `marksman_sender` | email address to be used to send emails |  |
+| `marksman_auth` | password to login to sender's email account |  |
+| `marksman_smtp_host` | url of SMTP host server  | `smtp.gmail.com` |
+| `marksman_smtp_port` | SMTP port for sending emails | `587` |
+| `marksman_inst` | name of institute which is sending emails |  |
+
+You can write these settings in the `.env` file like this:
+
+```text
+marksman_sender=meet.aahnik@gmail.com
+marksman_auth=dummypass
+```
+If you do not provide a value, the default value will be used.
+
+If a value is required, `marksman` will prompt you to to enter it during program execution.
+`marksman` will also ask you if you want to save it. If you say yes, `marksman` will save that setting in the global scope ( `~/.marksman/.env` file). In this way, `marksman` can exempt you from manually editing the configs. You can always manually eidt them when you want.
+
+
 
 
 
