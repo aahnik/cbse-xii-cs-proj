@@ -130,7 +130,7 @@ def save_email_config(thing: str, env_var: str, value: str) -> None:
         \nRead more about configuring your marksman environment http://bit.ly/configure-marksman \n'''
     logger.warning(text)
     console.print(
-        f'''Do you want[bold]marksman[/bold] to save your[blue]{thing}[/blue] ?
+        f'''Do you want [bold]marksman[/bold] to save your [blue]{thing}[/blue] ?
         [reverse]Y[/reverse]es or [reverse]n[/reverse]o''')
     choice = input().lower()
     if choice in 'yes':
