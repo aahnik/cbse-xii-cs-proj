@@ -2,6 +2,7 @@
 
 import os
 import sys
+import signal
 from argparse import RawTextHelpFormatter, Namespace, ArgumentParser
 import logging
 import sqlite3
@@ -117,9 +118,19 @@ def call_func(args: Namespace) -> None:
         logger.info('Closed database connection')
 
 
+def handle_interrupt(*args):
+    ''' Quit Gracefully '''
+    print('\nUser Interrupt recieved. Quitting.')
+    sys.exit(1)
+
+
 def main():
     ''' Command line entry point
     '''
+
+    # handle user interrupt
+    signal.signal(signal.SIGTERM, handle_interrupt)
+    signal.signal(signal.SIGINT, handle_interrupt)
 
     args = parse_commands()
 
