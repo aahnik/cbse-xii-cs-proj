@@ -56,7 +56,7 @@ If the student, with the roll number you entered does not exist, then you will b
 
 If you don't enter any roll number, then `marksman` will display all students in the database and exit.
 
-In the same fashion you can also `crud` exams and marks entries. See more examples of crud in action.
+In the same fashion you can also `crud` exams and marks entries. See [more examples](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/project/docs/more_usage_examples.md) of crud in action.
 
 ## Email
 
