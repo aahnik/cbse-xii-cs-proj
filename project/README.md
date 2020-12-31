@@ -62,9 +62,9 @@ In the same fashion you can also `crud` exams and marks entries. See more exampl
 
 You can run `marksman email --help` to see how to use the email action. To configure settings for your emailing, read [Configuration](#configuration).
 
-
 ![marksman email --help](https://user-images.githubusercontent.com/66209958/103417378-7db0d400-4bb0-11eb-8cb5-21a18896124d.gif)
 
+Now you have seen, how to use the `email` action, below is an example usage.
 
 
 ## Visualize
@@ -117,9 +117,18 @@ Here is a brief description of the convention that is supported by `marksman`:
 | Exams | `exams.csv` | `uid,name` |
 | Marks | `marks.csv` | `student,exam,marks` |
 
-All the three files must be kept in the same folder. For the CSV file for marks, `student` coloumn should contain the roll, and `exam` the uid.
+All three files must be kept in the same folder. For the CSV file for marks, `student` column should contain the roll, and `exam` the uid.
 
 It is not compulsory to have all the three files for the `import`. Marksman will take whatever data you give it.
+
+See the following example for understanding better.
+
+![marksman import](https://user-images.githubusercontent.com/66209958/103418235-d0d85600-4bb3-11eb-8888-26a78ff76d95.gif)
+
+You can use the `export` option to write the data in the database to `CSV` files.
+The exported files will have the same format as shown above.
+
+![marksman utils export](https://user-images.githubusercontent.com/66209958/103418308-13019780-4bb4-11eb-9c3b-3c4c7cd69144.gif)
 
 
 ## Configuration
@@ -157,10 +166,7 @@ marksman_auth=dummypass
 If you do not provide a value, the default value will be used.
 
 If a value is required, `marksman` will prompt you to to enter it during program execution.
-`marksman` will also ask you if you want to save it. If you say yes, `marksman` will save that setting in the global scope ( `~/.marksman/.env` file). In this way, `marksman` can exempt you from manually editing the configs. You can always manually eidt them when you want.
-
-
-
+`marksman` will also ask you if you want to save it. If you say yes, `marksman` will save that setting in the global scope ( `~/.marksman/.env` file). In this way, `marksman` can exempt you from manually editing the configs. You can always manually edit them when you want.
 
 
 ## API Reference
