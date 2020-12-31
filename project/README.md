@@ -29,146 +29,98 @@ pip install marksman
 Please [read this](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/project/docs/cli_for_beginners.md) if you are new to command-line-interfaces.
 
 
-<details>
-<summary> Usage </summary>
+![marksman --help](https://user-images.githubusercontent.com/66209958/103416978-e303c580-4bae-11eb-9d52-027e9ab41a5d.gif)
 
-Open your terminal and run `marksman --help` and you will get the following output.
-
-```shell
-
-usage: marksman [-h] [-l] [-v] {crud,email,visualize,utils} ...
-
-CLI Tool to manage marks of students efficiently
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -l, --loud            increase output verbosity
-  -v, --version         show programs version number and exit
-
-actions:
-  {crud,email,visualize,utils}
-                        actions you can take
-    crud                Do crud operations
-    email               Email results to students
-    visualize           Visualize the results
-    utils               Additional utility tools for marksman
-
-For tutorials and documentation visit https://git.io/JL1iI
-
-```
 > **Tip**: You can use the alias `mm` instead of typing the long `marksman`. Its already set for you when you install.
 
-</details>
+
 
 
 ## CRUD
 
-Description of the crud
+CRUD stands for Create,Read,Update,Delete. These are the fundamental operations we can perform on a database. `marksman` supports all these operations, through its CLI.
 
-<details>
-<summary> Usage </summary>
+You can CRUD the students, exams and marks entries using `marksman`.
 
-Running `marksman crud --help` will give this.
+To use the CRUD action, first read its usage.
 
-```shell
+![marksman crud --help](https://user-images.githubusercontent.com/66209958/103417096-5d344a00-4baf-11eb-96e7-953bde0d0851.gif)
 
-usage: marksman crud [-h] {students,exams,marks}
+Suppose you want to CRUD students, here is an example.
 
-positional arguments:
-  {students,exams,marks}
-                        Choose what data you want to crud
+![marksman crud students](https://user-images.githubusercontent.com/66209958/103417147-8654da80-4baf-11eb-865d-cd545972f3ce.gif)
 
-optional arguments:
-  -h, --help            show this help message and exit
-```
+If you have noticed the above gif carefully, you can observe that when you run the `crud` action with `students` as the option, you are first asked the roll number of the student. If a student with that roll exists, you are shown its details. You also have further options to see more data or update or delete the student.
 
-</details>
+If the student, with the roll number you entered does not exist, then you will be given the choice to create the student.
 
+If you don't enter any roll number, then `marksman` will display all students in the database and exit.
 
-
-<details>
-<summary> Examples </summary>
-
-</details>
-
+In the same fashion you can also `crud` exams and marks entries. See more examples of crud in action.
 
 ## Email
 
-<details>
-<summary> Usage </summary>
+You can run `marksman email --help` to see how to use the email action. To configure settings for your emailing, read [Configuration](#configuration).
 
-Running `marksman email --help` will give this.
 
-```shell
+![marksman email --help](https://user-images.githubusercontent.com/66209958/103417378-7db0d400-4bb0-11eb-8cb5-21a18896124d.gif)
 
-usage: marksman email [-h] exam
 
-positional arguments:
-  exam        exam uid
-
-optional arguments:
-  -h, --help  show this help message and exit
-```
-
-</details>
-
-<details>
-<summary> Examples </summary>
-
-</details>
 
 ## Visualize
 
-<details>
-<summary> Usage </summary>
+Data visualization is essential in taking important decisions. We can have a lot of data, but if we cannot make meaningful conclusions from it, then it is useless.
 
-Running `marksman visualize --help` will give this.
+In `marksman` you have the data of marks of all students. `marksman` allows you to easily visualize the performance of the entire batch or of an individual student using simple graphs.
 
-```shell
+You can learn to use the `visualize` action by using the `--help` flag.
 
-usage: marksman visualize [-h] [--r ROLL] exam
+![marksman vis --help](https://user-images.githubusercontent.com/66209958/103417562-23fcd980-4bb1-11eb-8e63-14779290bd49.gif)
 
-positional arguments:
-  exam        exam uid
 
-optional arguments:
-  -h, --help  show this help message and exit
-  --r ROLL    roll number of student (default=0 for all)
-```
+Let us see an example, where the teacher can visualize the results of an exam for the entire batch.
 
-</details>
+![marksman visualize batch](https://user-images.githubusercontent.com/66209958/103417592-4858b600-4bb1-11eb-9e7b-599d00d3e132.gif)
 
-<details>
-<summary> Examples </summary>
+You can also visualize the result of one particular student in that exam. Just use the `--r` flag to supply the roll number of the student to `marksman`. See the example below for clarity.
 
-</details>
+![marksman visualize student](https://user-images.githubusercontent.com/66209958/103417672-a5ed0280-4bb1-11eb-8d14-a1749f116157.gif)
+
+
 
 ## Utils
 
-<details>
-<summary> Usage </summary>
+`marksman` provides certain additional utilities to make your life easy. If you want to experiment with `marksman`, without actually putting any data your self, then `marksman` can help you by filling some dummy data. You can also import or export your data from or to CSV file formats.
 
-Running `marksman utils --help` will give this.
+To learn about the `utils` action, use the `--help` flag.
 
-```shell
+![marksman utils --help](https://user-images.githubusercontent.com/66209958/103417790-1f84f080-4bb2-11eb-9396-3215170e7a4b.gif)
 
-usage: marksman utils [-h] {dummy,import,export}
+As you can see that `utils` can accept either of the three arguments:
+1. `dummy` : fill the database with fake students, exams and marks for testing purposes.
+2. `import` : insert data into the database from CSV files ( of specific format )
+3. `export` : write existing data to CSV files
 
-positional arguments:
-  {dummy,import,export}
-                        Choose the task you want to perform
+Lets see some examples, for full clarity.
 
-optional arguments:
-  -h, --help            show this help message and exit
-```
+Filling dummy data is a piece of cake. Just run `marksman utils dummy`
 
-</details>
+![marksman dummy](https://user-images.githubusercontent.com/66209958/103417879-82768780-4bb2-11eb-8689-d7c052c4cfbb.gif)
 
+Now when it comes to importing data from CSV files, it must be in a specific format.
 
-<details>
-<summary> Examples </summary>
+Here is a brief description of the convention that is supported by `marksman`:
 
-</details>
+| Data | Filename | CSV Headers |
+|--|--|--|
+| Students | `students.csv` | `roll,name,email` |
+| Exams | `exams.csv` | `uid,name` |
+| Marks | `marks.csv` | `student,exam,marks` |
+
+All the three files must be kept in the same folder. For the CSV file for marks, `student` coloumn should contain the roll, and `exam` the uid.
+
+It is not compulsory to have all the three files for the `import`. Marksman will take whatever data you give it.
+
 
 ## Configuration
 
