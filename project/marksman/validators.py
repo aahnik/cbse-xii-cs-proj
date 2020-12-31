@@ -6,6 +6,7 @@ import logging
 import re
 
 from rich.console import Console
+
 logger = logging.getLogger(__name__)
 
 console = Console()

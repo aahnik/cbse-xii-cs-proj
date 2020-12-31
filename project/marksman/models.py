@@ -94,9 +94,9 @@ class Models:
                           'Uid', 'Exam Name', 'Marks'], related)
         else:  # marks
             student = self.db_modelz.query(
-                f'SELECT name FROM students WHERE roll={obj[0]}')[0]
+                f'SELECT name FROM students WHERE roll={obj[0]}')[0][0]
             exam = self.db_modelz.query(
-                f'SELECT name FROM exams WHERE uid={obj[1]} ')[0]
+                f'SELECT name FROM exams WHERE uid={obj[1]} ')[0][0]
             display_table('Marks Entry', ['Student', 'Exam', 'Marks'], [
                           (student, exam, obj[2])])
 

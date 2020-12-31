@@ -17,6 +17,7 @@ from marksman.db import DbModelz
 from marksman.helpers import intify
 
 console = Console()
+
 logger = logging.getLogger(__name__)
 
 

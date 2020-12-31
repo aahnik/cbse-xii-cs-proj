@@ -112,7 +112,7 @@ class DbModelz:
     def __str__(self) -> str:
         return f'Modelz object for {self.table}'
 
-    def query(self, query_string:str):
+    def query(self, query_string: str):
         ''' Execute a query using the Cursor and return all results
 
         Args:
