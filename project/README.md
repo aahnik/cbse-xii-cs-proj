@@ -66,6 +66,51 @@ You can run `marksman email --help` to see how to use the email action. To confi
 
 Now you have seen, how to use the `email` action, below is an example usage.
 
+![marksman email real](https://user-images.githubusercontent.com/66209958/103419666-ec465f80-4bb9-11eb-8881-7b13c5cf9005.gif)
+
+The result is this:
+
+![imageedit_3_4309512313](https://user-images.githubusercontent.com/66209958/103419928-23694080-4bbb-11eb-9d1f-a86df2f5da42.jpg)
+
+You can also use a custom template for the email message. If no template is found the default will be used.
+
+For using a custom template, create a file called `marksman_email_template.md` and put in the directory from which you are running `marksman`.
+
+You can insert variables in your template like this `::var::`.
+
+Here is a sample template.
+
+```text
+
+Hi ::name::, you have scored ::marks:: in ::exam::.
+
+Highest marks is ::highest::
+Average marks is ::average::
+Your rank is ::rank::
+
+Please find the attached graph of your performance analysis.
+
+Best Regards,
+::inst::
+
+```
+
+The list of supported variables are as follows:
+
+List of variables passed to the template:
+
+  1. name
+  2. roll
+  3. email
+  4. exam
+  5. marks
+  6. rank
+  7. highest
+  8. average
+  9. inst ( name of institute )
+
+As this template is in a markdown file, you can use any valid markdown formatting.
+
 
 ## Visualize
 
