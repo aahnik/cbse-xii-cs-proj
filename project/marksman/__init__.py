@@ -7,4 +7,4 @@ Source Code: https://github.com/aahnik/cbse-xii-cs-proj/tree/main/project
 PyPI: https://pypi.org/project/marksman/
 '''
 
-__version__ = "0.6.1"
+__version__ = "0.6.7"
