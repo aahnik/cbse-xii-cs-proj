@@ -1,10 +1,11 @@
 # Python
 
-This directory contains the solutions to all the 20 Python Questions.
+*This directory contains the solutions to all the 20 Python Questions.*
 
-## Outputs
 
-[**Q1. A program to calculate the n-th term of Fibonacci series using function.**](q01_fibo.py)
+## 1
+
+[**A program to calculate the n-th term of Fibonacci series using function.**](q01_fibo.py)
 
 ```shell
 
@@ -25,7 +26,9 @@ The 100th fibonacci number is 354224848179261915075
 
 ```
 
-[**Q2. Program to search any word in given string/sentence using function.**](q02_wordSearch.py)
+## 2
+
+[**Program to search any word in given string/sentence using function.**](q02_wordSearch.py)
 
 ```shell
 
@@ -40,7 +43,9 @@ The 100th fibonacci number is 354224848179261915075
 
 ```
 
-[**Q3. Read a text file line by line and display each word separated by a # .**](q03_textRead.py)
+## 3
+
+[**Read a text file line by line and display each word separated by a # .**](q03_textRead.py)
 
 ```shell
 
@@ -52,7 +57,9 @@ kfksf#kjkfjsjflksjk#fkjsdlif#jk#kjjfkljslkfjjklj#ksdfkjskl#l#lkjijfiijkkdflijgro
 
 ```
 
-[**Q4. Read a text file and display the number of vowels/consonants/uppercase/lowercase characters and digits in the file.**](q04_txtalyser.py)
+## 4
+
+[**Read a text file and display the number of vowels/consonants/uppercase/lowercase characters and digits in the file.**](q04_txtalyser.py)
 
 ```shell
 
@@ -63,7 +70,9 @@ Enter file path
 
 ```
 
-[**Q5. Read a text file and display the largest word and maximum number of characters present in a line from text file.**](q05_largestMax.py)
+## 5
+
+[**Read a text file and display the largest word and maximum number of characters present in a line from text file.**](q05_largestMax.py)
 
 ```shell
 
@@ -82,7 +91,9 @@ Line:10 Empty Line
 
 ```
 
-[**Q6. Write a program using Dictionary and Text file to store roman numbers and find their equivalent.**](q06_roman.py)
+## 6
+
+[**Write a program using Dictionary and Text file to store roman numbers and find their equivalent.**](q06_roman.py)
 
 ```shell
 
@@ -132,7 +143,9 @@ ValueError: Invalid roman numeral, "I" occured more than 3 times consecutively
 
 ```
 
-[**Q7. Write a menu driven program to perform read and write operations using a text file called “student.txt” counting student roll_no, name and address.**](q07_student.py)
+## 7
+
+[**Write a menu driven program to perform read and write operations using a text file called “student.txt” counting student roll_no, name and address.**](q07_student.py)
 
 ```shell
 
@@ -215,7 +228,9 @@ Enter roll no. to search
 Press [ENTER] to continue or CTRL+C to quit
 ```
 
-[**Q8. Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](q08_studentBin.py)
+## 9
+
+[**Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](q08_studentBin.py)
 
 ```shell
 > python q08_studentBin.py
