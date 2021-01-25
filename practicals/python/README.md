@@ -228,7 +228,7 @@ Enter roll no. to search
 Press [ENTER] to continue or CTRL+C to quit
 ```
 
-## 9
+# 8
 
 [**Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](q08_studentBin.py)
 
@@ -258,7 +258,7 @@ Press [ENTER] to continue or CTRL+C to quit
 >>>
 ```
 
-( the user chooses menu 1 )
+*( the user chooses menu 1 )*
 
 ```shell
 
@@ -270,4 +270,399 @@ Successfully recorded student
 ```
 
 *( the screen gets cleared at this point and menu is re-displayed )*
+
+```shell
+>>> 2
+Enter roll to search student: 12
+Student found : Jack Dorsey
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+# 9
+
+[**Create a binary file with roll number, name and marks. Input a roll number and update the marks.**](q09_marks.py)
+
+
+```shell
+> python q09_marks.py
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+*( the screen gets cleared at this point and menu is displayed )*
+
+```shell
+
+        MENU for Marks Manager
+
+╒══════════╤══════════════════════════════════╕
+│   Choice │ Description                      │
+╞══════════╪══════════════════════════════════╡
+│        1 │ Record new student               │
+├──────────┼──────────────────────────────────┤
+│        2 │ Update marks of existing student │
+├──────────┼──────────────────────────────────┤
+│        3 │ Display all records              │
+╘══════════╧══════════════════════════════════╛
+    Enter your choice or X to quit
+
+>>>
+```
+
+*( the user chooses 1)*
+
+```shell
+>>> 1
+Enter roll, name and marks seperated by comma
+> 13,Jay Bhatt, 80
+Sucessfully recorded
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+*( the screen gets cleared at this point and menu is displayed )*
+
+```shell
+>>> 2
+Enter roll, and new marks seperated by comma
+ 13,90
+Sucessfully updated
+```
+
+*( the screen gets cleared at this point and menu is re-displayed, and now the user tries an invalid update )*
+
+```shell
+>>> 2
+Enter roll, and new marks seperated by comma
+ 100,90
+Student does not exist in records
+```
+
+*( the screen gets cleared at this point and menu is re-displayed)*
+
+```shell
+
+
+>>> 3
+╒════════╤═══════════╤═════════╕
+│   Roll │ Name      │   Marks │
+╞════════╪═══════════╪═════════╡
+│      1 │ Hitesham  │      90 │
+├────────┼───────────┼─────────┤
+│     34 │ Ramesha   │      89 │
+├────────┼───────────┼─────────┤
+│     13 │ Jay Bhatt │      90 │
+╘════════╧═══════════╧═════════╛
+
+Press [ENTER] to continue or CTRL+C to quit
+
+```
+
+# 10
+
+[**Remove all the lines that contain the character `a' in a file and write it to another file.**](q10_moveA.py)
+
+*Let's first see the original file.*
+
+```shell
+> cat data/lines.txt
+A good donkey was grazing
+No body took notice
+But Andrew was eating ice-cream
+Hans was jumping with joy
+November is the month of winter
+Jacob was lost
+```
+
+*Now let's run the program.*
+
+```shell
+> python q10_moveA.py
+Enter the old file path: data/lines.txt
+Enter the new file path: data/new_lines.txt
+Done!
+```
+
+*Now let's see the old file again.*
+
+```shell
+> cat data/lines.txt
+No body took notice
+November is the month of winter
+```
+
+*The new file is as follows.*
+
+```shell
+> cat data/new_lines.txt
+A good donkey was grazing
+But Andrew was eating ice-cream
+Hans was jumping with joy
+Jacob was lost
+```
+
+# 11
+
+[**Write a random number generator that generates random numbers between 1 and 6 (simulates a dice).**](q11_dice.py)
+
+```shell
+> python q11_dice.py
+Throwing a dice ...
+3
+Press ENTER to throw again, or X to quit
+Throwing a dice ...
+2
+Press ENTER to throw again, or X to quit
+Throwing a dice ...
+4
+Press ENTER to throw again, or X to quit
+Throwing a dice ...
+3
+Press ENTER to throw again, or X to quitX
+```
+
+# 12
+
+[**Take a sample of ten phishing e-mails (or any text file) and find most commonly occurring word(s).**](q12_phishy.py)
+
+> **Note** : the file `data/phishing.txt` contains the text extracted from 10 phishing emails
+the samples are taken from https://security.berkeley.edu/
+
+```shell
+> python q12_phishy.py
+Top 20 Commonly used words
+
+╒═══════════╤════╕
+│ to        │ 32 │
+├───────────┼────┤
+│ bank      │ 29 │
+├───────────┼────┤
+│ the       │ 24 │
+├───────────┼────┤
+│ immediate │ 24 │
+├───────────┼────┤
+│ urgent    │ 20 │
+├───────────┼────┤
+│ you       │ 14 │
+├───────────┼────┤
+│ for       │ 10 │
+├───────────┼────┤
+│ in        │ 10 │
+├───────────┼────┤
+│ my        │  9 │
+├───────────┼────┤
+│ a         │  9 │
+├───────────┼────┤
+│ is        │  8 │
+├───────────┼────┤
+│ of        │  8 │
+├───────────┼────┤
+│ have      │  7 │
+├───────────┼────┤
+│ will      │  7 │
+├───────────┼────┤
+│ I         │  7 │
+├───────────┼────┤
+│ ID        │  7 │
+├───────────┼────┤
+│ email     │  6 │
+├───────────┼────┤
+│ an        │  6 │
+├───────────┼────┤
+│ from      │  6 │
+├───────────┼────┤
+│ on        │  6 │
+╘═══════════╧════╛
+```
+
+# 13
+
+[**Program to create CSV file and store empno,name,salary and search any empno and display name,salary and if not found appropriate message.**](q13_employee.py)
+
+```shell
+
+        MENU for Employee Management
+
+╒══════════╤════════════════════╕
+│   Choice │ Description        │
+╞══════════╪════════════════════╡
+│        1 │ Store new Employee │
+├──────────┼────────────────────┤
+│        2 │ Search Employee    │
+╘══════════╧════════════════════╛
+    Enter your choice or X to quit
+
+>>>
+
+```
+
+*( the user chooses 2 )*
+
+```shell
+>>> 2
+Enter empno to search
+>>> 13
+Employee not found in records
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+*( the screen is cleared, and menu re-displayed )*
+
+
+```shell
+>>> 1
+Enter empno, name and salary seperated by comma
+>>> 12, Akshay Kumar, 10000
+Employee recorded
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+*( the screen is cleared, and menu re-displayed )*
+
+```shell
+>>> 2
+Enter empno to search
+>>> 12
+Name:  Akshay Kumar
+Salary:  10000
+
+Press [ENTER] to continue or CTRL+C to quit
+```
+
+
+# 14
+
+[**Program to implement Stack in Python using List.**](q14_stack.py)
+
+
+```shell
+        MENU for Stack Operations
+
+╒══════════╤═══════════════╕
+│   Choice │ Description   │
+╞══════════╪═══════════════╡
+│        1 │ Push          │
+├──────────┼───────────────┤
+│        2 │ Pop           │
+├──────────┼───────────────┤
+│        3 │ Peek          │
+├──────────┼───────────────┤
+│        4 │ Display       │
+╘══════════╧═══════════════╛
+    Enter your choice or X to quit
+
+>>>
+```
+
+*( during the execution of the program the screen is cleared and the menu is displayed several times, for an aesthetic experience. To keep stuff clean, the same menu is not being repeated here)*
+
+```shell
+>>> 1
+Enter data to push: hoch
+
+>>> 1
+Enter data to push: poch
+
+>>> 1
+Enter data to push: ghosh
+
+>>> 3
+ghosh
+
+>>> 4
+top
+╒═══════╕
+│ ghosh │
+├───────┤
+│ poch  │
+├───────┤
+│ hoch  │
+╘═══════╛
+
+>>> 2
+ghosh
+
+>>> 4
+top
+╒══════╕
+│ poch │
+├──────┤
+│ hoch │
+╘══════╛
+
+```
+
+# 15
+
+[**Program to implement Queue in Python using List.**](q15_queue.py)
+
+```shell
+
+        MENU for Queue Operations
+
+╒══════════╤═══════════════╕
+│   Choice │ Description   │
+╞══════════╪═══════════════╡
+│        1 │ Enqueue       │
+├──────────┼───────────────┤
+│        2 │ Dequeue       │
+├──────────┼───────────────┤
+│        3 │ Peek (front)  │
+├──────────┼───────────────┤
+│        4 │ Rear          │
+├──────────┼───────────────┤
+│        5 │ Display       │
+╘══════════╧═══════════════╛
+    Enter your choice or X to quit
+
+>>>
+
+```
+
+*( during the execution of the program the screen is cleared and the menu is displayed several times, for an aesthetic experience. To keep stuff clean, the same menu is not being repeated here)*
+
+
+```shell
+>>> 1
+Enter data to enqueue: utopia
+
+>>> 1
+Enter data to enqueue: distopia
+
+>>> 1
+Enter data to enqueue: ultadanga
+
+>>> 5
+front
+╒════════╤══════════╤═══════════╕
+│ utopia │ distopia │ ultadanga │
+╘════════╧══════════╧═══════════╛
+
+>>> 3
+utopia
+
+>>> 4
+ultadanga
+
+>>> 2
+utopia
+
+>>> 5
+front
+╒══════════╤═══════════╕
+│ distopia │ ultadanga │
+╘══════════╧═══════════╛
+
+```
+
+# 16
+
+[**Program to create 21 Stick Game so that computer always wins.**](q16_stick21.py)
+
+```shell
+
+```
 
