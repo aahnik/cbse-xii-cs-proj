@@ -1,5 +1,5 @@
 ''' Create a binary file with roll number, name and marks. Input a roll
-number and update the marks
+number and update the marks.
 '''
 
 

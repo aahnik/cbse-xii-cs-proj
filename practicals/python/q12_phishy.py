@@ -1,4 +1,4 @@
-''' Take a sample of ten phishing e-mails (or any text file) and find most.
+''' Take a sample of ten phishing e-mails (or any text file) and find most
 commonly occurring word(s)
 
 the file `data/phishing.txt` contains the text extracted from 10 phishing emails
