@@ -662,7 +662,79 @@ front
 
 [**Program to create 21 Stick Game so that computer always wins.**](q16_stick21.py)
 
+Rules of the 21 Matchstick Puzzle game
+- In this Puzzle there are 21 Match Sticks.
+- You and Computer will pick up the sticks one by one.
+- Sticks can be picked from 1 to 4.
+- The who, picked up the last stick, is the loser.
+
+
+*( during the execution of the program the screen is cleared and the menu is displayed several times, for an aesthetic experience. To keep stuff clean, the same menu is not being repeated here)*
+
 ```shell
+        MENU for 21 Stick Game
+    
+╒══════════╤═══════════════╕
+│   Choice │ Description   │
+╞══════════╪═══════════════╡
+│        1 │ Play the game │
+├──────────┼───────────────┤
+│        2 │ See the rules │
+╘══════════╧═══════════════╛
+    Enter your choice or X to quit
+    
+>>> 1
+
+Press [ENTER] to continue or CTRL+C to quit
+
+Currently there are 21 sticks
+Choose from 1 to 4 sticks
+>>> 5
+You can choose only between 1 to 4 sticks
+Game Aborted
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# MENU IS RE-DISPLAYED
+>>> 1
+
+Press [ENTER] to continue or CTRL+C to quit
+
+Currently there are 21 sticks
+Choose from 1 to 4 sticks
+>>> 2
+Now we have 19 sticks left. Its my turn now
+I have picked 3 sticks
+
+Currently there are 16 sticks
+Choose from 1 to 4 sticks
+>>> 4
+Now we have 12 sticks left. Its my turn now
+I have picked 1 sticks
+
+
+Currently there are 11 sticks
+Choose from 1 to 4 sticks
+>>> 2
+Now we have 9 sticks left. Its my turn now
+I have picked 3 sticks
+
+
+Currently there are 6 sticks
+Choose from 1 to 4 sticks
+>>> 4
+Now we have 2 sticks left. Its my turn now
+I have picked 1 sticks
+
+There is only one stick left. By the rule, you loose 😔
+Better Luck next time !
+
+Game Ended
 
 ```
 
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTAyMjQzMTE4NywxMzU1MjkxMzAyXX0=
+-->
