@@ -190,7 +190,14 @@ ORDER BY interest;
 -- Display the Interest-wise count of all loan holders whose Installment due is more than
 -- 5 in each group.
 
-
+SELECT 
+	int_rate, COUNT(*)
+FROM 
+	loans
+GROUP BY 
+	int_rate
+HAVING
+	SUM(installments)>5;
 
 -- xviii
 -- Add one more column name ‘Address’ to the LOANS table.
