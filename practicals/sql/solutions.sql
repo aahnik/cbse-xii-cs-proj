@@ -1,19 +1,19 @@
 USE sql_practical;
 
--- note: to execute an particular line 
--- in MySql workbench, 
+-- note: to execute an particular line
+-- in MySql workbench,
 -- select it and press the execute button
 
 
-SELECT 
+SELECT
     *
 FROM
     emp;
 
--- i 
+-- i
 -- To display the all information of Sales department.
 
-SELECT 
+SELECT
     *
 FROM
     emp
@@ -23,7 +23,7 @@ WHERE
 -- ii
 -- To display all information about the employees whose name starts with 'K'
 
-SELECT 
+SELECT
     *
 FROM
     emp
@@ -33,7 +33,7 @@ WHERE
 -- iii
 -- To list the name of female employees who are in Finance department.
 
-SELECT 
+SELECT
     name
 FROM
     emp
@@ -44,7 +44,7 @@ WHERE
 -- To display name and sex of all the employees whose age is in the range of 40 to 50 in
 -- ascending order of their name.
 
-SELECT 
+SELECT
     name, sex
 FROM
     emp
@@ -56,7 +56,7 @@ ORDER BY name;
 -- To count the number of female employees with age greater than 20 and who are in
 -- Accounts department.
 
-SELECT 
+SELECT
     COUNT(*) 'female emp older than 20 in accounts'
 FROM
     emp
@@ -65,7 +65,7 @@ WHERE
 
 -- display table games
 
-SELECT 
+SELECT
     *
 FROM
     games;
@@ -73,7 +73,7 @@ FROM
 -- vi
 -- To display the name of all Games with their GCodes.
 
-SELECT 
+SELECT
     gamename, gcode
 FROM
     games;
@@ -81,7 +81,7 @@ FROM
 -- vii
 -- To display details of those games which are having PrizeMoney more than 7000.
 
-SELECT 
+SELECT
     *
 FROM
     games
@@ -91,7 +91,7 @@ WHERE
 -- viii
 -- To display the content of the GAMES table in ascending order of ScheduleDate.
 
-SELECT 
+SELECT
     *
 FROM
     games
@@ -101,7 +101,7 @@ ORDER BY scheduledate;
 -- To display sum of PrizeMoney for each of the Numberof participation groupings ( as shown in
 -- column number 2 or 4)
 
-SELECT 
+SELECT
     number, SUM(prizemoney)
 FROM
     games
@@ -110,7 +110,7 @@ GROUP BY number;
 -- x
 -- To display the sum of prize money of all games.
 
-SELECT 
+SELECT
     SUM(prizemoney)
 FROM
     games;
@@ -118,7 +118,7 @@ FROM
 
 -- display table loans
 
-SELECT 
+SELECT
     *
 FROM
     loans;
@@ -127,7 +127,7 @@ FROM
 -- xi
 -- Display the sum of all Loan Amount whose Interest rate is greater than 10.
 
-SELECT 
+SELECT
     SUM(loan_amount)
 FROM
     loans
@@ -138,7 +138,7 @@ WHERE
 -- xii
 -- Display the Maximum Interest from Loans table.
 
-SELECT 
+SELECT
     MAX(int_rate)
 FROM
     loans;
@@ -146,7 +146,7 @@ FROM
 -- xiii
 -- Display the count of all loan holders whose name ends with ‘SHARMA’.
 
-SELECT 
+SELECT
     COUNT(cust_name)
 FROM
     loans
@@ -157,7 +157,7 @@ WHERE
 -- xiv
 -- Display the count of all loan holders whose Interest is NULL.
 
-SELECT 
+SELECT
     COUNT(cust_name)
 FROM
     loans
@@ -168,7 +168,7 @@ WHERE
 -- xv
 -- Display the Interest-wise details of Loan Account Holders.
 
-SELECT 
+SELECT
     *
 FROM
     loans
@@ -178,7 +178,7 @@ ORDER BY interest;
 -- Display the Interest-wise details of Loan Account Holders with at least 10 installments
 -- remaining.
 
-SELECT 
+SELECT
     *
 FROM
     loans
@@ -190,11 +190,11 @@ ORDER BY interest;
 -- Display the Interest-wise count of all loan holders whose Installment due is more than
 -- 5 in each group.
 
-SELECT 
+SELECT
 	int_rate, COUNT(*)
-FROM 
+FROM
 	loans
-GROUP BY 
+GROUP BY
 	int_rate
 HAVING
 	SUM(installments)>5;
@@ -208,16 +208,16 @@ ADD (Adress TEXT);
 -- xix
 -- Reduce Interest rate by 1 of all loan holders whose Interest is not NULL.
 
-UPDATE loans 
-SET 
+UPDATE loans
+SET
     int_rate = int_rate - 1
 WHERE
     int_rate IS NOT NULL;
-    
+
 -- xx
 -- Delete the record of customer whose account number is 105.
 
-DELETE FROM loans 
+DELETE FROM loans
 WHERE
     accno = 105;
 
