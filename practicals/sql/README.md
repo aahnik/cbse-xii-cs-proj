@@ -6,7 +6,10 @@ See the following:
 1. [`create_db.sql`](create_db.sql) to create the tables as illustrated in question.
 2. [`solutions.sql`](solutions.sql) containing the solutions to the 20 questions.
 
+---------
 
+
+> *[the full `emp` table ↗️](outputs/emp_table.png)*
 
 #### i. To display the all information of Sales department.
 
@@ -76,6 +79,9 @@ WHERE
 
 ![image of output of question 05](outputs/05.png)
 
+-------
+
+> *[the full `games` table ↗️](outputs/games_table.png)*
 #### vi. To display the name of all Games with their GCodes.
 
 ```sql
@@ -138,6 +144,13 @@ FROM
 ```
 
 ![image of output of question 10](outputs/10.png)
+
+
+
+-------
+
+> *[the full `loans` table ↗️](outputs/loans_table.png)*
+
 
 #### xi. Display the sum of all Loan Amount whose Interest rate is greater than 10.
 
