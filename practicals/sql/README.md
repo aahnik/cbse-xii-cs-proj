@@ -9,7 +9,7 @@ See the following:
 ---------
 
 
-> *[the full `emp` table ↗️](outputs/emp_table.png)*
+> *[the full `emp` table](outputs/emp_table.png)*
 
 #### i. To display the all information of Sales department.
 
@@ -81,7 +81,7 @@ WHERE
 
 -------
 
-> *[the full `games` table ↗️](outputs/games_table.png)*
+> *[the full `games` table](outputs/games_table.png)*
 #### vi. To display the name of all Games with their GCodes.
 
 ```sql
@@ -149,7 +149,7 @@ FROM
 
 -------
 
-> *[the full `loans` table ↗️](outputs/loans_table.png)*
+> *[the full `loans` table](outputs/loans_table.png)*
 
 
 #### xi. Display the sum of all Loan Amount whose Interest rate is greater than 10.
