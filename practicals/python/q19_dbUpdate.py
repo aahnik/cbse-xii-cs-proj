@@ -10,7 +10,7 @@ from q17_dbRecord import input_employee_details
 def update_employee(cursor):
     ''' Update an employee '''
 
-    emp = get_employee()
+    emp = get_employee(cursor)
 
     if not emp:
         print('Employee does not exist.')
