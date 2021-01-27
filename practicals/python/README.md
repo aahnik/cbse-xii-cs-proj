@@ -673,7 +673,7 @@ Rules of the 21 Matchstick Puzzle game
 
 ```shell
         MENU for 21 Stick Game
-    
+
 ╒══════════╤═══════════════╕
 │   Choice │ Description   │
 ╞══════════╪═══════════════╡
@@ -682,7 +682,7 @@ Rules of the 21 Matchstick Puzzle game
 │        2 │ See the rules │
 ╘══════════╧═══════════════╛
     Enter your choice or X to quit
-    
+
 >>> 1
 
 Press [ENTER] to continue or CTRL+C to quit
@@ -733,8 +733,146 @@ Game Ended
 
 ```
 
+# 17
+
+[**Program to connect with database and store record of employee and display records.**](q17_dbRecord.py)
+
+```shell
+> python q17_dbRecord.py
+table already exists
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+No employees recorded yet
+RECORD NEW EMPLOYEES
+Enter the details to add new employee.
+
+Enter employee id: 12
+name: Hans Chen
+department: Sales
+salary: 10000
+New employee added successfully 😃
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+Here is the list of all employees
+
+╒══════════╤═══════════╤══════════════╤══════════╕
+│   emp_id │ name      │ department   │   salary │
+╞══════════╪═══════════╪══════════════╪══════════╡
+│       12 │ Hans Chen │ Sales        │    10000 │
+╘══════════╧═══════════╧══════════════╧══════════╛
+
+RECORD NEW EMPLOYEES
+Enter the details to add new employee.
+
+Enter employee id: 13
+name: Jay Chandran
+department: Coding
+salary: 100000000
+New employee added successfully 😃
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+Here is the list of all employees
+
+╒══════════╤══════════════╤══════════════╤═══════════╕
+│   emp_id │ name         │ department   │    salary │
+╞══════════╪══════════════╪══════════════╪═══════════╡
+│       12 │ Hans Chen    │ Sales        │     10000 │
+├──────────┼──────────────┼──────────────┼───────────┤
+│       13 │ Jay Chandran │ Coding       │ 100000000 │
+╘══════════╧══════════════╧══════════════╧═══════════╛
+
+RECORD NEW EMPLOYEES
+Enter the details to add new employee.
+
+Enter employee id: ^C
+Interrupt recieved. Quitting.
+
+```
+
+# 18
+
+[**Program to connect with database and search employee number in table employee and display record, if empno not found display appropriate message.**](q18_dbSearch.py)
+
+```shell
+SEARCH EMPLOYEE
+Enter employee id: 12
+Record found 🥰
+
+                        name: Hans Chen,
+                        department: Sales,
+                        salary: 10000
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+SEARCH EMPLOYEE
+Enter employee id: 100
+Employee Not found 😢
+
+Press [ENTER] to continue or CTRL+C to quit
+^C
+Interrupt recieved. Quitting.
+
+```
 
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMjQzMTE4NywxMzU1MjkxMzAyXX0=
--->
+# 19
+
+[**Program to connect with database and update the employee record of entered empno.**](q19_dbUpdate.py)
+
+```shell
+
+UPDATE EMPLOYEE
+Enter employee id: 12
+Enter new details of employee.
+name: Aahnik Daw
+department: Machine Learning
+salary: 10
+Update Successful!
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+UPDATE EMPLOYEE
+Enter employee id: 100
+Employee does not exist.
+
+Press [ENTER] to continue or CTRL+C to quit
+^C
+Interrupt recieved. Quitting.
+
+```
+
+# 20
+
+[**Program to connect with database and delete the record of entered employee number.**](q20_dbDelete.py)
+
+```shell
+DELETE EMPLOYEE
+Enter employee id: 12
+Successfully deleted.
+
+Press [ENTER] to continue or CTRL+C to quit
+
+# screen gets cleared
+
+DELETE EMPLOYEE
+Enter employee id: 100
+Employee does not exist.
+
+Press [ENTER] to continue or CTRL+C to quit
+^C
+Interrupt recieved. Quitting.
+```
+
