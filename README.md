@@ -1,5 +1,7 @@
 # cbse-xii-cs-proj
 
+![Computer Science Practicals and Final Project](https://user-images.githubusercontent.com/66209958/106116380-d9eb2180-6177-11eb-8ef4-4e8c7de4b141.png)
+
 *Useful Links*
 
 1. [Source code and output of practicals](https://github.com/aahnik/cbse-xii-cs-proj/tree/main/practicals#cbse-xii-practicals)
