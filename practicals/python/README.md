@@ -5,7 +5,7 @@
 
 ## 1
 
-[**A program to calculate the n-th term of Fibonacci series using function.**](q01_fibo.py)
+[**A program to calculate the n-th term of Fibonacci series using function.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q01_fibo.py)
 
 ```shell
 
@@ -28,7 +28,7 @@ The 100th fibonacci number is 354224848179261915075
 
 ## 2
 
-[**Program to search any word in given string/sentence using function.**](q02_wordSearch.py)
+[**Program to search any word in given string/sentence using function.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q02_wordSearch.py)
 
 ```shell
 
@@ -45,7 +45,7 @@ The 100th fibonacci number is 354224848179261915075
 
 ## 3
 
-[**Read a text file line by line and display each word separated by a # .**](q03_textRead.py)
+[**Read a text file line by line and display each word separated by a # .**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q03_textRead.py)
 
 ```shell
 
@@ -59,7 +59,7 @@ kfksf#kjkfjsjflksjk#fkjsdlif#jk#kjjfkljslkfjjklj#ksdfkjskl#l#lkjijfiijkkdflijgro
 
 ## 4
 
-[**Read a text file and display the number of vowels/consonants/uppercase/lowercase characters and digits in the file.**](q04_txtalyser.py)
+[**Read a text file and display the number of vowels/consonants/uppercase/lowercase characters and digits in the file.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q04_txtalyser.py)
 
 ```shell
 
@@ -72,7 +72,7 @@ Enter file path
 
 ## 5
 
-[**Read a text file and display the largest word and maximum number of characters present in a line from text file.**](q05_largestMax.py)
+[**Read a text file and display the largest word and maximum number of characters present in a line from text file.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q05_largestMax.py)
 
 ```shell
 
@@ -93,7 +93,7 @@ Line:10 Empty Line
 
 ## 6
 
-[**Write a program using Dictionary and Text file to store roman numbers and find their equivalent.**](q06_roman.py)
+[**Write a program using Dictionary and Text file to store roman numbers and find their equivalent.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q06_roman.py)
 
 ```shell
 
@@ -145,7 +145,7 @@ ValueError: Invalid roman numeral, "I" occured more than 3 times consecutively
 
 ## 7
 
-[**Write a menu driven program to perform read and write operations using a text file called “student.txt” counting student roll_no, name and address.**](q07_student.py)
+[**Write a menu driven program to perform read and write operations using a text file called “student.txt” counting student roll_no, name and address.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q07_student.py)
 
 ```shell
 
@@ -230,7 +230,7 @@ Press [ENTER] to continue or CTRL+C to quit
 
 # 8
 
-[**Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](q08_studentBin.py)
+[**Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q08_studentBin.py)
 
 ```shell
 > python q08_studentBin.py
@@ -281,7 +281,7 @@ Press [ENTER] to continue or CTRL+C to quit
 
 # 9
 
-[**Create a binary file with roll number, name and marks. Input a roll number and update the marks.**](q09_marks.py)
+[**Create a binary file with roll number, name and marks. Input a roll number and update the marks.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q09_marks.py)
 
 
 ```shell
@@ -361,7 +361,7 @@ Press [ENTER] to continue or CTRL+C to quit
 
 # 10
 
-[**Remove all the lines that contain the character `a' in a file and write it to another file.**](q10_moveA.py)
+[**Remove all the lines that contain the character `a' in a file and write it to another file.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q10_moveA.py)
 
 *Let's first see the original file.*
 
@@ -404,7 +404,7 @@ Jacob was lost
 
 # 11
 
-[**Write a random number generator that generates random numbers between 1 and 6 (simulates a dice).**](q11_dice.py)
+[**Write a random number generator that generates random numbers between 1 and 6 (simulates a dice).**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q11_dice.py)
 
 ```shell
 > python q11_dice.py
@@ -424,7 +424,7 @@ Press ENTER to throw again, or X to quitX
 
 # 12
 
-[**Take a sample of ten phishing e-mails (or any text file) and find most commonly occurring word(s).**](q12_phishy.py)
+[**Take a sample of ten phishing e-mails (or any text file) and find most commonly occurring word(s).**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q12_phishy.py)
 
 > **Note** : the file `data/phishing.txt` contains the text extracted from 10 phishing emails
 the samples are taken from https://security.berkeley.edu/
@@ -478,7 +478,7 @@ Top 20 Commonly used words
 
 # 13
 
-[**Program to create CSV file and store empno,name,salary and search any empno and display name,salary and if not found appropriate message.**](q13_employee.py)
+[**Program to create CSV file and store empno,name,salary and search any empno and display name,salary and if not found appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q13_employee.py)
 
 ```shell
 
@@ -535,7 +535,7 @@ Press [ENTER] to continue or CTRL+C to quit
 
 # 14
 
-[**Program to implement Stack in Python using List.**](q14_stack.py)
+[**Program to implement Stack in Python using List.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q14_stack.py)
 
 
 ```shell
@@ -597,7 +597,7 @@ top
 
 # 15
 
-[**Program to implement Queue in Python using List.**](q15_queue.py)
+[**Program to implement Queue in Python using List.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q15_queue.py)
 
 ```shell
 
@@ -660,7 +660,7 @@ front
 
 # 16
 
-[**Program to create 21 Stick Game so that computer always wins.**](q16_stick21.py)
+[**Program to create 21 Stick Game so that computer always wins.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q16_stick21.py)
 
 Rules of the 21 Matchstick Puzzle game
 - In this Puzzle there are 21 Match Sticks.
@@ -735,7 +735,7 @@ Game Ended
 
 # 17
 
-[**Program to connect with database and store record of employee and display records.**](q17_dbRecord.py)
+[**Program to connect with database and store record of employee and display records.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q17_dbRecord.py)
 
 ```shell
 > python q17_dbRecord.py
@@ -800,7 +800,7 @@ Interrupt recieved. Quitting.
 
 # 18
 
-[**Program to connect with database and search employee number in table employee and display record, if empno not found display appropriate message.**](q18_dbSearch.py)
+[**Program to connect with database and search employee number in table employee and display record, if empno not found display appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q18_dbSearch.py)
 
 ```shell
 SEARCH EMPLOYEE
@@ -828,7 +828,7 @@ Interrupt recieved. Quitting.
 
 # 19
 
-[**Program to connect with database and update the employee record of entered empno.**](q19_dbUpdate.py)
+[**Program to connect with database and update the employee record of entered empno.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q19_dbUpdate.py)
 
 ```shell
 
@@ -856,7 +856,7 @@ Interrupt recieved. Quitting.
 
 # 20
 
-[**Program to connect with database and delete the record of entered employee number.**](q20_dbDelete.py)
+[**Program to connect with database and delete the record of entered employee number.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q20_dbDelete.py)
 
 ```shell
 DELETE EMPLOYEE
