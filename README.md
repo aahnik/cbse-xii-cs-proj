@@ -14,3 +14,5 @@ Enjoy!
 [![MIT license](https://img.shields.io/pypi/l/ansicolortags.svg)](LICENSE)
 [![telegram-chat](https://img.shields.io/badge/chat-@aahnikdaw-blue?logo=telegram)](https://telegram.me/aahnikdaw)
 [![YouTube Video Views](https://img.shields.io/youtube/views/K7Qe6_rQjmk?logo=youtube&style=social)](https://youtu.be/K7Qe6_rQjmk)
+
+[![promoted](https://raw.githubusercontent.com/aahnik/aahnik/master/promoted/general.gif)](https://aahnik.github.io/aahnik/promoted/general.html)
