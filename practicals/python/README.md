@@ -228,7 +228,7 @@ Enter roll no. to search
 Press [ENTER] to continue or CTRL+C to quit
 ```
 
-# 8
+## 8
 
 [**Create a binary file with name and roll number. Search for a given roll number and display the name, if not found display appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q08_studentBin.py)
 
@@ -279,7 +279,7 @@ Student found : Jack Dorsey
 Press [ENTER] to continue or CTRL+C to quit
 ```
 
-# 9
+## 9
 
 [**Create a binary file with roll number, name and marks. Input a roll number and update the marks.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q09_marks.py)
 
@@ -359,7 +359,7 @@ Press [ENTER] to continue or CTRL+C to quit
 
 ```
 
-# 10
+## 10
 
 [**Remove all the lines that contain the character `a' in a file and write it to another file.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q10_moveA.py)
 
@@ -402,7 +402,7 @@ Hans was jumping with joy
 Jacob was lost
 ```
 
-# 11
+## 11
 
 [**Write a random number generator that generates random numbers between 1 and 6 (simulates a dice).**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q11_dice.py)
 
@@ -422,7 +422,7 @@ Throwing a dice ...
 Press ENTER to throw again, or X to quitX
 ```
 
-# 12
+## 12
 
 [**Take a sample of ten phishing e-mails (or any text file) and find most commonly occurring word(s).**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q12_phishy.py)
 
@@ -476,7 +476,7 @@ Top 20 Commonly used words
 ╘═══════════╧════╛
 ```
 
-# 13
+## 13
 
 [**Program to create CSV file and store empno,name,salary and search any empno and display name,salary and if not found appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q13_employee.py)
 
@@ -533,7 +533,7 @@ Press [ENTER] to continue or CTRL+C to quit
 ```
 
 
-# 14
+## 14
 
 [**Program to implement Stack in Python using List.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q14_stack.py)
 
@@ -595,7 +595,7 @@ top
 
 ```
 
-# 15
+## 15
 
 [**Program to implement Queue in Python using List.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q15_queue.py)
 
@@ -658,7 +658,7 @@ front
 
 ```
 
-# 16
+## 16
 
 [**Program to create 21 Stick Game so that computer always wins.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q16_stick21.py)
 
@@ -733,7 +733,7 @@ Game Ended
 
 ```
 
-# 17
+## 17
 
 [**Program to connect with database and store record of employee and display records.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q17_dbRecord.py)
 
@@ -798,7 +798,7 @@ Interrupt recieved. Quitting.
 
 ```
 
-# 18
+## 18
 
 [**Program to connect with database and search employee number in table employee and display record, if empno not found display appropriate message.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q18_dbSearch.py)
 
@@ -826,7 +826,7 @@ Interrupt recieved. Quitting.
 ```
 
 
-# 19
+## 19
 
 [**Program to connect with database and update the employee record of entered empno.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q19_dbUpdate.py)
 
@@ -854,7 +854,7 @@ Interrupt recieved. Quitting.
 
 ```
 
-# 20
+## 20
 
 [**Program to connect with database and delete the record of entered employee number.**](https://github.com/aahnik/cbse-xii-cs-proj/blob/main/practicals/python/q20_dbDelete.py)
 
