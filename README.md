@@ -15,4 +15,8 @@ Enjoy!
 [![telegram-chat](https://img.shields.io/badge/chat-@aahnikdaw-blue?logo=telegram)](https://telegram.me/aahnikdaw)
 [![YouTube Video Views](https://img.shields.io/youtube/views/K7Qe6_rQjmk?logo=youtube&style=social)](https://youtu.be/K7Qe6_rQjmk)
 
+
+For any queries related to the project email me at [daw@aahnik.dev](mailto:daw@aahnik.dev)
+
+
 [![promoted](https://raw.githubusercontent.com/aahnik/aahnik/master/promoted/general.gif)](https://aahnik.github.io/aahnik/promoted/general.html)
