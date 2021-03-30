@@ -19,4 +19,3 @@ Enjoy!
 For any queries related to the project email me at [daw@aahnik.dev](mailto:daw@aahnik.dev)
 
 
-[![promoted](https://raw.githubusercontent.com/aahnik/aahnik/master/promoted/general.gif)](https://aahnik.github.io/aahnik/promoted/general.html)
